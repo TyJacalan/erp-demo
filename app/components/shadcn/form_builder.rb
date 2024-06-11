@@ -45,6 +45,17 @@ module Shadcn
       )
     end
 
+    def checkbox(method, options = {})
+      options[:class] = @template.tw((options[:class]).to_s)
+      label = options[:label]
+      @template.render_checkbox(
+        name: "#{object_name}[#{method}]",
+        label:,
+        id: "#{object_name}_#{method}",
+        **options
+      )
+    end
+
     def submit(value = nil, options = {})
       @template.render_button(value, **options)
     end
