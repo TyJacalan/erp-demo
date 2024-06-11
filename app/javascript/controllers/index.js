@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import Ui__CheckboxController from "./ui/checkbox_controller"
+application.register("ui--checkbox", Ui__CheckboxController)
+
 import Ui__DialogController from "./ui/dialog_controller"
 application.register("ui--dialog", Ui__DialogController)
 

@@ -1,10 +1,7 @@
-// Inspired by: https://github.com/excid3/tailwindcss-stimulus-components/blob/master/src/popover.js
-
 import { Controller } from "@hotwired/stimulus";
 
 export default class UIToggleController extends Controller {
-  connect() {
-  }
+  connect() { }
 
   toggle() {
     const button = this.element.querySelector("button");
@@ -24,7 +21,7 @@ export default class UIToggleController extends Controller {
     }
   }
 
-  test(){
-    console.log("this works")
+  test() {
+    console.log("this works");
   }
 }

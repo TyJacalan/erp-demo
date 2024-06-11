@@ -1,16 +1,22 @@
-// Inspired by https://github.com/kanety/stimulus-dialog
 import { Controller } from "@hotwired/stimulus";
 
 export default class UIDialog extends Controller {
-  static targets = ["dialog", "modal", "focus", "drag", "backdrop", "closeButton"];
+  static targets = [
+    "dialog",
+    "modal",
+    "focus",
+    "drag",
+    "backdrop",
+    "closeButton",
+  ];
   static actions = [
     ["element", "keydown@window->closeByKey"],
     ["modal", "click->closeByModal"],
     ["closeButton", "click->close"],
   ];
 
-  initialize() {}
-  connect() {}
+  initialize() { }
+  connect() { }
   open(e) {
     this.openBy(e.target);
     e.preventDefault();
