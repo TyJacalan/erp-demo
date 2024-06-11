@@ -1,11 +1,16 @@
-<%= render 'devise/shared/omniauth_separator' %>
 <%- if devise_mapping.omniauthable? %>
+
+  <%= render_separator class: 'my-4' %>
+
   <%- resource_class.omniauth_providers.each do |provider| %>
     <%= form_for "Login",
       url: omniauth_authorize_path(resource_name, provider),
       method: :post,
       data: {turbo: "false"} do |f| %>
-      <%= render 'devise/google/button' %>
-  <% end %>
+      <%= render_button(class: "bg-primary dark:bg-gray-200 w-full hover:bg-gray-200/90 text-background") do %>
+        <%= render partial: 'components/icons/google' %>
+        <span class="ml-2">Sign in with Google</span>
+      <% end %>
+    <% end %>
   <% end %>
 <% end %>

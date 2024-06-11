@@ -1,27 +1,10 @@
 <% content_for(:auth_header) do %>
-  <% if devise_mapping.registerable? && controller_name == 'sessions' %>
+  <% if action_name == 'edit' %>
     <div class='text-center text-muted-foreground'>
-      <h1>Sign In</h1>
-      <span>Or</span>
-      <%= link_to 'create your free account', new_registration_path(resource_name), class: 'text-primary/90 hover:text-primary' %>
+      <h1>Edit your profile</h1>
+      <span>Back to</span>
+      <%= link_to 'home', root_path, class: 'text-primary/90 hover:text-primary' %>
     </div>
-  <% end %>
-
-  <% if devise_mapping.registerable? && controller_name == 'registrations' %>
-    <% if action_name == 'new' || action_name == 'create' %>
-      <div class='text-center text-muted-foreground'>
-        <h1>Sign Up</h1>
-        <span>Already have an account?</span>
-        <%= link_to 'Login', new_session_path(resource_name), class: 'text-primary/90 hover:text-primary' %>
-      </div>
-    <% end %>
-    <% if action_name == 'edit' %>
-      <div class='text-center text-muted-foreground'>
-        <h1>Edit your profile</h1>
-        <span>Back to</span>
-        <%= link_to 'home', root_path, class: 'text-primary/90 hover:text-primary' %>
-      </div>
-    <% end %>
   <% end %>
 
   <% if devise_mapping.recoverable? && controller_name == 'passwords' %>
@@ -36,5 +19,4 @@
       <h1>Set a new password</h1>
     <% end %>
   <% end %>
-
 <% end %>
