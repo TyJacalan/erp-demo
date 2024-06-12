@@ -12,26 +12,26 @@
   </nav>
 
   <div class='md:hidden'>
-  <%= render_sheet direction: "left" do %>
-    <%= sheet_trigger do %>
-      <%= render_button variant: :outline do %>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-        </svg>
+    <%= render_sheet direction: "left" do %>
+      <%= sheet_trigger do %>
+        <%= render_button variant: :outline do %>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        <% end %>
+      <% end %>
+      <%= sheet_content do %>
+        <nav class="flex flex-col gap-6 text-lg font-medium">
+          <%= link_to root_path do %>
+            <span class="sr-only">Smarter Good</span>
+            <img class="h-6 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Logo">
+          <% end %>
+          <% links.each do |link| %>
+            <%= link_to link[:name].capitalize, link[:path], class: 'transition-colors hover:text-foreground' %>
+          <% end %>
+        </nav>
       <% end %>
     <% end %>
-    <%= sheet_content do %>
-      <nav class="flex flex-col gap-6 text-lg font-medium">
-        <%= link_to root_path do %>
-          <span class="sr-only">Smarter Good</span>
-          <img class="h-6 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Logo">
-        <% end %>
-        <% links.each do |link| %>
-          <%= link_to link[:name].capitalize, link[:path], class: 'transition-colors hover:text-foreground' %>
-        <% end %>
-      </nav>
-    <% end %>
-  <% end %>
   </div>
 
   <div class="flex w-full items-center justify-end gap-4 md:ml-auto md:gap-2 lg:gap-4">
@@ -49,7 +49,7 @@
           <% end %>
         <% end %>
       <% end %>
-      
+
       <%= dropdown_menu_content do %>
         <div data-controller="ui--mode">
           <% ["Light", "Dark", "System"].each do |mode| %>
@@ -73,10 +73,7 @@
         <%= dropdown_menu_label "My Account" %>
         <%= render_separator class: "my-1" %>
         <%= dropdown_menu_item do %>
-          <%= link_to "Profile", edit_user_registration_path %>
-        <% end %>
-        <%= dropdown_menu_item do %>
-          <%= link_to "Settings" %>
+          <%= link_to "Profile", users_path %>
         <% end %>
         <%= dropdown_menu_item do %>
           <%= button_to "Logout", destroy_user_session_path, method: :delete, class: 'text-muted-foreground' %>

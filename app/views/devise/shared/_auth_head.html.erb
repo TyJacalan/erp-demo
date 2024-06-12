@@ -1,20 +1,13 @@
 <% content_for(:auth_header) do %>
   <div class='text-center text-muted-foreground'>
     <h1><%= t "devise.#{controller_name}.#{action_name}.header" %></h1>
-    <span>Back to</span>
-    <%= link_to 'home', root_path, class: 'text-primary/90 hover:text-primary' %>
-  </div>
 
-  <% if devise_mapping.recoverable? && controller_name == 'passwords' %>
-    <% if action_name == 'new' || action_name == 'create' %>
-      <div class='text-center text-muted-foreground'>
-        <h1>Forgot your password</h1>
-        <span>Remember your password?</span>
-        <%= link_to 'Back to login', new_session_path(resource_name), class: 'text-primary/90 hover:text-primary' %>
-      </div>
+    <% if devise_mapping.recoverable? && controller_name == 'passwords' %>
+      <span>Remember your password?</span>
+      <%= link_to 'Back to login', new_session_path(resource_name), class: 'text-primary/90 hover:text-primary' %>
+    <% else %>
+      <span>Back to</span>
+      <%= link_to 'home', root_path, class: 'text-primary/90 hover:text-primary' %>
     <% end %>
-    <% if action_name == 'edit' %>
-      <h1>Set a new password</h1>
-    <% end %>
-  <% end %>
+  </div>
 <% end %>

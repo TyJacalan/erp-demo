@@ -13,7 +13,9 @@
   <body class="max-w-7xl min-w-[350px] mx-auto flex h-full w-full min-h-screen flex-col bg-background text-foreground">
     <%= render 'components/layout/toast_messages' %>
     <%= render 'components/layout/navbar' %>
-    <%= yield %>
+    <div class='flex-1 h-full w-full'>
+      <%= yield %>
+    </div>
     <%= render 'components/layout/footer' %>
   </body>
 </html>

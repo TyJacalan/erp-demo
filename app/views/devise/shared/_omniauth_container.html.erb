@@ -7,7 +7,7 @@
       url: omniauth_authorize_path(resource_name, provider),
       method: :post,
       data: {turbo: "false"} do |f| %>
-      <%= render_button(class: "bg-primary dark:bg-gray-200 w-full hover:bg-gray-200/90 text-background") do %>
+      <%= render_button(class: "bg-muted dark:bg-gray-200 w-full hover:bg-gray-200/90 text-muted-foreground") do %>
         <%= render partial: 'components/icons/google' %>
         <span class="ml-2">Sign in with Google</span>
       <% end %>
