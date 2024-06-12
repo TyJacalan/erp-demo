@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  devise :invitable, :database_authenticatable,
+  has_one_attached :avatar
+
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
 
@@ -16,4 +18,8 @@ class User < ApplicationRecord
     associate_development_manager: 5,
     development_manager: 6
   }
+
+  def avatar_thumbnail
+    avatar.variant(resize: '150x150!')
+  end
 end

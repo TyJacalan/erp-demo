@@ -1,24 +1,22 @@
 <%= render 'devise/shared/auth_head' %>
 
-<% if request.path == '/admins/sign_in' %>
-  <%= render_form_for(resource, url: session_path(resource_name), class: "flex flex-col gap-4") do |f| %>
-    <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<%= render_form_for resource, url: session_path(resource_name), class: "flex flex-col gap-4" do |f| %>
+  <%= f.label :email %>
+  <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
 
-    <div class="flex flex-row items-center justify-between">
-      <%= f.label :password %>
-      <%= link_to "Forgot your password?", new_password_path(resource_name), class: "text-xs text-primary/90 hover:text-primary" %>
+  <div class="flex flex-row items-center justify-between">
+    <%= f.label :password %>
+    <%= link_to "Forgot your password?", new_password_path(resource_name), class: "text-xs text-primary/90 hover:text-primary" %>
+  </div>
+  <%= f.password_field :password, autocomplete: "current-password" %>
+
+  <% if devise_mapping.rememberable? %>
+    <div class="flex flex-row items-center gap-2">
+      <%= f.checkbox :remember_me, label: 'Remember me' %>
     </div>
-    <%= f.password_field :password, autocomplete: "current-password" %>
-
-    <% if devise_mapping.rememberable? %>
-      <div class="flex flex-row items-center gap-2">
-        <%= f.checkbox :remember_me, label: 'Remember me' %>
-      </div>
-    <% end %>
-
-    <%= f.submit 'Sign In' %>
   <% end %>
+
+  <%= f.submit 'Sign In' %>
 <% end %>
 
 <%= render 'devise/shared/omniauth_container' %>

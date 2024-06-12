@@ -18,6 +18,7 @@ module Shadcn
     def email_field(method, options = {})
       error_class = @object.errors[method].any? ? 'error' : ''
       options[:class] = @template.tw("#{options[:class]} #{error_class}")
+      options[:autocomplete] = 'email'
       @template.render_input(
         name: "#{object_name}[#{method}]",
         id: "#{object_name}_#{method}",
@@ -41,6 +42,19 @@ module Shadcn
       @template.render_label(
         name: "#{object_name}[#{method}]",
         label: label_for(@object, method), **options
+      )
+    end
+
+    def phone_field(method, options = {})
+      error_class = @object.errors[method].any? ? 'error' : ''
+      options[:class] = @template.tw("#{options[:class]} #{error_class}")
+      options[:autocomplete] = 'tel'
+
+      @template.render_input(
+        name: "#{object_name}[#{method}]",
+          id: "#{object_name}_#{method}",
+          value: @object.send(method),
+          type: 'tel', **options
       )
     end
 

@@ -1,0 +1,49 @@
+<%= render 'devise/shared/auth_head' %>
+
+<%= render_form_for(resource, as: resource_name, url: registration_path(resource_name), method: :put, class: 'flex flex-col gap-4') do |f| %>
+  <div class='h-fit w-full flex items-center justify-center'>
+    <label class='group relative h-fit w-fit cursor-pointer'>
+      <% if resource.avatar.attached? %>
+        <%= render_avatar src: url_for(resource.avatar), alt: resource.full_name, variant: :large %>
+      <% else %>
+        <%= render_avatar src: nil, alt: 'default profile image', variant: :large %>
+      <% end %>
+      <span class='hidden'>
+        <%= f.file_field :avatar %>
+      </span>
+      <div class='group-hover:block hidden absolute bottom-0 right-0 h-4 w-4 text-muted-foreground z-100'>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+        </svg>
+      </div>
+    </label>
+  </div>
+
+  <%= f.label :full_name %>
+  <%= f.text_field :full_name, autocomplete: 'name' %>
+
+  <%= f.label :mobile %>
+  <%= f.phone_field :mobile %>
+
+
+  <%= render_separator class: 'my-4' %>
+
+  <%# f.submit 'Edit Profile' %>
+  <%= render_dialog do %>
+    <%= dialog_trigger do %>
+      <%= render_button 'Edit Profile', class: 'w-full' %>
+    <% end %>
+    <%= dialog_content do %>
+      <div class='flex flex-col gap-4'>
+        <%= f.label :current_password, label: "Type your <strong>current password</strong> to proceed".html_safe %>
+        <%= f.password_field :current_password, autocomplete: 'new-password' %>
+        <%= f.error_message :password %>
+
+        <%= render_separator class: 'my-4' %>
+
+        <%= f.submit 'Proceed', class: 'w-full' %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
