@@ -9,6 +9,7 @@ gem 'bootsnap', require: false
 gem 'cssbundling-rails'
 gem 'devise'
 gem 'devise_invitable', '~> 2.0.0'
+gem 'image_processing', '~> 1.0'
 gem 'jsbundling-rails'
 gem 'letter_opener_web'
 gem 'omniauth'
