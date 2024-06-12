@@ -10,6 +10,18 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
+  authenticate :admin do
+    mount Avo::Engine, at: Avo.configuration.root_path
+  end
+
+  authenticated :admin do
+    root to: redirect(Avo.configuration.root_path), as: :admin_root
+  end
+
+  authenticated :user do
+    root to: 'posts#index', as: :user_root
+  end
+
   root 'posts#index'
   resources :posts
 

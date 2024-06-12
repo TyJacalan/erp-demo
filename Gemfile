@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 
 ruby '3.3.0'
 
+gem 'avo'
 gem 'bootsnap', require: false
 gem 'cssbundling-rails'
 gem 'devise'

@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# Run RuboCop checks
-rubocop
-
 # Auto-correct offenses
 rubocop -a
 
