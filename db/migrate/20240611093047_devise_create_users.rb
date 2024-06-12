@@ -10,9 +10,10 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       t.string :uid
       t.string :avatar_url
       t.string :provider
-      t.string :position
       t.date   :birthdate
       t.string :mobile
+      t.integer :position
+      t.float :salary
 
       ## Confirmable
       t.string   :confirmation_token

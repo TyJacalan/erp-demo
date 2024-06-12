@@ -1,0 +1,27 @@
+<%= render 'devise/shared/auth_head' %>
+
+<%= render_form_for resource, as: resource_name, url: invitation_path(resource_name), method: :post, class: 'flex flex-col gap-4' do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <%= f.label :full_name %>
+  <%= f.text_field :full_name %>
+
+  <%= f.label :email %>
+  <%= f.email_field :email %>
+
+  <% if resource_name == :user %>
+    <%= f.label :position %>
+    <%= f.select_field :position do |select |%>
+      <% User.positions.each do |key, value| %>
+        <%= select.option label: key.humanize, value: key %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :salary %>
+    <%= f.number_field :salary %>
+  <% end %>
+
+  <%= render_separator class: 'my-4' %>
+
+  <%= f.submit t("devise.invitations.new.submit_button") %>
+<% end %>

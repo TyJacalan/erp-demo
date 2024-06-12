@@ -7,7 +7,8 @@ Rails.application.routes.draw do
 
   devise_for :users, skip: [:registrations], controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',
-    sessions: 'users/sessions'
+    sessions: 'users/sessions',
+    invitations: 'users/invitations'
   }
 
   authenticate :admin do

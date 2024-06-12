@@ -3,6 +3,7 @@ AllCops:
   SuggestExtensions: false
   Exclude:
     - "app/helpers/components/**/*"
+    - "app/components/**/*.rb"
 
 Metrics/CyclomaticComplexity:
   Enabled: false
@@ -38,3 +39,5 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   Enabled: true
   EnforcedStyle: always
+  Exclude:
+    - "db/schema.rb"

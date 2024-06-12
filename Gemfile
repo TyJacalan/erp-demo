@@ -8,6 +8,7 @@ gem 'avo'
 gem 'bootsnap', require: false
 gem 'cssbundling-rails'
 gem 'devise'
+gem 'devise_invitable', '~> 2.0.0'
 gem 'jsbundling-rails'
 gem 'letter_opener_web'
 gem 'omniauth'
