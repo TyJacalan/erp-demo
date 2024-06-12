@@ -12,21 +12,21 @@ Avo.configure do |config|
   end
 
   ## == Authentication ==
-  config.current_user_method = :current_user
+  config.current_user_method = :current_admin
 
   ## == Authorization ==
-  # config.authorization_methods = {
-  #   index: 'index?',
-  #   show: 'show?',
-  #   edit: 'edit?',
-  #   new: 'new?',
-  #   update: 'update?',
-  #   create: 'create?',
-  #   destroy: 'destroy?',
-  #   search: 'search?',
-  # }
+  config.authorization_methods = {
+    index: 'index?',
+    show: 'show?',
+    edit: 'edit?',
+    new: 'new?',
+    update: 'update?',
+    create: 'create?',
+    destroy: 'destroy?',
+    search: 'search?'
+  }
   # config.raise_error_on_missing_policy = false
-  # config.authorization_client = :pundit
+  config.authorization_client = :pundit
 
   ## == Localization ==
   # config.locale = 'en-US'
@@ -40,36 +40,10 @@ Avo.configure do |config|
   # config.via_per_page = 8
   # config.id_links_to_resource = false
 
-  ## == Cache options ==
-  ## Provide a lambda to customize the cache store used by Avo.
-  ## We compute the cache store by default, this is NOT the default, just an example.
-  # config.cache_store = -> {
-  #   ActiveSupport::Cache.lookup_store(:solid_cache_store)
-  # }
-  # config.cache_resources_on_index_view = true
-  ## permanent enable or disable cache_resource_filters, default value is false
-  # config.cache_resource_filters = false
-  ## provide a lambda to enable or disable cache_resource_filters per user/resource.
-  # config.cache_resource_filters = -> { current_user.cache_resource_filters? }
-
-  ## == Logger ==
-  # config.logger = -> {
-  #   file_logger = ActiveSupport::Logger.new(Rails.root.join("log", "avo.log"))
-  #
-  #   file_logger.datetime_format = "%Y-%m-%d %H:%M:%S"
-  #   file_logger.formatter = proc do |severity, time, progname, msg|
-  #     "[Avo] #{time}: #{msg}\n".tap do |i|
-  #       puts i
-  #     end
-  #   end
-  #
-  #   file_logger
-  # }
-
   ## == Customization ==
-  # config.app_name = 'Avocadelicious'
-  # config.timezone = 'UTC'
-  # config.currency = 'USD'
+  config.app_name = 'SmarterGood, Inc.'
+  config.timezone = 'UTC + 8:00'
+  config.currency = 'PHP'
   # config.hide_layout_when_printing = false
   # config.full_width_container = false
   # config.full_width_index_view = false
@@ -104,20 +78,6 @@ Avo.configure do |config|
   # end
 
   ## == Menus ==
-  # config.main_menu = -> {
-  #   section "Dashboards", icon: "dashboards" do
-  #     all_dashboards
-  #   end
-
-  #   section "Resources", icon: "resources" do
-  #     all_resources
-  #   end
-
-  #   section "Tools", icon: "tools" do
-  #     all_tools
-  #   end
-  # }
-  # config.profile_menu = -> {
-  #   link "Profile", path: "/avo/profile", icon: "user-circle"
-  # }
+  config.main_menu = lambda {
+  }
 end
