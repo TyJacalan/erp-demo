@@ -7,6 +7,6 @@ end
 
 puts "Seeding #{Rails.env} database..."
 seed 'admin'
-seed 'user'
+seed 'users'
 
 puts 'All files successfully seeded'

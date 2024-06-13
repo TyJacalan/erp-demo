@@ -6,12 +6,15 @@
 
   <% if resource_name == :user %>
     <%= f.label :mobile %>
-    <%= f.text_field :mobile %>
+    <%= f.phone_field :mobile %>
+
+    <%= f.label :birthdate %>
+    <%= f.date_field :birthdate %>
   <% end %>
 
   <% if f.object.class.require_password_on_accepting %>
       <%= f.label :password %>
-      <%= f.password_field :password %>
+      <%= f.password_field :password, autocomplete: 'new-password' %>
       <%= f.error_message :password %>
 
       <%= f.label :password_confirmation %>

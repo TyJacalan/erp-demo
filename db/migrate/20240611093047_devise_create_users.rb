@@ -12,14 +12,13 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       t.string :provider
       t.date   :birthdate
       t.string :mobile
-      t.integer :position
+      t.string :position
+      t.string :team
       t.float :salary
-
-      ## Confirmable
-      t.string   :confirmation_token
-      t.datetime :confirmed_at
-      t.datetime :confirmation_sent_at
-      t.string   :unconfirmed_email
+      t.boolean :task_manager,      default: false
+      t.boolean :client_manager,    default: false
+      t.boolean :team_manager,      default: false
+      t.boolean :moderator,         default: false
 
       ## Recoverable
       t.string   :reset_password_token
@@ -40,6 +39,5 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
 
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
-    add_index :users, :confirmation_token,   unique: true
   end
 end

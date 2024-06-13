@@ -1,34 +1,66 @@
-# spec/fixtures/users.yml
-valid_user:
-  email: valid_user@example.com
-  first_name: Valid
-  
-missing_first_name_user:
-  email: missing_firstname@example.com
+# test/fixtures/users.yml
 
-short_first_name_user:
-  email: short_firstname@example.com
-  first_name: S
+freelancer_user:
+  full_name: Freelancer User
+  email: freelancer@example.com
+  position: freelancer
 
-long_first_name_user:
-  email: long_firstname@example.com
-  first_name: Looooooooooooooooooooooooooooooooooooooooooooong
-  last_name: LongFirstName
+development_associate_user:
+  full_name: Development Associate User
+  email: development_associate@example.com
+  position: development_associate
 
-missing_last_name_user:
-  email: missing_lastname@example.com
-  first_name: MissingLastName
+writer_researcher_user:
+  full_name: Writer Researcher User
+  email: writer_researcher@example.com
+  position: writer_researcher
 
-short_last_name_user:
-  email: short_lastname@example.com
-  first_name: ShortLastName
-  last_name: S
+senior_development_associate_user:
+  full_name: Senior Development Associate User
+  email: senior_development_associate@example.com
+  position: senior_development_associate
 
-long_last_name_user:
-  email: long_lastname@example.com
-  first_name: LongLastName
-  last_name: Looooooooooooooooooooooooooooooooooooooooooooong
+senior_writer_researcher_user:
+  full_name: Senior Writer Researcher User
+  email: senior_writer_researcher@example.com
+  position: senior_writer_researcher
 
-invalid_email_user:
-  email: invalid_email_example.com
-  first_name: InvalidEmail
+editor_user:
+  full_name: Editor User
+  email: editor@example.com
+  position: editor
+
+associate_development_manager_user:
+  full_name: Associate Development Manager User
+  email: associate_development_manager@example.com
+  position: associate_development_manager
+
+development_manager_user:
+  full_name: Development Manager User
+  email: development_manager@example.com
+  position: development_manager
+
+director_user:
+  full_name: Director User
+  email: director@example.com
+  position: director
+
+vice_president_user:
+  full_name: Vice President User
+  email: vice_president@example.com
+  position: vice_president
+
+president_user:
+  full_name: President User
+  email: president@example.com
+  position: president
+
+ceo_user:
+  full_name: CEO User
+  email: ceo@example.com
+  position: ceo
+
+people_partnership_associate_user:
+  full_name: People Partnership Associate User
+  email: people_partnership_associate@example.com
+  position: people_partnership_associate

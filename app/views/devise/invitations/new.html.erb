@@ -4,21 +4,28 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <%= f.label :full_name %>
-  <%= f.text_field :full_name %>
+  <%= f.text_field :full_name, autocomplete: 'name' %>
 
   <%= f.label :email %>
   <%= f.email_field :email %>
 
   <% if resource_name == :user %>
+    <%= f.label :team %>
+    <%= f.select_field :team do |select| %>
+      <% User.distinct_teams.each do |team| %>
+        <%= select.option label: team.humanize, value: team %>
+      <% end %>
+    <% end %>
+
     <%= f.label :position %>
     <%= f.select_field :position do |select |%>
-      <% User.positions.each do |key, value| %>
-        <%= select.option label: key.humanize, value: key %>
+      <% User.distinct_positions.each do |position| %>
+        <%= select.option label: position.humanize, value: position %>
       <% end %>
     <% end %>
 
     <%= f.label :salary %>
-    <%= f.number_field :salary %>
+    <%= f.number_field :salary, autocomplete: 'transaction-amount' %>
   <% end %>
 
   <%= render_separator class: 'my-4' %>

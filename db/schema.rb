@@ -55,10 +55,6 @@ ActiveRecord::Schema[7.1].define(version: 20_240_612_070_630) do
     t.datetime 'last_sign_in_at'
     t.string 'current_sign_in_ip'
     t.string 'last_sign_in_ip'
-    t.string 'confirmation_token'
-    t.datetime 'confirmed_at'
-    t.datetime 'confirmation_sent_at'
-    t.string 'unconfirmed_email'
     t.integer 'failed_attempts', default: 0, null: false
     t.string 'unlock_token'
     t.datetime 'locked_at'
@@ -72,7 +68,6 @@ ActiveRecord::Schema[7.1].define(version: 20_240_612_070_630) do
     t.string 'invited_by_type'
     t.bigint 'invited_by_id'
     t.integer 'invitations_count', default: 0
-    t.index ['confirmation_token'], name: 'index_admins_on_confirmation_token', unique: true
     t.index ['email'], name: 'index_admins_on_email', unique: true
     t.index ['invitation_token'], name: 'index_admins_on_invitation_token', unique: true
     t.index ['invited_by_id'], name: 'index_admins_on_invited_by_id'
@@ -90,12 +85,13 @@ ActiveRecord::Schema[7.1].define(version: 20_240_612_070_630) do
     t.string 'provider'
     t.date 'birthdate'
     t.string 'mobile'
-    t.integer 'position'
+    t.string 'position'
+    t.string 'team'
     t.float 'salary'
-    t.string 'confirmation_token'
-    t.datetime 'confirmed_at'
-    t.datetime 'confirmation_sent_at'
-    t.string 'unconfirmed_email'
+    t.boolean 'task_manager', default: false
+    t.boolean 'client_manager', default: false
+    t.boolean 'team_manager', default: false
+    t.boolean 'moderator', default: false
     t.string 'reset_password_token'
     t.datetime 'reset_password_sent_at'
     t.datetime 'remember_created_at'
@@ -114,7 +110,6 @@ ActiveRecord::Schema[7.1].define(version: 20_240_612_070_630) do
     t.string 'invited_by_type'
     t.bigint 'invited_by_id'
     t.integer 'invitations_count', default: 0
-    t.index ['confirmation_token'], name: 'index_users_on_confirmation_token', unique: true
     t.index ['email'], name: 'index_users_on_email', unique: true
     t.index ['invitation_token'], name: 'index_users_on_invitation_token', unique: true
     t.index ['invited_by_id'], name: 'index_users_on_invited_by_id'

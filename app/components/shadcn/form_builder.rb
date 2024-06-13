@@ -15,10 +15,22 @@ module Shadcn
       )
     end
 
+    def date_field(method, options = {})
+      error_class = @object.errors[method].any? ? 'error' : ''
+      options[:class] = @template.tw("#{options[:class]} #{error_class}")
+      options[:autocomplete] = options[:autocomplete] || 'bday'
+      @template.render_input(
+        name: "#{object_name}[#{method}]",
+        id: "#{object_name}_#{method}",
+        value: @object.send(method),
+        type: 'date', **options
+      )
+    end
+
     def email_field(method, options = {})
       error_class = @object.errors[method].any? ? 'error' : ''
       options[:class] = @template.tw("#{options[:class]} #{error_class}")
-      options[:autocomplete] = 'email'
+      options[:autocomplete] = options[:autocomplete] || 'email'
       @template.render_input(
         name: "#{object_name}[#{method}]",
         id: "#{object_name}_#{method}",
@@ -48,7 +60,7 @@ module Shadcn
     def phone_field(method, options = {})
       error_class = @object.errors[method].any? ? 'error' : ''
       options[:class] = @template.tw("#{options[:class]} #{error_class}")
-      options[:autocomplete] = 'tel'
+      options[:autocomplete] = options[:autocomplete] ||  'tel'
 
       @template.render_input(
         name: "#{object_name}[#{method}]",
@@ -84,6 +96,8 @@ module Shadcn
     def password_field(method, options = {})
       error_class = @object.errors[method].any? ? 'error' : ''
       options[:class] = @template.tw("#{options[:class]} #{error_class}")
+      options[:autocomplete] = options[:autocomplete] || 'new-password'
+
       @template.render_input(
         name: "#{object_name}[#{method}]",
         id: "#{object_name}_#{method}",

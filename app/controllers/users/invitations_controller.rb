@@ -7,7 +7,7 @@ module Users
     protected
 
     def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:accept_invitation, keys: %i[password mobile])
+      devise_parameter_sanitizer.permit(:accept_invitation, keys: %i[password mobile birthdate])
       devise_parameter_sanitizer.permit(:invite, keys: %i[full_name email position salary])
     end
   end

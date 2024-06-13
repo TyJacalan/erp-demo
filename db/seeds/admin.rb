@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-a = Admin.create!(
-  email: 'admin@example.com',
-  password: 'password123!',
-  confirmed_at: Time.now
-)
+a = Admin.create_or_find_by!(email: 'admin@example.com') do |admin|
+  admin.password = 'password123!'
+end
 
-a.skip_confirmation!
+a.skip_invitation
