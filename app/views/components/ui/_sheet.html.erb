@@ -16,11 +16,11 @@
                   options[:class]) %>"
         tabindex="-1"
         style="pointer-events: auto">
-      <div data-ui--sheet-target="content"><%= content_for(:sheet_content) %></div>
+      <div data-ui--sheet-target="content" class="h-full bg-background text-muted-foreground"><%= content_for(:sheet_content) %></div>
       <button
         data-ui--sheet-target="closeButton"
         type="button"
-        class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+        class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent text-muted-foreground">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"

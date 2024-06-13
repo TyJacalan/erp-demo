@@ -1,6 +1,8 @@
 <% content_for(:auth_header) do %>
   <div class='text-center text-muted-foreground'>
-    <h1><%= t "devise.#{controller_name}.#{action_name}.header" %></h1>
+    <h1 class='mt-6 text-center text-3xl font-bold tracking-tight text-muted-foreground'>
+      <%= t "devise.#{controller_name}.#{action_name}.header" %>
+    </h1>
 
     <% if devise_mapping.recoverable? && controller_name == 'passwords' %>
       <span>Remember your password?</span>
