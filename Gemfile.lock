@@ -103,6 +103,8 @@ GEM
     bindex (0.8.1)
     bootsnap (1.18.3)
       msgpack (~> 1.2)
+    breadcrumbs_on_rails (4.1.0)
+      railties (>= 5.0)
     builder (3.2.4)
     childprocess (5.0.0)
     concurrent-ruby (1.2.3)
@@ -397,6 +399,7 @@ PLATFORMS
 DEPENDENCIES
   avo
   bootsnap
+  breadcrumbs_on_rails
   cssbundling-rails
   debug
   devise
@@ -407,6 +410,7 @@ DEPENDENCIES
   omniauth
   omniauth-google-oauth2
   omniauth-rails_csrf_protection (~> 1.0)
+  pagy (~> 8.4)
   pg (~> 1.1)
   puma (>= 5.0)
   pundit (~> 2.3)

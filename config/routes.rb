@@ -21,7 +21,12 @@ Rails.application.routes.draw do
   end
 
   root 'posts#index'
+
+  # Sidebar
+  resources :clients
   resources :posts
+  resources :research
+  resources :workplan
   resources :users
 
   # Error routes

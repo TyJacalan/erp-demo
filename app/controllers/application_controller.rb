@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   include Pundit::Authorization
 
+  add_breadcrumb 'Home', :root_path
+
   protected
 
   def authenticate_inviter!

@@ -62,7 +62,6 @@ module SmartergoodErp
       Devise::UnlocksController.layout 'auth'
       Devise::PasswordsController.layout 'auth'
       Devise::Mailer.layout 'mailer'
-      UsersController.layout 'setting'
     end
 
     # GZip all responses

@@ -1,0 +1,24 @@
+<%= render_dropdown_menu do %>
+    <%= dropdown_menu_trigger do %>
+        <%= render_button class: 'flex flex-row gap-2', variant: :outline do %>
+            <%= controller_name.capitalize %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+            </svg>
+        <% end %>
+    <% end %>
+    <%= dropdown_menu_content do %>
+        <%= dropdown_menu_item do %>
+            <%= render_button "Clients", href: clients_path, as: :link, variant: :ghost, class: 'text-muted-foreground w-full' %>
+        <% end %>
+        <%= dropdown_menu_item do %>
+            <%= render_button "Research", href: research_index_path, as: :link, variant: :ghost, class: 'text-muted-foreground w-full' %>
+        <% end %>
+        <%= dropdown_menu_item do %>
+            <%= render_button "Workplan", href: workplan_index_path, as: :link, variant: :ghost, class: 'text-muted-foreground w-full' %>
+        <% end %>
+        <%= dropdown_menu_item do %>
+            <%= render_button "Users", href: users_path, as: :link, variant: :ghost, class: 'text-muted-foreground w-full' %>
+        <% end %>
+    <% end %>
+<% end %>
