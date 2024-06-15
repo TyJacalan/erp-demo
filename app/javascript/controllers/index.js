@@ -13,6 +13,9 @@ application.register("ui--dialog", Ui__DialogController)
 import Ui__DropdownController from "./ui/dropdown_controller"
 application.register("ui--dropdown", Ui__DropdownController)
 
+import Ui__DropzoneController from "./ui/dropzone_controller"
+application.register("ui--dropzone", Ui__DropzoneController)
+
 import Ui__ModeController from "./ui/mode_controller"
 application.register("ui--mode", Ui__ModeController)
 

@@ -1,1 +1,17 @@
 Clients
+<%= render_dialog do %>
+    <%= dialog_trigger do %>
+        <%= render_button 'Create Client' %>
+    <% end %>
+    <%= dialog_content do %>
+        <%= turbo_frame_tag 'client_form' do %>
+            <%= render 'form' %>
+        <% end %>
+    <% end %>
+<% end %>
+
+<div id='clients'>
+    <% @clients.each do |client| %>
+        <%= render partial: 'client', locals: { client: client } %>
+    <% end %>
+</div>

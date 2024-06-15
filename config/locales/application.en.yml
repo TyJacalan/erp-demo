@@ -1,0 +1,8 @@
+en:
+  client:
+    create:
+      success: "You have successfully created a new client."
+    destroy:
+      success: "You have successfully deleted a client."
+    edit:
+      success: "You have successfully edited a new client."

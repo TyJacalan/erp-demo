@@ -1,0 +1,18 @@
+<%= turbo_frame_tag 'client_form', loading: 'lazy' do %>
+    <%= render_form_for @client, method: :post, class: 'flex flex-col gap-4' do |f| %>
+        <%= f.label :name %>
+        <%= f.text_field :name, autocomplete: 'name' %>
+
+        <%= f.label :abbreviation %>
+        <%= f.text_field :abbreviation, autocomplete: 'none' %>
+
+        <%= f.file_field :logo %>
+        
+        <%= f.label :mission %>
+        <%= f.textarea :mission, autocomplete: 'none' %>
+
+        <%= render_separator class: 'my-4' %>
+
+        <%= f.submit 'Create' %>
+    <% end %>
+<% end %>

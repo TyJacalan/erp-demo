@@ -27,6 +27,15 @@ module Shadcn
       )
     end
 
+    def dropzone(method)
+      error_class = @object.errors[method].any? ? 'error' : ''
+      options[:class] = @template.tw("#{options[:class]} #{error_class}")
+      @template.render_dropzone(
+        name: "#{object_name}[#{method}]",
+        id: "#{object_name}_#{method}"
+      )
+    end
+
     def email_field(method, options = {})
       error_class = @object.errors[method].any? ? 'error' : ''
       options[:class] = @template.tw("#{options[:class]} #{error_class}")
@@ -92,6 +101,20 @@ module Shadcn
         type: 'text', **options
       )
     end
+
+
+    def textarea(method, options = {}, &block)
+    error_class = @object.errors[method].any? ? 'error' : ''
+    options[:class] = @template.tw("#{options[:class]} #{error_class}")
+
+    @template.render_textarea(
+      name: "#{object_name}[#{method}]",
+      id: "#{object_name}_#{method}",
+      value: @object.send(method),
+      **options,
+      &block
+    )
+  end
 
     def password_field(method, options = {})
       error_class = @object.errors[method].any? ? 'error' : ''

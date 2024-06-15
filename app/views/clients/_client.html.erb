@@ -1,0 +1,21 @@
+<%= turbo_frame_tag "client_#{dom_id(client)}" do %>
+    <div class='flex flex-row gap-4'>
+        <h2><%= client.name %></h2>
+        <p><%= client.abbreviation %></p>
+        <p><%= client.mission %></p>
+        <% if client.logo.attached? %>
+            <%= render_avatar src: url_for(client.logo), alt: client.name, variant: :large %>
+        <% else %>
+            <%= render_avatar src: nil, alt: 'default profile image', variant: :large %>
+        <% end %>
+        <%= render_dialog do %>
+            <%= dialog_trigger do %>
+                <%= render_button 'Edit' %>
+            <% end %>
+            <%= dialog_content do %>
+                <%= render partial: 'edit', locals: { client: client } %>
+            <% end %>
+        <% end %>
+        <%= render_button 'Delete', as: :link, href: client_path(client), class: 'text-destructive', data: { turbo_method: :delete } %>
+    </div>
+<% end %>

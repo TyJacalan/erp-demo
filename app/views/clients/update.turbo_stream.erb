@@ -1,0 +1,2 @@
+<%= turbo_stream.update 'toasts', partial: 'components/layout/toast_messages' %>
+<%= turbo_stream.replace "client_#{dom_id(@client)}", partial: 'client', locals: { client: @client } %>
