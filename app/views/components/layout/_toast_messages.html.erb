@@ -1,7 +1,9 @@
-<% if notice %>
-  <%= render_toast id: "default_toast", description: notice %>
-<% end %>
+<div id='toasts'>
+  <% if notice %>
+    <%= render_toast id: "default_toast", description: notice %>
+  <% end %>
 
-<% if alert %>
-  <%= render_toast description: alert, id: "alert_toast", variant: :destructive %>
-<% end %>
+  <% if alert %>
+    <%= render_toast description: alert, id: "alert_toast", variant: :destructive %>
+  <% end %>
+</div>

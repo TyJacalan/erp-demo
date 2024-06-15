@@ -4,8 +4,9 @@
     <%= render_breadcrumbs separator: '> ' %>
     </div>
     <div class='h-full w-1/2 flex flex-row items-center justify-end gap-4'>
-      <%= render_input name: 'search', id: 'search', placeholder: 'Search...', class: 'w-1/3' %>
-        <%= render partial: 'components/layout/mode_switch' %>
-        <%= render partial: 'components/layout/account_modal' %>
+      <%= render_input name: 'search', id: 'search', placeholder: 'Search...', class: 'w-full' %>
+        <%= render 'components/layout/mode_switch' %>
+        <%= render 'components/layout/notifications' %>
+        <%= render 'components/layout/account_modal' %>
     </div>
 </header>
