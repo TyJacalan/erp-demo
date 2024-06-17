@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!
   include Pundit::Authorization
+  before_action :authenticate_user!
+  after_action :verify_authorized, unless: :devise_controller?
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   add_breadcrumb 'Home', :root_path
 
@@ -20,6 +23,15 @@ class ApplicationController < ActionController::Base
         flash.now[:alert] = @obj.error.first.full_messages
       end
       format.turbo_stream
+    end
+  end
+
+  def user_not_authorized
+    flash.now[:alert] = t 'policy.unauthorized'
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update('toasts', partial: 'components/layout/toast_messages')
+      end
     end
   end
 end

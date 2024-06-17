@@ -3,6 +3,7 @@
 class AlertsController < ApplicationController
   def index
     @notifications = current_user.notifications
-    @count = current_user.notifications.count
+    @count = @notifications.count
+    authorize @notifications
   end
 end

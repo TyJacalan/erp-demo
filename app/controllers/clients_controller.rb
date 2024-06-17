@@ -8,6 +8,7 @@ class ClientsController < ApplicationController
   def index
     @client = Client.new
     @clients = Client.all
+    authorize @client
   end
 
   def create
@@ -35,5 +36,6 @@ class ClientsController < ApplicationController
 
   def set_client
     @client = Client.find(params[:id])
+    authorize @client
   end
 end

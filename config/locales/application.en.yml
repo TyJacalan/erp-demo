@@ -6,3 +6,5 @@ en:
       success: "You have successfully deleted a client."
     edit:
       success: "You have successfully edited a new client."
+  policy:
+    unauthorized: "You are not authorized to perform this action."

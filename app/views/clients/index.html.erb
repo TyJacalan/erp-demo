@@ -1,11 +1,12 @@
-Clients
-<%= render_dialog do %>
-    <%= dialog_trigger do %>
-        <%= render_button 'Create Client' %>
-    <% end %>
-    <%= dialog_content do %>
-        <%= turbo_frame_tag 'client_form' do %>
-            <%= render 'form' %>
+<% if current_user.client_manager %>
+    <%= render_dialog do %>
+        <%= dialog_trigger do %>
+            <%= render_button 'Create Client' %>
+        <% end %>
+        <%= dialog_content do %>
+            <%= turbo_frame_tag 'client_form' do %>
+                <%= render 'form' %>
+            <% end %>
         <% end %>
     <% end %>
 <% end %>

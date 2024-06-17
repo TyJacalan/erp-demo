@@ -11,11 +11,4 @@ class PostPolicy
   def index?
     user
   end
-
-  class Scope
-    def initialize(user, post)
-      @user = user
-      @post = post
-    end
-  end
 end
