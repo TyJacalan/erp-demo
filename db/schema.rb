@@ -80,6 +80,9 @@ ActiveRecord::Schema[7.1].define(version: 20_240_615_104_248) do
     t.string 'name'
     t.string 'abbreviation'
     t.text 'mission'
+    t.string 'website'
+    t.boolean 'nonprofit_status'
+    t.json 'issue_areas'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
   end

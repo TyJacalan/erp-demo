@@ -26,7 +26,7 @@ class ClientsController < ApplicationController
   private
 
   def client_params
-    params.require(:client).permit(:name, :abbreviation, :mission, :logo)
+    params.require(:client).permit(:name, :abbreviation, :mission, :logo, :website, :nonprofit_status, :issue_areas)
   end
 
   def initialize_client_service

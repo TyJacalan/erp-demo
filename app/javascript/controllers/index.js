@@ -33,3 +33,6 @@ application.register("ui--tabs", Ui__TabsController)
 
 import Ui__ToastController from "./ui/toast_controller"
 application.register("ui--toast", Ui__ToastController)
+
+import Ui__CarouselController from "./ui/carousel_controller"
+application.register("ui--carousel", Ui__CarouselController)

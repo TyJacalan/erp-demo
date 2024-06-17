@@ -9,6 +9,8 @@ class ClientService
   def create
     ActiveRecord::Base.transaction do
       @client = Client.new(@client_params)
+      @client.issue_areas = @client_params[:issue_areas].split(',').map(&:strip)
+      Rails.logger.info "ia: #{@client.issue_areas}"
 
       @client.save
 

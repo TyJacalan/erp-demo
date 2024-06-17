@@ -1,0 +1,12 @@
+<div data-controller="ui--carousel" class='h-full w-full'>
+  <div
+    role="carouselslides"
+    class="h-full w-full" 
+    data-ui--carousel-target="slides">
+    <%= content_for :carousel_slides %>
+  </div>
+  <div class='flex flex-row items-center justify-center gap-12 mt-8'>
+    <button type="button" data-action="ui--carousel#previous" data-ui--carousel-target="prevButton" class='hover:text-foreground'>Previous</button>
+    <button type="button" data-action="ui--carousel#next" data-ui--carousel-target="nextButton" class='hover:text-foreground'>Next</button>
+  </div>
+</div>

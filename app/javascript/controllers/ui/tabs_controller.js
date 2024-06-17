@@ -1,6 +1,5 @@
 // https://github.com/excid3/tailwindcss-stimulus-components/blob/master/src/tabs.js
 import { Controller } from "@hotwired/stimulus";
-import "stimulus-use";
 
 export default class extends Controller {
   static targets = ["tab", "panel"];

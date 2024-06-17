@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
       if response
         flash.now[:notice] = t "client.#{action_name}.success"
       elsif obj.present?
-        flash.now[:alert] = @obj.errors.first.full_messages
+        flash.now[:alert] = @obj.error.first.full_messages
       end
       format.turbo_stream
     end
