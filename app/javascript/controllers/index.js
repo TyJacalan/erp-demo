@@ -28,5 +28,8 @@ application.register("ui--sheet", Ui__SheetController)
 import Ui__SwitchController from "./ui/switch_controller"
 application.register("ui--switch", Ui__SwitchController)
 
+import Ui__TabsController from "./ui/tabs_controller"
+application.register("ui--tabs", Ui__TabsController)
+
 import Ui__ToastController from "./ui/toast_controller"
 application.register("ui--toast", Ui__ToastController)
