@@ -22,6 +22,7 @@ gem 'pg', '~> 1.1'
 gem 'puma', '>= 5.0'
 gem 'pundit', '~> 2.3'
 gem 'rails', '~> 7.1.3', '>= 7.1.3.2'
+gem 'redis', '>= 4.0.1'
 gem 'rubocop', require: false
 gem 'shadcn-ui', '~> 0.0.12'
 gem 'sprockets-rails'

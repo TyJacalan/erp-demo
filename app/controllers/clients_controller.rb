@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ClientsController < ApplicationController
+  before_action :set_client, only: %i[update destroy]
+  before_action :initialize_client_service, only: %i[create]
   add_breadcrumb 'Clients', :clients_path
 
   def index
@@ -9,18 +11,15 @@ class ClientsController < ApplicationController
   end
 
   def create
-    @client = Client.new(client_params)
-    handle_response(@client.save, @client)
+    @client = @client_service.create
+    handle_response(@client.persisted?, @client)
   end
 
   def update
-    @client = Client.find(params[:id])
     handle_response(@client.update(client_params), @client)
   end
 
   def destroy
-    @client = Client.find(params[:id])
-
     handle_response(@client.destroy, @client)
   end
 
@@ -30,15 +29,11 @@ class ClientsController < ApplicationController
     params.require(:client).permit(:name, :abbreviation, :mission, :logo)
   end
 
-  def handle_response(response, obj)
-    respond_to do |format|
-      if response
-        flash.now[:notice] = t "client.#{action_name}.success"
-        format.turbo_stream
-      else
-        flash.now[:alert] = @obj.errors.first.full_messages if obj.present?
-        format.turbo_stream
-      end
-    end
+  def initialize_client_service
+    @client_service = ClientService.new(client_params, current_user)
+  end
+
+  def set_client
+    @client = Client.find(params[:id])
   end
 end

@@ -51,6 +51,10 @@
     font: inherit;
 		box-sizing: box-border;
 	}
+
+	li {
+		list-style: none;
+	}
 }
 
 @layer utilities {
