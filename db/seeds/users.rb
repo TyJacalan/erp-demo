@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Create Sample User
-user = User.create_or_find_by!(email: 'example@example.com') do |user|
+User.create_or_find_by!(email: 'example@example.com') do |user|
   user.full_name = 'Example User'
   user.password = 'password123!'
   user.position = :director

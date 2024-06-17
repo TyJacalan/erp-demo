@@ -7,10 +7,12 @@ RSpec.describe ClientPolicy, type: :policy do
 
   let(:client) { Client.new }
 
-  context 'for a visitor' do
+  context 'with visitors' do
     let(:user) { nil }
 
-    it { is_expected.to forbid_all_actions }
+    it 'raises NotAuthorizedError' do
+      expect { subject.index? }.to raise_error(Pundit::NotAuthorizedError)
+    end
   end
 
   context 'for a non client manager' do

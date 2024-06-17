@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PostPolicy
+class ProfilePolicy < ApplicationPolicy
   def index?
     user
   end
