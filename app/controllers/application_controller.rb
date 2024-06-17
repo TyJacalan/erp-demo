@@ -16,11 +16,10 @@ class ApplicationController < ActionController::Base
     respond_to do |format|
       if response
         flash.now[:notice] = t "client.#{action_name}.success"
-        format.turbo_stream
-      else
-        flash.now[:alert] = @obj.errors.first.full_messages if obj.present?
-        format.turbo_stream
+      elsif obj.present?
+        flash.now[:alert] = @obj.errors.first.full_messages
       end
+      format.turbo_stream
     end
   end
 end
