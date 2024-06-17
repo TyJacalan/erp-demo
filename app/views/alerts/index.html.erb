@@ -1,0 +1,3 @@
+<%= turbo_frame_tag "alerts_#{current_user.id}" do %>
+    <%= render partial: 'alert', locals: { count: @count, notifications: @notifications } %>
+<% end %>

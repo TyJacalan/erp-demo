@@ -29,6 +29,9 @@ Rails.application.routes.draw do
   resources :workplan
   resources :users
 
+  resources :alerts
+  resource :notifications
+
   # Error routes
   get '/404', to: 'errors#not_found', via: :all
   get '/403', to: 'errors#forbidden', via: :all
