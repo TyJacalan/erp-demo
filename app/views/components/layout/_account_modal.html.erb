@@ -8,7 +8,7 @@
         <%= render_separator class: "my-1" %>
         
         <%= dropdown_menu_item do %>
-            <%= render_button 'Profile', href: users_path, as: :link, variant: :ghost, class: 'text-muted-foreground w-full' %>
+            <%= render_button 'Profile', href: profile_index_path, as: :link, variant: :ghost, class: 'text-muted-foreground w-full' %>
         <% end %>
         <%= dropdown_menu_item do %>
             <%= button_to "Logout", destroy_user_session_path, method: :delete, class: 'text-muted-foreground w-full' %>

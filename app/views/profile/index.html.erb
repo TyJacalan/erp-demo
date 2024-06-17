@@ -1,0 +1,30 @@
+<div class='flex flex-row items-center gap-4'>
+  <% if current_user.avatar.attached? %>
+    <%= render_avatar src: url_for(current_user.avatar), alt: current_user.full_name, variant: :large %>
+  <% else %>
+    <%= render_avatar src: nil, alt: 'default profile image', variant: :large %>
+  <% end %>
+  <div class='flex flex-col'>
+    <h1 class='text-3xl truncate'><%= current_user.full_name %></h1>
+    <p class='font-bold'><%= current_user.position.humanize %></p>
+  </div>
+</div>
+
+<%= render_tabs do %>
+  <%= tab_list do %>
+    <%= tab "User", active: true %>
+    <%= tab "Notifications" %>
+  <% end %>
+  <%= tab_panels do %>
+    <%= tab_panel active: true do %>
+        <%= turbo_frame_tag "details_#{current_user.id}" do %>
+          <%= render 'details' %>
+        <% end %>
+    <% end %>
+    <%= tab_panel do %>
+        <%= turbo_frame_tag 'user_notifications', src: notifications_path, loading: 'lazy' do %>
+            <%= render 'components/ui/spinner' %>
+        <% end %>
+    <% end %>
+  <% end %>
+<% end %>

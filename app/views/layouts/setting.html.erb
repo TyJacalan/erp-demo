@@ -14,9 +14,8 @@
     <%= render 'components/layout/toast_messages' %>
     <%= render 'components/layout/header' %>
     <%= render 'components/layout/mobile_header' %>
-    <div class='h-full w-full flex flex-col sm:flex-row gap-6 px-6 sm:px-16'>
-        <%= render 'components/layout/settings_menu' %>
-        <main class='h-full w-full sm:px-6 sm:py-12'>
+    <div class='h-full w-full bg-muted flex flex-col sm:flex-row gap-6'>
+        <main class='h-full w-full px-6 py-4'>
             <%= yield %>
         </main>
     </div>

@@ -10,13 +10,15 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body class="flex min-h-screen w-full flex-col">
+  <body class="flex min-h-screen h-full w-full flex-row overflow-hidden">
     <%= render 'components/layout/toast_messages' %>
     <%= render 'components/layout/sidebar' %>
-    <%= render 'components/layout/header' %>
-    <%= render 'components/layout/mobile_header' %>
-    <main class='flex-1 flex flex-col gap-4 bg-muted px-6 sm:pl-20 sm:pr-6'>
-      <%= yield %>
+    <main class='flex-1 bg-muted'>
+      <%= render 'components/layout/header' %>
+      <%= render 'components/layout/mobile_header' %>
+      <div class='h-full w-full flex flex-col gap-4 px-6 py-4'>
+        <%= yield %>
+      </div>
     </main>
   </body>
 </html>

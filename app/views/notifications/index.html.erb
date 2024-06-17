@@ -1,7 +1,13 @@
 <%= turbo_frame_tag 'user_notifications' do %>
-    <ul>
-        <% @notifications.each do |notification| %>
-            <%= notification.message %>
+    <div class='py-4'>
+        <% if @notifications.present? %>
+        <ul>
+            <% @notifications.each do |notification| %>
+                <%= notification.message %>
+            <% end %>
+        </ul>
+        <% else %>
+            No notifications to display
         <% end %>
-    </ul>
+    </div>
 <% end %>
