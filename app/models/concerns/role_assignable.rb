@@ -9,7 +9,7 @@ module RoleAssignable
 
   ROLES = {
     task_manager: %i[senior_development_associate senior_writer_researcher],
-    client_manager: %i[senior_development_associate associate_development_manager development_manager],
+    client_manager: %i[senior_development_associate associate_development_manager development_manager director],
     team_manager: %i[editor associate_development_manager development_manager director vice_president president ceo],
     moderator: %i[people_partnership_associate director vice_president president]
   }.freeze

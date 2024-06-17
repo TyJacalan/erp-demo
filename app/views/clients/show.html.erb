@@ -1,0 +1,38 @@
+<div class='flex flex-row items-center gap-4'>
+  <% if @client.logo.attached? %>
+    <%= render_avatar src: url_for(@client.logo), alt: @client.name, variant: :large %>
+  <% else %>
+    <%= render_avatar src: nil, alt: 'logo placeholder', variant: :large %>
+  <% end %>
+  <div class='flex flex-col'>
+    <h1 class='text-3xl truncate'><%= @client.name %></h1>
+    <p class='text-sm'><%= @client.mission %></p>
+  </div>
+</div>
+
+<%= render_tabs do %>
+  <%= tab_list do %>
+    <%= tab "Details", active: true %>
+    <%= tab "Prospects" %>
+    <%= tab "Grants" %>
+    <%= tab "Projects" %>
+    <%= tab "Contracts" %>
+  <% end %>
+  <%= tab_panels do %>
+    <%= tab_panel active: true do %>
+        
+    <% end %>
+    <%= tab_panel do %>
+        
+    <% end %>
+    <%= tab_panel do %>
+        
+    <% end %>
+    <%= tab_panel do %>
+        
+    <% end %>
+    <%= tab_panel do %>
+        
+    <% end %>
+  <% end %>
+<% end %>

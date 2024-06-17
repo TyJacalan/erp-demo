@@ -5,6 +5,10 @@ class ClientPolicy < ApplicationPolicy
     user
   end
 
+  def show?
+    user
+  end
+
   def create?
     user.client_manager?
   end

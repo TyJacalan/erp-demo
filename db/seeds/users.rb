@@ -1,14 +1,10 @@
 # frozen_string_literal: true
 
 # Create Sample User
-User.create_or_find_by!(email: 'example@example.com') do |user|
+user = User.create_or_find_by!(email: 'example@example.com') do |user|
   user.full_name = 'Example User'
   user.password = 'password123!'
-  user.task_manager = true
-  user.client_manager = true
-  user.team_manager = true
-  user.moderator = true
-  user.position = :test
+  user.position = :director
   user.skip_invitation
 end
 

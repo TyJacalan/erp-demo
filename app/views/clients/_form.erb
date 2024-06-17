@@ -1,5 +1,5 @@
 <%= turbo_frame_tag 'client_form', loading: 'lazy' do %>
-    <%= render_form_for @client, method: :post do |f| %>
+    <%= render_form_for client, method: :post do |f| %>
         <%= render_carousel do %>
             <%= carousel_slides do %>
                 <%= carousel_slide do %>
@@ -26,7 +26,7 @@
 
                     <%= render_separator class: 'my-4' %>
 
-                    <%= f.submit 'Create', class: 'w-full' %>
+                    <%= f.submit 'Save', class: 'w-full' %>
                 <% end %>
             <% end %>
         <% end %>

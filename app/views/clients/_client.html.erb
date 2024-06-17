@@ -13,7 +13,7 @@
                 <%= render_button 'Edit' %>
             <% end %>
             <%= dialog_content do %>
-                <%= render partial: 'edit', locals: { client: client } %>
+                <%= render partial: 'form', locals: { client: client } %>
             <% end %>
         <% end %>
         <%= render_button 'Delete', as: :link, href: client_path(client), class: 'text-destructive', data: { turbo_method: :delete } %>
