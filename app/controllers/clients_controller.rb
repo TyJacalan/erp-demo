@@ -16,21 +16,25 @@ class ClientsController < ApplicationController
 
   def create
     @client = @client_service.create
-    handle_response(@client.persisted?, @client)
+    authorize @client
+    message = "#{current_user.full_name} #{t "client.#{action_name}.success"} #{@client.name}"
+    handle_response(@client.persisted?, message)
   end
 
   def update
-    handle_response(@client.update(client_params), @client)
+    message = "#{t "client.#{action_name}.success"} #{@client.name}."
+    handle_response(@client.update(client_params), message)
   end
 
   def destroy
-    handle_response(@client.destroy, @client)
+    message = "#{current_user.full_name} #{t "client.#{action_name}.success"} #{@client.name}"
+    handle_response(@client.destroy, message)
   end
 
   private
 
   def client_params
-    params.require(:client).permit(:name, :abbreviation, :mission, :logo, :website, :nonprofit_status, :issue_areas)
+    params.require(:client).permit(:name, :abbreviation, :mission, :logo, :website, :nonprofit_status, :status, :issue_areas)
   end
 
   def initialize_client_service

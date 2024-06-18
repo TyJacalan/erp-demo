@@ -1,18 +1,23 @@
-<%= turbo_frame_tag "client_#{dom_id(client)}" do %>
-  <%= table_row do %>
-    <%= table_column client.id.to_s %>
-    <%= table_column do %>
-    <% end %>
-    <%= table_column do %>
-      <%= link_to client_path(client), class: 'flex flex-row gap-4 hover:text-foreground', data: { turbo: false } do %>
-        <% if client.logo.attached? %>
-          <%= render_avatar src: url_for(client.logo), alt: client.full_name, variant: :small %>
-        <% else %>
-          <%= render_avatar src: nil, alt: 'default profile image', variant: :small %>
+<%= table_row do %>
+  <%= table_column client.id.to_s %>
+  <%= table_column do %>
+    <%= render_form_for client, url: client_path(client), method: :patch, data: { controller: 'auto-submit' } do |f| %>
+      <%= f.select_field :status, id: "status_#{dom_id(client)}", class: 'w-full max-w-32', selected: @client.status, data: { action: 'change->auto-submit#submit' } do |select| %>
+        <% Client.statuses.each do |key, value| %>
+          <%= select.option label: key, value: key %>
         <% end %>
-        <%= client.name %>
       <% end %>
     <% end %>
-    <%= table_column client.abbreviation %>
   <% end %>
+  <%= table_column do %>
+    <%= link_to client_path(client), class: 'flex flex-row gap-4 hover:text-foreground', data: { turbo: false } do %>
+      <% if client.logo.attached? %>
+        <%= render_avatar src: url_for(client.logo), alt: client.full_name, variant: :small %>
+      <% else %>
+        <%= render_avatar src: nil, alt: 'default profile image', variant: :small %>
+      <% end %>
+      <%= client.name %>
+    <% end %>
+  <% end %>
+  <%= table_column client.abbreviation %>
 <% end %>

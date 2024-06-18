@@ -36,7 +36,7 @@ module Components::TableHelper
   end
 
   def table_body(**options, &block)
-    content_tag :tbody, class: options.reverse_merge(
+    content_tag :tbody, id: options[:id], class: options.reverse_merge(
       class: tw("[&_tr:last-child]:border-0", options[:class])
     ), &block
   end

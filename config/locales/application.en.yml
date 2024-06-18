@@ -1,9 +1,11 @@
 en:
   client:
     create:
-      success: "You have successfully created a new client."
+      success: "created a new client:"
+    update:
+      success: "You have successfully updated"
     destroy:
-      success: "You have successfully deleted a client."
+      success: "deleted a client:"
     edit:
       success: "You have successfully edited a new client."
   policy:

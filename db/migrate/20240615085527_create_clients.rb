@@ -8,7 +8,8 @@ class CreateClients < ActiveRecord::Migration[7.1]
       t.text :mission
       t.string :website
       t.boolean :nonprofit_status
-      t.text :issue_areas, array: true, default: []
+      t.integer :status,           null: false, default: 0
+      t.text :issue_areas,         array: true, default: []
 
       t.timestamps
     end

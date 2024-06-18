@@ -11,7 +11,7 @@
     <% end %>
 <% end %>
 
-<%= turbo_frame_tag 'clients' do %>
+<%= turbo_frame_tag "clients_#{dom_id(current_user)}" do %>
   <%= render partial: 'clients' %>
 <% end %>
 </div>

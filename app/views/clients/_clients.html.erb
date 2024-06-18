@@ -1,4 +1,4 @@
-<%= turbo_frame_tag 'clients' do %>
+<%= turbo_frame_tag "clients_#{dom_id(current_user)}" do %>
   <%= render_form_with id: 'client_search', class: 'w-full max-w-md flex flex-row gap-2', method: :get, data: { turbo_permanent: true } do |f| %>
     <%= f.search_field :issue_areas_cont, placeholder: 'Search clients...' %>
     <%= f.submit 'Search' %>
@@ -14,7 +14,7 @@
         <%= sort_link(@q, :abbreviation) %>
       <% end %>
     <% end %>
-    <%= table_body do %>
+    <%= table_body id: 'clients' do %>
       <% @clients.each do |client| %>
         <%= table_row do %>
           <%= render partial: 'client', locals: { client: client } %>

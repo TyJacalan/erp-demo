@@ -134,7 +134,6 @@ module Shadcn
 
     def select_field(method, options = {}, &block)
       @method = method
-      add_error_class(options)
 
       select_html = @template.render_select(
         name: set_name,

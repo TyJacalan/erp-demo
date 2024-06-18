@@ -9,8 +9,7 @@ class Client < ApplicationRecord
   validates :name, :abbreviation, presence: true
   validates :name, :abbreviation, uniqueness: true
 
-  after_create { Rails.cache.delete_matched(/^pagy-#{self.class.name}:/) }
-  after_destroy { Rails.cache.delete_matched(/^pagy-#{self.class.name}:/) }
+  after_save { Rails.cache.delete_matched(/^pagy-#{self.class.name}:/) }
 
   enum status: { pending: 0, onboarding: 1, active: 2, inactive: 3 }
 

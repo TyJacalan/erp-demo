@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import AutoSubmitController from "./auto_submit_controller"
+application.register("auto-submit", AutoSubmitController)
+
 import PagyInitializerController from "./pagy_initializer_controller"
 application.register("pagy-initializer", PagyInitializerController)
 
