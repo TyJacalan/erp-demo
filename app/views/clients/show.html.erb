@@ -4,9 +4,16 @@
   <% else %>
     <%= render_avatar src: nil, alt: 'logo placeholder', variant: :large %>
   <% end %>
-  <div class='flex flex-col'>
+  <div class='flex flex-col gap-2'>
     <h1 class='text-3xl truncate'><%= @client.name %></h1>
     <p class='text-sm'><%= @client.mission %></p>
+    <ul class='flex flex-row gap-2 text-xs'>
+      <% @client.issue_areas.each do |issue_area| %>
+        <li class='px-2 py-1 bg-accent text-accent-foreground rounded-md'>
+          <%= issue_area %>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </div>
 

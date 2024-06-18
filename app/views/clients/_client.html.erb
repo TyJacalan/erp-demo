@@ -1,21 +1,18 @@
 <%= turbo_frame_tag "client_#{dom_id(client)}" do %>
-    <div class='flex flex-row gap-4'>
-        <h2><%= client.name %></h2>
-        <p><%= client.abbreviation %></p>
-        <p><%= client.mission %></p>
+  <%= table_row do %>
+    <%= table_column client.id.to_s %>
+    <%= table_column do %>
+    <% end %>
+    <%= table_column do %>
+      <%= link_to client_path(client), class: 'flex flex-row gap-4 hover:text-foreground', data: { turbo: false } do %>
         <% if client.logo.attached? %>
-            <%= render_avatar src: url_for(client.logo), alt: client.name, variant: :large %>
+          <%= render_avatar src: url_for(client.logo), alt: client.full_name, variant: :small %>
         <% else %>
-            <%= render_avatar src: nil, alt: 'default profile image', variant: :large %>
+          <%= render_avatar src: nil, alt: 'default profile image', variant: :small %>
         <% end %>
-        <%= render_dialog do %>
-            <%= dialog_trigger do %>
-                <%= render_button 'Edit' %>
-            <% end %>
-            <%= dialog_content do %>
-                <%= render partial: 'form', locals: { client: client } %>
-            <% end %>
-        <% end %>
-        <%= render_button 'Delete', as: :link, href: client_path(client), class: 'text-destructive', data: { turbo_method: :delete } %>
-    </div>
+        <%= client.name %>
+      <% end %>
+    <% end %>
+    <%= table_column client.abbreviation %>
+  <% end %>
 <% end %>

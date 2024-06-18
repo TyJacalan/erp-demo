@@ -1,0 +1,28 @@
+<%= turbo_frame_tag 'clients' do %>
+  <%= render_form_with id: 'client_search', class: 'w-full max-w-md flex flex-row gap-2', method: :get, data: { turbo_permanent: true } do |f| %>
+    <%= f.search_field :issue_areas_cont, placeholder: 'Search clients...' %>
+    <%= f.submit 'Search' %>
+  <% end %>
+  <%= render_table do %>
+    <%= table_head do %>
+      <%= table_header 'ID', class: 'w-1' %>
+      <%= table_header 'Status' %>
+      <%= table_header do %>
+        <%= sort_link(@q, :name) %>
+      <% end %>
+      <%= table_header do %>
+        <%= sort_link(@q, :abbreviation) %>
+      <% end %>
+    <% end %>
+    <%= table_body do %>
+      <% @clients.each do |client| %>
+        <%= table_row do %>
+          <%= render partial: 'client', locals: { client: client } %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <nav class='w-full flex justify-center mt-2 text-muted-foreground text-sm' data-controller='pagy-initializer'>
+    <%== pagy_nav_js(@pagy) if @pagy.pages > 1 %>
+  </nav>
+<% end %>

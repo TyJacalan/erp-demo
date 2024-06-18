@@ -4,7 +4,7 @@
     <%= render_breadcrumbs separator: '> ' %>
     </div>
     <div class='h-full w-1/2 flex flex-row items-center justify-end'>
-      <%= render_input name: 'search', id: 'search', placeholder: 'Search...', class: 'w-full mr-2' %>
+      <%= render_input name: 'search', id: 'search', placeholder: 'Search...', autocomplete: 'off', class: 'w-full mr-2' %>
         <%= render 'components/layout/mode_switch' %>
         <%= turbo_stream_from "alerts_#{current_user.id}"%>
         <%= turbo_frame_tag "alerts_#{current_user.id}", src: alerts_path do %>

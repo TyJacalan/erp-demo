@@ -4,6 +4,12 @@
 
 import { application } from "./application"
 
+import PagyInitializerController from "./pagy_initializer_controller"
+application.register("pagy-initializer", PagyInitializerController)
+
+import Ui__CarouselController from "./ui/carousel_controller"
+application.register("ui--carousel", Ui__CarouselController)
+
 import Ui__CheckboxController from "./ui/checkbox_controller"
 application.register("ui--checkbox", Ui__CheckboxController)
 
@@ -33,6 +39,3 @@ application.register("ui--tabs", Ui__TabsController)
 
 import Ui__ToastController from "./ui/toast_controller"
 application.register("ui--toast", Ui__ToastController)
-
-import Ui__CarouselController from "./ui/carousel_controller"
-application.register("ui--carousel", Ui__CarouselController)

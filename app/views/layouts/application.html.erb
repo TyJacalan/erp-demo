@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="bg-background text-muted-foreground transition-colors <%= cookies[:ui_theme] %>">
+<html class="h-full bg-background text-muted-foreground transition-colors <%= cookies[:ui_theme] %>">
   <head>
     <title>SmarterGood</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,10 +13,10 @@
   <body class="flex min-h-screen h-full w-full flex-row overflow-hidden">
     <%= render 'components/layout/toast_messages' %>
     <%= render 'components/layout/sidebar' %>
-    <main class='flex-1 bg-muted'>
+    <main class='h-full w-full flex flex-col bg-muted'>
       <%= render 'components/layout/header' %>
       <%= render 'components/layout/mobile_header' %>
-      <div class='h-full w-full flex flex-col gap-4 px-6 py-4'>
+      <div class='flex-1 h-full w-full flex flex-col gap-4 px-6 py-4'>
         <%= yield %>
       </div>
     </main>

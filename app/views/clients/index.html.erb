@@ -11,36 +11,7 @@
     <% end %>
 <% end %>
 
-<div id='clients'>
-    <%= render_table do %>
-        <%= table_head do %>
-            <%= table_header 'ID', class: 'w-1' %>
-            <%= table_header 'Status' %>
-            <%= table_header 'Logo' %>
-            <%= table_header 'Abbreviation' %>
-            <%= table_header 'Name' %>
-            <%= table_header '' %>
-        <% end %>
-        <%= table_body do %>
-            <% @clients.each do |client| %>
-                <%= table_row do %>
-                    <%= table_column client.id.to_s %>
-                    <%= table_column '' %>
-                    <%= table_column do %>
-                        <% if client.logo.attached? %>
-                            <%= render_avatar src: url_for(client.logo), alt: client.full_name, variant: :small %>
-                        <% else %>
-                            <%= render_avatar src: nil, alt: 'default profile image', variant: :small %>
-                        <% end %>
-                    <% end %>
-                    <%= table_column client.abbreviation %>
-                    <%= table_column client.name %>
-                    <%= table_column do %>
-                        <%= link_to 'Client page', client_path(client), class: 'hover:text-foreground' %>
-                    <% end %>
-                <% end %>
-            <% end %>
-        <% end %>
-        <%# render partial: 'client', locals: { client: client } %>
-    <% end %>
+<%= turbo_frame_tag 'clients' do %>
+  <%= render partial: 'clients' %>
+<% end %>
 </div>

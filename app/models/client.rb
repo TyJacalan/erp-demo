@@ -8,4 +8,21 @@ class Client < ApplicationRecord
 
   validates :name, :abbreviation, presence: true
   validates :name, :abbreviation, uniqueness: true
+
+  after_create { Rails.cache.delete_matched(/^pagy-#{self.class.name}:/) }
+  after_destroy { Rails.cache.delete_matched(/^pagy-#{self.class.name}:/) }
+
+  enum status: { pending: 0, onboarding: 1, active: 2, inactive: 3 }
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[name abbreviation issue_areas]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[users]
+  end
+
+  ransacker :issue_areas do
+    Arel.sql("array_to_string(issue_areas, ',')")
+  end
 end

@@ -1,0 +1,1 @@
+/home/ty/.asdf/installs/ruby/3.3.0/lib/ruby/gems/3.3.0/gems/pagy-8.4.4/javascripts/pagy.mjs

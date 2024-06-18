@@ -82,7 +82,8 @@ ActiveRecord::Schema[7.1].define(version: 20_240_615_104_248) do
     t.text 'mission'
     t.string 'website'
     t.boolean 'nonprofit_status'
-    t.json 'issue_areas'
+    t.integer 'status', default: 0, null: false
+    t.text 'issue_areas', default: [], array: true
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
   end
