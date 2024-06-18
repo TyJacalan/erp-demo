@@ -18,23 +18,31 @@ class ClientsController < ApplicationController
     @client = @client_service.create
     authorize @client
     message = "#{current_user.full_name} #{t "client.#{action_name}.success"} #{@client.name}"
-    handle_response(@client.persisted?, message)
+    handle_turbo_response(@client.persisted?, message)
   end
 
   def update
     message = "#{t "client.#{action_name}.success"} #{@client.name}."
-    handle_response(@client.update(client_params), message)
+    handle_turbo_response(@client.update(client_params), message)
   end
 
   def destroy
     message = "#{current_user.full_name} #{t "client.#{action_name}.success"} #{@client.name}"
-    handle_response(@client.destroy, message)
+
+    if @client.destroy
+      flash[:notice] = message
+      redirect_to clients_path
+    else
+      flash[:alert] = @client.error.full_messages.first
+      redirect_to client_path(@client)
+    end
   end
 
   private
 
   def client_params
-    params.require(:client).permit(:name, :abbreviation, :mission, :logo, :website, :nonprofit_status, :status, :issue_areas)
+    params.require(:client).permit(:name, :abbreviation, :mission, :logo, :website, :nonprofit_status, :status,
+                                   :issue_areas)
   end
 
   def initialize_client_service

@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     authenticate_admin!(force: true)
   end
 
-  def handle_response(response, message = nil)
+  def handle_turbo_response(response, message = nil)
     respond_to do |format|
       if response
         flash.now[:notice] = message unless message.nil?

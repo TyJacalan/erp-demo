@@ -1,45 +1,51 @@
-<div class='flex flex-row items-center gap-4'>
-  <% if @client.logo.attached? %>
-    <%= render_avatar src: url_for(@client.logo), alt: @client.name, variant: :large %>
-  <% else %>
-    <%= render_avatar src: nil, alt: 'logo placeholder', variant: :large %>
-  <% end %>
-  <div class='flex flex-col gap-2'>
-    <h1 class='text-3xl truncate'><%= @client.name %></h1>
-    <p class='text-sm'><%= @client.mission %></p>
-    <ul class='flex flex-row gap-2 text-xs'>
-      <% @client.issue_areas.each do |issue_area| %>
-        <li class='px-2 py-1 bg-accent text-accent-foreground rounded-md'>
-          <%= issue_area %>
-        </li>
-      <% end %>
-    </ul>
+<%= turbo_frame_tag dom_id(@client) do %>
+  <div class='flex flex-row items-center gap-4'>
+    <% if @client.logo.attached? %>
+      <%= render_avatar src: url_for(@client.logo), alt: @client.name, variant: :large %>
+    <% else %>
+      <%= render_avatar src: nil, alt: 'logo placeholder', variant: :large %>
+    <% end %>
+    <div class='flex-1 flex flex-col gap-2'>
+      <h1 class='text-3xl truncate'><%= @client.name %></h1>
+      <p class='text-sm'><%= @client.mission %></p>
+      <ul class='flex flex-row gap-2 text-xs'>
+        <% @client.issue_areas.each do |issue_area| %>
+          <li class='px-2 py-1 bg-accent text-accent-foreground rounded-md'>
+            <%= issue_area %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class='w-fit flex flex-row gap-4'>
+      <%= render partial: 'edit_form', locals: { client: @client } %>
+      <%= render partial: 'delete_form', locals: { client: @client } %>
+    </div>
   </div>
-</div>
 
-<%= render_tabs do %>
-  <%= tab_list do %>
-    <%= tab "Details", active: true %>
-    <%= tab "Prospects" %>
-    <%= tab "Grants" %>
-    <%= tab "Projects" %>
-    <%= tab "Contracts" %>
-  <% end %>
-  <%= tab_panels do %>
-    <%= tab_panel active: true do %>
-        
+  <%= render_tabs do %>
+    <%= tab_list do %>
+      <%= tab "Details", active: true %>
+      <%= tab "Prospects" %>
+      <%= tab "Grants" %>
+      <%= tab "Projects" %>
+      <%= tab "Contracts" %>
     <% end %>
-    <%= tab_panel do %>
-        
-    <% end %>
-    <%= tab_panel do %>
-        
-    <% end %>
-    <%= tab_panel do %>
-        
-    <% end %>
-    <%= tab_panel do %>
-        
+    <%= tab_panels do %>
+      <%= tab_panel active: true do %>
+
+      <% end %>
+      <%= tab_panel do %>
+
+      <% end %>
+      <%= tab_panel do %>
+
+      <% end %>
+      <%= tab_panel do %>
+
+      <% end %>
+      <%= tab_panel do %>
+
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

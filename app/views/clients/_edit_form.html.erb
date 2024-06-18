@@ -1,0 +1,49 @@
+<%= render_dialog do %>
+  <%= dialog_trigger do %>
+    <%= render_button 'Edit', variant: :outline %>
+  <% end %>
+  <%= dialog_content do %>
+    <%= render_form_for client, method: :patch do |f| %>
+      <%= render_carousel do %>
+        <%= carousel_slides do %>
+          <%= carousel_slide do %>
+            <%= f.label :name %>
+            <%= f.text_field :name, autocomplete: 'name' %>
+
+            <%= f.label :abbreviation %>
+            <%= f.text_field :abbreviation, autocomplete: 'none' %>
+
+            <div class='flex flex-row gap-2'>
+              <%= f.label :status %>
+              <%= f.select_field :status, class: 'w-full', selected: @client.status do |select| %>
+                <% Client.statuses.each do |key, value| %>
+                  <%= select.option label: key, value: key %>
+                <% end %>
+              <% end %>
+            </div>
+
+            <%= f.file_field :logo %>
+
+            <%= f.label :mission %>
+            <%= f.textarea :mission, autocomplete: 'none' %> 
+          <% end %>
+          <%= carousel_slide do %>
+            <%= f.label :website %>
+            <%= f.text_field :website, autocomplete: 'url' %>
+
+            <%= f.check_box :nonprofit_status, label: 'Registered Nonprofit' %>
+            <%= f.label :nonprofit_status %>
+
+            <%= f.label :issue_areas %>
+            <%= f.text_field :issue_areas, autocomplete: 'off' %>
+
+            <%= render_separator class: 'my-4' %>
+
+            <%= f.submit 'Save', class: 'w-full' %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
