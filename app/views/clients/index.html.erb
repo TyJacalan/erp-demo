@@ -1,17 +1,18 @@
-<% if current_user.client_manager %>
+<div class='h-full w-full flex flex-col gap-4 px-6 py-4'>
+  <% if current_user.client_manager %>
     <%= render_dialog do %>
-        <%= dialog_trigger do %>
-            <%= render_button 'Create Client' %>
+      <%= dialog_trigger do %>
+        <%= render_button 'Create Client' %>
+      <% end %>
+      <%= dialog_content do %>
+        <%= turbo_frame_tag 'client_form' do %>
+          <%= render partial: 'form', locals: { client: @client } %>
         <% end %>
-        <%= dialog_content do %>
-            <%= turbo_frame_tag 'client_form' do %>
-                <%= render partial: 'form', locals: { client: @client } %>
-            <% end %>
-        <% end %>
+      <% end %>
     <% end %>
-<% end %>
+  <% end %>
 
-<%= turbo_frame_tag "clients_#{dom_id(current_user)}" do %>
-  <%= render partial: 'clients' %>
-<% end %>
+  <%= turbo_frame_tag "clients_#{dom_id(current_user)}" do %>
+    <%= render partial: 'clients' %>
+  <% end %>
 </div>

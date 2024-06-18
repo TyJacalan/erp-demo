@@ -6,9 +6,9 @@ module Components
                         when :default
                           'h-8 w-8'
                         when :small
-                          'h-4 w-4 text-xs'
+                          'h-4 w-4 sm:h-8 sm:w-8 text-xs'
                         when :large
-                          'h-24 w-24 text-3xl'
+                          'h-12 w-12 sm:h-24 sm:w-24 text-3xl'
                         end
       avatar_classes << " #{variant_classes} #{options[:class]}"
       avatar_classes = tw(avatar_classes)

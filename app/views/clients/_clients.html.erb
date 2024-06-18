@@ -1,7 +1,7 @@
 <%= turbo_frame_tag "clients_#{dom_id(current_user)}" do %>
-  <%= render_form_with id: 'client_search', class: 'w-full max-w-md flex flex-row gap-2', method: :get, data: { turbo_permanent: true } do |f| %>
+  <%= render_form_with id: 'client_search', class: 'w-full max-w-md flex flex-col sm:flex-row gap-2', method: :get, data: { turbo_permanent: true } do |f| %>
     <%= f.search_field :issue_areas_cont, placeholder: 'Search clients...' %>
-    <%= f.submit 'Search' %>
+    <%= f.submit 'Search', variant: :outline %>
   <% end %>
   <%= render_table do %>
     <%= table_head do %>
