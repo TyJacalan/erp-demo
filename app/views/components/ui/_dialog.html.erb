@@ -1,5 +1,5 @@
 <div data-controller="ui--dialog">
-  <div data-action="click->ui--dialog#open"><%= content_for(:dialog_trigger) %></div>
+  <div data-action="click->ui--dialog#open" class='flex'><%= content_for(:dialog_trigger) %></div>
 
   <%= render "components/ui/shared/backdrop", as: "modal" %>
 
