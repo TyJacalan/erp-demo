@@ -18,12 +18,12 @@ class ClientsController < ApplicationController
     @client = @client_service.create
     authorize @client
     message = "#{current_user.full_name} #{t "client.#{action_name}.success"} #{@client.name}"
-    handle_turbo_response(@client.persisted?, message)
+    handle_turbo_response(@client.persisted?, @client, message)
   end
 
   def update
     message = "#{t "client.#{action_name}.success"} #{@client.name}."
-    handle_turbo_response(@client.update(client_params), message)
+    handle_turbo_response(@client.update(client_params), @client, message)
   end
 
   def destroy

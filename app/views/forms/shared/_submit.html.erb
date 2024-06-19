@@ -1,9 +1,9 @@
-<%= render_separator class: 'my-4' %>
+<%= render_separator class: 'my-6' %>
 
 <% if method == :post %>
   <%= render_button 'Create', class: 'w-full' %>
-<% elsif method == :update %>
-  <%= render_button 'Update', variant: :outline, class: 'w-full' %>
+<% elsif method == :patch %>
+  <%= render_button 'Update', class: 'w-full' %>
 <% elsif method == :delete %>
   <%= render_button 'Delete', variant: :destructive, class: 'w-full' %>
 <% else %>
