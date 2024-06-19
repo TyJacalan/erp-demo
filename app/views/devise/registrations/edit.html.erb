@@ -3,11 +3,7 @@
 <%= render_form_for(resource, as: resource_name, url: registration_path(resource_name), method: :put, class: 'flex flex-col gap-4') do |f| %>
   <div class='h-fit w-full flex items-center justify-center'>
     <label class='group relative h-fit w-fit cursor-pointer'>
-      <% if resource.avatar.attached? %>
-        <%= render_avatar src: url_for(resource.avatar), alt: resource.full_name, variant: :large %>
-      <% else %>
-        <%= render_avatar src: nil, alt: 'default profile image', variant: :large %>
-      <% end %>
+      <%= render_avatar src: image_url(resource.avatar), alt: resource.full_name, variant: :large %>
       <span class='hidden'>
         <%= f.file_field :avatar %>
       </span>

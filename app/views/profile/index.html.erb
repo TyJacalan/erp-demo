@@ -1,8 +1,5 @@
 <div class='flex flex-row items-center gap-4'>
-  <% if current_user.avatar.attached? %>
-    <%= render_avatar src: url_for(current_user.avatar), alt: current_user.full_name, variant: :large %>
-  <% else %>
-    <%= render_avatar src: nil, alt: 'default profile image', variant: :large %>
+    <%= render_avatar src: image_url(current_user.avatar), alt: current_user.full_name, variant: :large %>
   <% end %>
   <div class='flex flex-col'>
     <h1 class='text-3xl truncate'><%= current_user.full_name %></h1>
