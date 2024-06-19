@@ -1,0 +1,7 @@
+<%= turbo_stream.update 'toasts', partial: 'components/layout/toast_messages' %>
+
+<% if @member.persisted? %>
+  <%= turbo_stream.append "team",
+                           partial: 'member',
+                           locals: { member: @member } %>
+<% end %>

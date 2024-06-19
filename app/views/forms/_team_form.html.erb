@@ -1,0 +1,28 @@
+<%= turbo_frame_tag 'team_form', loading: 'lazy' do %>
+  <%= render_form_for resource, url: path, method: method do |f| %>
+    <% unless method == :delete %>
+      <%= f.hidden_field :client_id, value: params[:client_id] %>
+      <%= f.label :user_id, label: 'Add a user' %>
+      <%= f.select_field :user_id, selected: 'placeholder', disabled: 'placeholder', class: 'w-full mt-2' do |select| %>
+        <%= select.option label: 'Add a user', value: 'placeholder' %>
+        <% @users.each do |user| %>
+          <%= select.option label: user.full_name.titleize, value: user.id %>
+        <% end %>
+      <% end %>
+      <%= render_separator class: 'my-4' %>
+      <%= f.submit "Add to Team", class: 'w-full' %>
+    <% else %>
+      <div class="flex flex-col space-y-2 sm:text-left">
+        <h2 class="text-lg font-semibold">Remove from team?</h2>
+        <p class="text-sm text-muted-foreground">
+          This user will no lose some access to client information and will no longer receive notifications for client related updates.
+        </p>
+      </div>
+
+      <div class="flex w-full flex-row items-center justify-end gap-2 mt-4">
+        <%= render_button "Cancel", variant: :outline, data: { action: "ui--dialog#close" } %>
+        <%= f.submit "Delete", variant: :destructive %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

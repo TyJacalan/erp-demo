@@ -2,7 +2,8 @@
 
 class ContractsController < ApplicationController
   def index
-    @contracts = Contract.where(client_id: params[:client_id])
+    @client = Client.find(params[:client_id])
+    @contracts = Contract.where(client_id: @client.id)
     @contract = Contract.new
     authorize @contracts
   end

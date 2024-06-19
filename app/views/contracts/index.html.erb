@@ -1,29 +1,31 @@
-<div class='flex flex-col gap-4 px-6 py-4'>
-  <%= render_dialog do %>
-    <%= dialog_trigger do %>
-      <%= render_button variant: :outline, class: 'w-full' do %>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-        </svg>
+<%= turbo_frame_tag "contracts_#{dom_id(@client)}" do %>
+  <div class='w-full flex flex-col gap-4 px-6 py-4'>
+    <%= render_dialog do %>
+      <%= dialog_trigger do %>
+        <%= render_button variant: :outline, class: 'w-full' do %>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+        <% end %>
+      <% end %>
+      <%= dialog_content do %>
+        <%= render partial: 'forms/contract_form', locals: { resource: @contract, path: client_contracts_path, method: :post } %>
       <% end %>
     <% end %>
-    <%= dialog_content do %>
-      <%= render partial: 'forms/contract_form', locals: { resource: @contract, path: client_contracts_path, method: :post } %>
-    <% end %>
-  <% end %>
 
-  <%= render_table do %>
-    <%= table_head do %>
-      <%= table_header 'ID' %>
-      <%= table_header 'Service Type' %>
-      <%= table_header 'Start Date' %>
-      <%= table_header 'End Date' %>
-      <%= table_header 'Monthly Fee' %>
-    <% end %>
-    <%= table_body id: 'contracts' do %>
-      <% @contracts.each do |contract| %>
-        <%= render partial: 'contract', locals: { contract: contract } %>
+    <%= render_table do %>
+      <%= table_head do %>
+        <%= table_header 'ID' %>
+        <%= table_header 'Service Type' %>
+        <%= table_header 'Start Date' %>
+        <%= table_header 'End Date' %>
+        <%= table_header 'Monthly Fee' %>
+      <% end %>
+      <%= table_body id: 'contracts' do %>
+        <% @contracts.each do |contract| %>
+          <%= render partial: 'contract', locals: { contract: contract } %>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
+<% end %>

@@ -8,5 +8,8 @@ en:
       success: "deleted a client:"
     edit:
       success: "You have successfully edited a new client."
+  team:
+    destroy:
+      success: "You removed"
   policy:
     unauthorized: "You are not authorized to perform this action."

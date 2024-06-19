@@ -1,0 +1,8 @@
+<%= turbo_frame_tag "team_#{dom_id(@client)}" do %>
+  <div id="team" class='h-fit w-full flex flex-row flex-wrap py-6'>
+  <% @team.each do |member| %>
+    <%= render partial: 'member', locals: { member: member } %>
+  <% end %>
+  </div>
+<% end %>
+

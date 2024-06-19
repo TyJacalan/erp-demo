@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_many :notifications, as: :recipient, dependent: :destroy, class_name: 'Noticed::Notification'
   has_many :mentions, as: :record, dependent: :destroy, class_name: 'Noticed::Event'
+  has_many :teams
+  has_many :clients, through: :teams
 
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,

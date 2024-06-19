@@ -2,6 +2,6 @@
   <%= image_tag src, size:, alt:, class: avatar_classes %>
 <% else %>
   <div class="<%= avatar_classes %>">
-    <%= current_user.full_name&.chr&.upcase %>
+    <%= alt&.chr&.upcase %>
   </div>
 <% end %>

@@ -1,11 +1,7 @@
 <div id="<%= dom_id(@client) %>" class='h-full w-full flex flex-col gap-4'>
   <div class='flex flex-row items-start sm:items-center gap-4 px-6 py-4 bg-gradient-to-b from-primary to-secondary'>
     <div class='w-fit'>
-      <% if @client.logo.attached? %>
-        <%= render_avatar src: url_for(@client.logo), alt: @client.name, variant: :large %>
-      <% else %>
-        <%= render_avatar src: nil, alt: 'logo placeholder', variant: :large %>
-      <% end %>
+      <%= render_avatar src: image_url(@client.logo), alt: @client.name, variant: :large %>
     </div>
     <div class='h-full w-full flex flex-col gap-2'>
       <h1 class='text-xl sm:text-3xl text-background dark:text-muted-foreground truncate'><%= @client.name %></h1>
@@ -23,7 +19,8 @@
 
   <div class='h-full w-full flex flex-col gap-4 px-6'>
     <% if current_user.client_manager? %>
-      <div class='w-fit flex flex-row gap-4'>
+      <div class='h-fit w-fit flex flex-row items-end gap-4'>
+        <%# edit client %>
         <%= render_dialog do %>
           <%= dialog_trigger do %>
             <%= render_button variant: :outline do %>
@@ -36,7 +33,31 @@
             <%= render partial: 'forms/client_form', locals: { resource: @client, path: client_path(@client), method: :patch } %>
           <% end %>
         <% end %>
+
+        <%# delete client %>
         <%= render partial: 'forms/client_form', locals: { resource: @client, path: client_path(@client), method: :delete } %>
+
+        <%# add members %>
+        <%= render_dialog do %>
+          <%= dialog_trigger do %>
+            <%= render_tooltip do %>
+              <%= tooltip_trigger do %>
+                <%= render_button variant: :ghost do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
+                  </svg>
+                <% end %>
+              <% end %>
+              <%= tooltip_content do %>
+                <p>Add a team member </p>
+              <% end %>
+            <% end %>
+          <% end %>
+          <%= dialog_content do %>
+            <%= turbo_frame_tag :new_team, src: new_client_team_path(@client) do %>
+            <% end %>
+          <% end %>
+        <% end %>
       </div>
     <% end %>
   <%= render_tabs do %>
@@ -57,9 +78,12 @@
       <%= tab_panel do %>
 
       <% end %>
-      <%= tab_panel do %>
 
+      <%= tab_panel do %>
+        <%= turbo_frame_tag "team_#{dom_id(@client)}", src: client_teams_path(@client) do %>
+        <% end %>
       <% end %>
+
       <%= tab_panel do %>
         <%= turbo_frame_tag "contracts_#{dom_id(@client)}", src: client_contracts_path(@client) do %>
           <%= render partial: 'components/ui/spinner' %>

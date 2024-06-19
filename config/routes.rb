@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   # Sidebar
   resources :clients, except: %i[new edit] do
     resources :contracts, except: %i[new edit]
+    resources :teams, except: %i[show edit update]
   end
   resources :posts
   resources :research

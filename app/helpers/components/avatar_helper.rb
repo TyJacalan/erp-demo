@@ -1,7 +1,7 @@
 module Components
   module AvatarHelper
     def render_avatar(src: nil, alt: nil, size: '100x100', variant: :default, **options)
-      avatar_classes = src ? 'object-cover rounded-full' : 'flex items-center justify-center bg-muted rounded-full'
+      avatar_classes = src ? 'object-cover rounded-full' : 'flex items-center justify-center bg-accent rounded-full'
       variant_classes = case variant.to_sym
                         when :default
                           'h-8 w-8'

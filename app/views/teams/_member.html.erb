@@ -1,0 +1,18 @@
+<%= turbo_frame_tag dom_id(member) do %>
+  <%= render_tooltip do %>
+    <%= tooltip_trigger do %>
+      <%= render_dialog do %>
+        <%= dialog_trigger do %>
+          <%= render_avatar src: image_url(member.user.avatar), alt: member.user.full_name %>
+        <% end %>
+        <%= dialog_content do %>
+          <%= render partial: 'forms/team_form',
+            locals: { resource: member, path: client_team_path(@client.id, member), method: :delete } %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <%= tooltip_content do %>
+      <span><%= member.user.full_name %></span>
+    <% end %>
+  <% end %>
+<% end %>

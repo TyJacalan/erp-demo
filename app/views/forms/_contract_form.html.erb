@@ -4,7 +4,7 @@
     <%= f.label :service_type %>
     <%= f.select_field :service_type do |select| %>
       <% Contract.service_types.each do |key, value| %>
-        <%= select.option label: key.humanize.titleize, value: key %>
+        <%= select.option label: key.titleize, value: key %>
       <% end %>
     <% end %>
 
