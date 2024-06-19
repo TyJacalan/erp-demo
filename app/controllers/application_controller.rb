@@ -16,12 +16,12 @@ class ApplicationController < ActionController::Base
     authenticate_admin!(force: true)
   end
 
-  def handle_turbo_response(response, message = nil)
+  def handle_turbo_response(response, obj, message = nil)
     respond_to do |format|
       if response
         flash.now[:notice] = message unless message.nil?
-      elsif @obj.present?
-        flash.now[:alert] = @obj.error.first.full_messages
+      elsif obj.present?
+        flash.now[:alert] = obj.errors.full_messages.first
       end
       format.turbo_stream
     end

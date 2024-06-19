@@ -30,10 +30,10 @@
     <% end %>
   <%= render_tabs do %>
     <%= tab_list do %>
-      <%= tab "Details", active: true %>
-      <%= tab "Prospects" %>
+      <%= tab "Prospects", active: true %>
       <%= tab "Grants" %>
       <%= tab "Projects" %>
+      <%= tab "Information" %>
       <%= tab "Contracts" %>
     <% end %>
     <%= tab_panels do %>
@@ -50,7 +50,9 @@
 
       <% end %>
       <%= tab_panel do %>
-
+        <%= turbo_frame_tag "contracts_#{dom_id(@client)}", src: client_contracts_path(@client) do %>
+          <%= render partial: 'components/ui/spinner' %>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>

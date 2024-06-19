@@ -97,7 +97,7 @@ ActiveRecord::Schema[7.1].define(version: 20_240_615_104_248) do
 
   create_table 'contracts', force: :cascade do |t|
     t.bigint 'client_id', null: false
-    t.float 'monthyl_fee'
+    t.float 'monthly_fee'
     t.date 'start_date'
     t.date 'end_date'
     t.integer 'service_type'

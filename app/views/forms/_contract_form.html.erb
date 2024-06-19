@@ -1,0 +1,22 @@
+<%= turbo_frame_tag "contract_form", loading: 'lazy' do %>
+  <%= render_form_for resource, url: path, method: method, class: 'flex flex-col gap-4' do |f| %>
+    <%= f.hidden_field :client_id, value: params[:client_id] %>
+    <%= f.label :service_type %>
+    <%= f.select_field :service_type do |select| %>
+      <% Contract.service_types.each do |key, value| %>
+        <%= select.option label: key.humanize.titleize, value: key %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :start_date %>
+    <%= f.date_field :start_date %>
+
+    <%= f.label :end_date %>
+    <%= f.date_field :end_date %>
+
+    <%= f.label :monthly_fee %>
+    <%= f.number_field :monthly_fee, autocomplete: 'transaction-currency' %>
+
+    <%= render partial: 'forms/shared/submit', locals: { method: method } %>
+  <% end %>
+<% end %>

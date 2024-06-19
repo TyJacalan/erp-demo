@@ -1,0 +1,9 @@
+<%= turbo_frame_tag dom_id(contract) do %>
+  <%= table_row do %>
+    <%= table_column contract.id.to_s %>
+    <%= table_column contract.service_type.upcase %>
+    <%= table_column contract.start_date.strftime('%Y %b %d') %>
+    <%= table_column contract.end_date.strftime('%Y %b %d') %>
+    <%= table_column contract.monthly_fee.to_s %>
+  <% end %>
+<% end %>

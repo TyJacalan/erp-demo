@@ -1,0 +1,14 @@
+<%= turbo_stream.update 'toasts',
+  partial: 'components/layout/toast_messages' %>
+
+<% if @contract.persisted? %>
+  <%= turbo_stream.replace 'contract_form',
+                           partial: 'forms/contract_form',
+                           locals: { resource: Contract.new,
+                           path: client_contracts_path,
+                           method: :post } %>
+
+  <%= turbo_stream.append 'contracts',
+                          partial: 'contract',
+                          locals: { contract: @contract } %>
+<% end %>

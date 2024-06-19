@@ -23,7 +23,9 @@ Rails.application.routes.draw do
   root 'posts#index'
 
   # Sidebar
-  resources :clients, except: %i[new edit]
+  resources :clients, except: %i[new edit] do
+    resources :contracts, except: %i[new edit]
+  end
   resources :posts
   resources :research
   resources :workplan
