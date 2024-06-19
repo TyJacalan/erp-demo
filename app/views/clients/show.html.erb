@@ -22,10 +22,12 @@
 
 
   <div class='h-full w-full flex flex-col gap-4 px-6'>
-    <div class='w-fit flex flex-row gap-4'>
-      <%= render partial: 'edit_form', locals: { client: @client } %>
-      <%= render partial: 'delete_form', locals: { client: @client } %>
-    </div>
+    <% if current_user.client_manager? %>
+      <div class='w-fit flex flex-row gap-4'>
+        <%= render partial: 'edit_form', locals: { client: @client } %>
+        <%= render partial: 'delete_form', locals: { client: @client } %>
+      </div>
+    <% end %>
   <%= render_tabs do %>
     <%= tab_list do %>
       <%= tab "Details", active: true %>

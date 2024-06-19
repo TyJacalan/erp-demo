@@ -1,28 +1,61 @@
 <%= turbo_frame_tag "clients_#{dom_id(current_user)}" do %>
-  <%= render_form_with id: 'client_search', class: 'w-full max-w-md flex flex-col sm:flex-row gap-2', method: :get, data: { turbo_permanent: true } do |f| %>
-    <%= f.search_field :issue_areas_cont, placeholder: 'Search clients...' %>
-    <%= f.submit 'Search', variant: :outline %>
-  <% end %>
-  <%= render_table do %>
-    <%= table_head do %>
-      <%= table_header 'ID', class: 'w-1' %>
-      <%= table_header 'Status' %>
-      <%= table_header do %>
-        <%= sort_link(@q, :name) %>
-      <% end %>
-      <%= table_header do %>
-        <%= sort_link(@q, :abbreviation) %>
-      <% end %>
+  <div class='flex flex-col gap-4'>
+    <%= render_form_with id: 'client_search', class: 'w-full max-w-md flex flex-col sm:flex-row gap-2', method: :get, data: { turbo_permanent: true } do |f| %>
+      <%= f.search_field :issue_areas_cont, placeholder: 'Search clients...' %>
+      <%= f.submit 'Search', variant: :outline %>
     <% end %>
-    <%= table_body id: 'clients' do %>
-      <% @clients.each do |client| %>
-        <%= table_row do %>
-          <%= render partial: 'client', locals: { client: client } %>
+
+    <div class='w-fit'>
+    <% if current_user.client_manager %>
+      <%= render_dialog do %>
+        <%= dialog_trigger do %>
+          <%= render_tooltip do %>
+            <%= tooltip_trigger do %>
+              <%= render_button variant: :outline do %>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+              <% end %>
+            <% end %>
+            <%= tooltip_content do %> 
+              <div class="grid gap-2">
+                <div class="space-y-2">
+                  <p class="text-sm text-muted-foreground">Add a new client</p>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+        <%= dialog_content do %>
+          <%= turbo_frame_tag 'client_form' do %>
+            <%= render partial: 'form', locals: { client: @client } %>
+          <% end %>
         <% end %>
       <% end %>
     <% end %>
-  <% end %>
-  <nav class='w-full flex justify-center mt-2 text-muted-foreground text-sm' data-controller='pagy-initializer'>
-    <%== pagy_nav_js(@pagy) if @pagy.pages > 1 %>
-  </nav>
+    </div>
+
+    <%= render_table do %>
+      <%= table_head do %>
+        <%= table_header 'ID', class: 'w-1' %>
+        <%= table_header 'Status' %>
+        <%= table_header do %>
+          <%= sort_link(@q, :name) %>
+        <% end %>
+        <%= table_header do %>
+          <%= sort_link(@q, :abbreviation) %>
+        <% end %>
+      <% end %>
+      <%= table_body id: 'clients' do %>
+        <% @clients.each do |client| %>
+          <%= table_row do %>
+            <%= render partial: 'client', locals: { client: client } %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <nav class='w-full flex justify-center mt-2 text-muted-foreground text-sm' data-controller='pagy-initializer'>
+      <%== pagy_nav_js(@pagy) if @pagy.pages > 1 %>
+    </nav>
+  </div>
 <% end %>

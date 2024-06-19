@@ -25,6 +25,9 @@ application.register("ui--dropdown", Ui__DropdownController)
 import Ui__DropzoneController from "./ui/dropzone_controller"
 application.register("ui--dropzone", Ui__DropzoneController)
 
+import Ui__HoverCardController from "./ui/hover-card_controller"
+application.register("ui--hover-card", Ui__HoverCardController)
+
 import Ui__ModeController from "./ui/mode_controller"
 application.register("ui--mode", Ui__ModeController)
 
@@ -42,3 +45,6 @@ application.register("ui--tabs", Ui__TabsController)
 
 import Ui__ToastController from "./ui/toast_controller"
 application.register("ui--toast", Ui__ToastController)
+
+import Ui__TooltipController from "./ui/tooltip_controller"
+application.register("ui--tooltip", Ui__TooltipController)
