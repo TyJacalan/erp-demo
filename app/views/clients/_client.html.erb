@@ -10,8 +10,8 @@
     <% end %>
   <% end %>
   <%= table_column do %>
-    <%= link_to client_path(client), class: 'flex flex-row gap-4 truncate hover:text-foreground', data: { turbo: false } do %>
-        <%= render_avatar src: image_url(client.logo), alt: client.name, variant: :small %>
+    <%= link_to client_path(client), class: 'flex flex-row items-center gap-4 truncate hover:text-foreground', data: { turbo: false } do %>
+      <%= render_avatar src: image_url(client.logo), alt: client.name, variant: :small %>
       <%= client.name %>
     <% end %>
   <% end %>

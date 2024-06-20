@@ -12,7 +12,9 @@ class ClientsController < ApplicationController
     authorize @clients
   end
 
-  def show; end
+  def show
+    add_breadcrumb @client.abbreviation, client_path(@client)
+  end
 
   def create
     @client = @client_service.create

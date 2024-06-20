@@ -1,14 +1,16 @@
 <header class='sticky top-0 z-30 h-14 w-full hidden sm:flex flex-row items-center justify-between px-6 bg-background'>
-    <div class='w-1/2 flex flex-row items-center gap-4'>
+  <div class='w-1/2 flex flex-row items-center gap-4'>
     <%= render partial: 'components/layout/nav_dropdown' %>
-    <%= render_breadcrumbs separator: '> ' %>
+    <div class='text-xs'>
+      <%= render_breadcrumbs separator: '> ' %>
     </div>
-    <div class='h-full w-1/2 flex flex-row items-center justify-end'>
-      <%= render_input name: 'search', id: 'search', placeholder: 'Search...', autocomplete: 'off', class: 'w-full mr-2' %>
-        <%= render 'components/layout/mode_switch' %>
-        <%= turbo_stream_from "alerts_#{current_user.id}"%>
-        <%= turbo_frame_tag "alerts_#{current_user.id}", src: alerts_path do %>
-        <% end %>
-        <%= render 'components/layout/account_modal' %>
-    </div>
+  </div>
+  <div class='h-full w-1/2 flex flex-row items-center justify-end'>
+    <%= render_input name: 'search', id: 'search', placeholder: 'Search...', autocomplete: 'off', class: 'w-full mr-2' %>
+    <%= render 'components/layout/mode_switch' %>
+    <%= turbo_stream_from "alerts_#{current_user.id}"%>
+    <%= turbo_frame_tag "alerts_#{current_user.id}", src: alerts_path do %>
+    <% end %>
+    <%= render 'components/layout/account_modal' %>
+  </div>
 </header>

@@ -44,9 +44,7 @@
       <% end %>
       <%= table_body id: 'clients' do %>
         <% @clients.each do |client| %>
-          <%= table_row do %>
             <%= render partial: 'client', locals: { client: client } %>
-          <% end %>
         <% end %>
       <% end %>
     <% end %>
