@@ -1,0 +1,12 @@
+valid_task:
+  description: "This is a valid task"
+  department: 0
+  category: "Prospect Research"
+  hours: 1
+  user: valid_user
+  client: valid_client
+
+invalid_task:
+  description: "This is an invalid task"
+  user: valid_user
+  client: valid_client

@@ -1,0 +1,6 @@
+valid_client:
+  name: "Client"
+  abbreviation: "CLNT"
+
+invalid_client:
+  name: "Invalid Client"

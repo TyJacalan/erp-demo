@@ -1,5 +1,13 @@
 # test/fixtures/users.yml
 
+valid_user:
+  full_name: Example User
+  email: example@example.com
+  position: ceo
+
+invalid_user:
+  full_name: Invalid User
+
 freelancer_user:
   full_name: Freelancer User
   email: freelancer@example.com

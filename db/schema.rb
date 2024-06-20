@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_240_620_053_431) do
+ActiveRecord::Schema[7.1].define(version: 20_240_620_113_841) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -133,6 +133,22 @@ ActiveRecord::Schema[7.1].define(version: 20_240_620_053_431) do
     t.index %w[recipient_type recipient_id], name: 'index_noticed_notifications_on_recipient'
   end
 
+  create_table 'tasks', force: :cascade do |t|
+    t.string 'description'
+    t.text 'notes'
+    t.integer 'department'
+    t.string 'category'
+    t.integer 'hours'
+    t.datetime 'internal_deadline'
+    t.datetime 'client_deadline'
+    t.bigint 'user_id', null: false
+    t.bigint 'client_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['client_id'], name: 'index_tasks_on_client_id'
+    t.index ['user_id'], name: 'index_tasks_on_user_id'
+  end
+
   create_table 'users', force: :cascade do |t|
     t.string 'email', default: '', null: false
     t.string 'encrypted_password', default: '', null: false
@@ -178,4 +194,6 @@ ActiveRecord::Schema[7.1].define(version: 20_240_620_053_431) do
   add_foreign_key 'active_storage_variant_records', 'active_storage_blobs', column: 'blob_id'
   add_foreign_key 'contracts', 'clients'
   add_foreign_key 'memberships', 'users'
+  add_foreign_key 'tasks', 'clients'
+  add_foreign_key 'tasks', 'users'
 end
