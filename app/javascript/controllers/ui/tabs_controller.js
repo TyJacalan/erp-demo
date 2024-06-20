@@ -7,9 +7,22 @@ export default class extends Controller {
 
   connect() {
     this.activeTabClasses = (this.data.get("activeTab") || "active").split(" ");
-    this.inactiveTabClasses = (this.data.get("inactiveTab") || "inactive").split(" ");
-    if (this.anchor) this.index = this.tabTargets.findIndex((tab) => tab.id === this.anchor);
-    // this.showTab();
+    this.inactiveTabClasses = (
+      this.data.get("inactiveTab") || "inactive"
+    ).split(" ");
+
+    const storedIndex = localStorage.getItem(
+      window.location.pathname + "Index",
+    );
+    this.index = storedIndex !== null ? parseInt(storedIndex, 10) : 0;
+
+    if (this.anchor) {
+      this.index = this.tabTargets.findIndex((tab) => tab.id === this.anchor);
+    }
+
+    this.showTab();
+
+    console.log("Pathname:", window.location.pathname);
   }
 
   change(event) {
@@ -19,12 +32,17 @@ export default class extends Controller {
 
       // If target specifies an id, use that
     } else if (event.currentTarget.dataset.id) {
-      this.index = this.tabTargets.findIndex((tab) => tab.id == event.currentTarget.dataset.id);
+      this.index = this.tabTargets.findIndex(
+        (tab) => tab.id == event.currentTarget.dataset.id,
+      );
 
       // Otherwise, use the index of the current target
     } else {
       this.index = this.tabTargets.indexOf(event.currentTarget);
     }
+
+    // Store the active tab index in local storage
+    localStorage.setItem(window.location.pathname + "Index", this.index);
 
     window.dispatchEvent(new CustomEvent("tsc:tab-change"));
   }
@@ -66,6 +84,8 @@ export default class extends Controller {
   }
 
   get anchor() {
-    return document.URL.split("#").length > 1 ? document.URL.split("#")[1] : null;
+    return document.URL.split("#").length > 1
+      ? document.URL.split("#")[1]
+      : null;
   }
 }

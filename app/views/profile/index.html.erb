@@ -1,6 +1,5 @@
 <div class='flex flex-row items-center gap-4'>
-    <%= render_avatar src: image_url(current_user.avatar), alt: current_user.full_name, variant: :large %>
-  <% end %>
+  <%= render_avatar src: image_url(current_user.avatar), alt: current_user.full_name, variant: :large %>
   <div class='flex flex-col'>
     <h1 class='text-3xl truncate'><%= current_user.full_name %></h1>
     <p class='font-bold'><%= current_user.position.humanize %></p>
@@ -14,14 +13,14 @@
   <% end %>
   <%= tab_panels do %>
     <%= tab_panel active: true do %>
-        <%= turbo_frame_tag "details_#{current_user.id}" do %>
-          <%= render 'details' %>
-        <% end %>
+      <%= turbo_frame_tag "details_#{current_user.id}" do %>
+        <%= render 'details' %>
+      <% end %>
     <% end %>
     <%= tab_panel do %>
-        <%= turbo_frame_tag 'user_notifications', src: notifications_path, loading: 'lazy' do %>
-            <%= render 'components/ui/spinner' %>
-        <% end %>
+      <%= turbo_frame_tag 'user_notifications', src: notifications_path, loading: 'lazy' do %>
+        <%= render 'components/ui/spinner' %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
