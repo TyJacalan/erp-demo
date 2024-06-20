@@ -1,12 +1,14 @@
 <%= turbo_frame_tag 'team_form', loading: 'lazy' do %>
   <%= render_form_for resource, url: path, method: method do |f| %>
     <% unless method == :delete %>
-      <%= f.hidden_field :client_id, value: params[:client_id] %>
+      <%= f.hidden_field :memberable_id, value: params[:client_id] %>
+      <%= f.hidden_field :memberable_type, value: params[:memberable_type] %>
+      
       <%= f.label :user_id, label: 'Add a user' %>
       <%= f.select_field :user_id, selected: 'placeholder', disabled: 'placeholder', class: 'w-full mt-2' do |select| %>
         <%= select.option label: 'Add a user', value: 'placeholder' %>
         <% @users.each do |user| %>
-          <%= select.option label: user.full_name.titleize, value: user.id %>
+          <%= select.option label: user.full_name, value: user.id %>
         <% end %>
       <% end %>
       <%= render_separator class: 'my-4' %>

@@ -1,0 +1,8 @@
+<%= turbo_frame_tag "members_#{dom_id(@memberable)}" do %>
+  <div id="memberships" class='h-fit w-full flex flex-row flex-wrap py-6'>
+  <% @memberships.each do |membership| %>
+    <%= render partial: 'membership', locals: { membership: membership } %>
+  <% end %>
+  </div>
+<% end %>
+

@@ -5,6 +5,10 @@ class ClientPolicy < ApplicationPolicy
     user
   end
 
+  def new?
+    create?
+  end
+
   def show?
     user
   end

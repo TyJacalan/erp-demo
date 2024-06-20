@@ -1,4 +1,6 @@
-class TeamPolicy < ApplicationPolicy
+# frozen_string_literal: true
+
+class MembershipPolicy < ApplicationPolicy
   def index?
     user
   end

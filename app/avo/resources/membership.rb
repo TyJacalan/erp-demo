@@ -1,4 +1,4 @@
-class Avo::Resources::Team < Avo::BaseResource
+class Avo::Resources::Membership < Avo::BaseResource
   self.includes = []
   # self.search = {
   #   query: -> { query.ransack(id_eq: params[:q], m: "or").result(distinct: false) }
@@ -7,6 +7,6 @@ class Avo::Resources::Team < Avo::BaseResource
   def fields
     field :id, as: :id
     field :user, as: :belongs_to
-    field :client, as: :belongs_to
+    field :memberable, as: :text
   end
 end

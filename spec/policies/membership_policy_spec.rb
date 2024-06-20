@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe TeamPolicy, type: :policy do
+RSpec.describe MembershipPolicy, type: :policy do
   subject { described_class.new(user, team) }
 
-  let(:team) { Team.new }
+  let(:team) { Membership.new }
 
   context 'with visitors' do
     let(:user) { nil }

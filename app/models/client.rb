@@ -4,8 +4,8 @@ class Client < ApplicationRecord
   has_one_attached :logo
   has_many :contracts
   has_many :mentions, as: :record, dependent: :destroy, class_name: 'Noticed::Event'
-  has_many :teams
-  has_many :users, through: :teams
+  has_many :memberships, as: :memberable
+  has_many :users, through: :memberships
 
   validates :name, :abbreviation, presence: true
   validates :name, :abbreviation, uniqueness: true

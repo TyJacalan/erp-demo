@@ -54,7 +54,7 @@
             <% end %>
           <% end %>
           <%= dialog_content do %>
-            <%= turbo_frame_tag :new_team, src: new_client_team_path(@client) do %>
+            <%= turbo_frame_tag :new_membership, src: new_client_membership_path(@client) do %>
             <% end %>
           <% end %>
         <% end %>
@@ -80,7 +80,7 @@
       <% end %>
 
       <%= tab_panel do %>
-        <%= turbo_frame_tag "team_#{dom_id(@client)}", src: client_teams_path(@client) do %>
+        <%= turbo_frame_tag "members_#{dom_id(@client)}", src: client_memberships_path(@client) do %>
         <% end %>
       <% end %>
 

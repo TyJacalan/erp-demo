@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TeamNotifier < ApplicationNotifier
+class MembershipNotifier < ApplicationNotifier
   notification_methods do
     def message
       params[:message]

@@ -1,0 +1,18 @@
+<%= turbo_frame_tag dom_id(membership) do %>
+  <%= render_tooltip do %>
+    <%= tooltip_trigger do %>
+      <%= render_dialog do %>
+        <%= dialog_trigger do %>
+          <%= render_avatar src: image_url(membership.user.avatar), alt: membership.user.full_name %>
+        <% end %>
+        <%= dialog_content do %>
+          <%= render partial: 'forms/membership_form',
+            locals: { resource: membership, path: client_membership_path(@memberable.id, membership), method: :delete } %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <%= tooltip_content do %>
+      <span><%= membership.user.full_name %></span>
+    <% end %>
+  <% end %>
+<% end %>
