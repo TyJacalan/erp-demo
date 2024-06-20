@@ -2,7 +2,7 @@
 
 class MembershipsController < ApplicationController
   before_action :memberable
-  before_action :membership_service, only: [:create, :destroy]
+  before_action :membership_service, only: %i[create destroy]
 
   def index
     @memberships = @memberable.memberships.includes(:user)
@@ -38,9 +38,9 @@ class MembershipsController < ApplicationController
   private
 
   def memberable
-    if params[:client_id].present?
-      @memberable ||= Client.find(params[:client_id])
-    end
+    return unless params[:client_id].present?
+
+    @memberable ||= Client.find(params[:client_id])
   end
 
   def memberships_params

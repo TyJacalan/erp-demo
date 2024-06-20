@@ -19,7 +19,7 @@ class MembershipService
   end
 
   def destroy(membership)
-    ActiveRecord::Base.transaction do 
+    ActiveRecord::Base.transaction do
       @membership = membership
       @membership.destroy
 
