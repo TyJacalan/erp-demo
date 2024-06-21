@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Create Sample User
-User.create_or_find_by!(email: 'example@example.com') do |user|
+User.find_or_create_by(email: 'example@example.com') do |user|
   user.full_name = 'Example User'
   user.password = 'password123!'
   user.position = :director
@@ -25,7 +25,7 @@ end
   people_partnership_associate
 ].each do |position|
   puts "seeding #{position}"
-  User.create_or_find_by!(email: "#{position}@smartergood.com") do |user|
+  User.find_or_create_by(email: "#{position}@smartergood.com") do |user|
     user.full_name = position.to_s
     user.password = 'password123!'
     user.position = position
