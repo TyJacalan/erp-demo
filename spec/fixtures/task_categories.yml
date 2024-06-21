@@ -1,0 +1,6 @@
+valid_category:
+  department: "Research"
+  name: "Prospect Research"
+
+invalid_category:
+  name: "Prospect Research"
