@@ -30,11 +30,12 @@ Rails.application.routes.draw do
 
   resources :posts
   resources :research
-  resources :workplan
+  resources :workplan, only: %i[index]
   resources :users
 
   resources :alerts
   resources :notifications
+  resources :tasks, except: %i[show edit]
   resources :profile, only: [:index]
 
   # Error routes

@@ -8,6 +8,9 @@ en:
       success: "deleted a client:"
     edit:
       success: "You have successfully edited a new client."
+  task:
+    create:
+      success: "You have successfully created new task(s)."
   team:
     destroy:
       success: "You removed"

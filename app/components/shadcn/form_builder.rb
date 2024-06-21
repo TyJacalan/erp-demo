@@ -16,6 +16,19 @@ module Shadcn
       )
     end
 
+    def date_field(method, options = {})
+      @method = method
+      options = add_error_class(options)
+      options[:autocomplete] ||= 'date'
+      @template.render_input(
+        name: set_name,
+        id: set_id,
+        value: set_value,
+        type: options[:type] || 'date',
+        **options
+      )
+    end
+
     def dropzone(method, options = {})
       @method = method
       options = add_error_class(options)

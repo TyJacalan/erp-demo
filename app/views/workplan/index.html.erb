@@ -1,0 +1,23 @@
+<div class='flex flex-col gap-4 px-4 py-6'>
+  <h2 class='text-3xl font-bold'>Hi, <%= current_user.full_name %>!</h2>
+
+  <% if current_user.task_manager? %>
+    <%= link_to 'New Task', new_task_path %>
+  <% end %>
+
+  <%= render_tabs do %>
+    <%= tab_list do %>
+      <%= tab 'My Tasks' %>
+      <%= tab 'Team' %>
+    <% end %>
+    <%= tab_panels do %>
+      <%= tab_panel do %>
+        <%= turbo_frame_tag "tasks_#{dom_id(current_user)}", src: tasks_path %>
+      <% end %>
+      <%= tab_panel do %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+

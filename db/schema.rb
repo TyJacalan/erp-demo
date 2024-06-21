@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_240_620_113_841) do
+ActiveRecord::Schema[7.1].define(version: 20_240_621_090_358) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -133,19 +133,25 @@ ActiveRecord::Schema[7.1].define(version: 20_240_620_113_841) do
     t.index %w[recipient_type recipient_id], name: 'index_noticed_notifications_on_recipient'
   end
 
+  create_table 'task_categories', force: :cascade do |t|
+    t.string 'department'
+    t.string 'name'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+  end
+
   create_table 'tasks', force: :cascade do |t|
-    t.string 'description'
-    t.text 'notes'
-    t.integer 'department'
-    t.string 'category'
+    t.string 'name'
+    t.integer 'status', default: 0
     t.integer 'hours'
-    t.datetime 'internal_deadline'
-    t.datetime 'client_deadline'
+    t.datetime 'deadline'
     t.bigint 'user_id', null: false
     t.bigint 'client_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.bigint 'task_category_id', null: false
     t.index ['client_id'], name: 'index_tasks_on_client_id'
+    t.index ['task_category_id'], name: 'index_tasks_on_task_category_id'
     t.index ['user_id'], name: 'index_tasks_on_user_id'
   end
 
@@ -195,5 +201,6 @@ ActiveRecord::Schema[7.1].define(version: 20_240_620_113_841) do
   add_foreign_key 'contracts', 'clients'
   add_foreign_key 'memberships', 'users'
   add_foreign_key 'tasks', 'clients'
+  add_foreign_key 'tasks', 'task_categories'
   add_foreign_key 'tasks', 'users'
 end

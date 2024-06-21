@@ -1,0 +1,63 @@
+<%= turbo_frame_tag 'task_form' do %>
+  <%= render_form_with url: tasks_path, method: :post, local: true, class: 'flex flex-col gap-4' do |f| %>
+    <div class='flex flex-row gap-2 items-center'>
+      <%= label_tag :client_id, 'Create Tasks For' %>
+      <%= f.select_field :client_id, selected: 'default', disabled: 'default', class: 'w-48' do |select| %>
+        <%= select.option label: 'Select a client...', value: 'default' %>
+        <% @clients.each do |client| %>
+          <%= select.option label: client.abbreviation, value: client.id %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <%= render_table do %>
+      <%= table_head do %>
+        <%= table_header 'User' %>
+        <%= table_header 'Category' %>
+        <%= table_header 'Name' %>
+        <%= table_header 'Hours' %>
+        <%= table_header 'Deadline' %>
+      <% end %>
+      <%= table_body do %>
+        <% tasks.each_with_index do |task, index| %>
+          <span><%= task.errors[:client_id].first %></span>
+          <%= table_row do %>
+            <%= table_column do %>
+              <span><%= task.errors[:user_id].first %></span>
+              <%= render_select name: "tasks[#{index}][user_id]", id: "select_#{index}_user_id", selected: 'default', disabled: 'default', class: 'w-60 text-xs truncate' do |select| %>
+                <%= select.option label: 'Select an employee...', value: 'default' %>
+                <% @users.each do |user| %>
+                  <%= select.option label: user.full_name, value: user.id %>
+                <% end %>
+              <% end %>
+            <% end %>
+            <%= table_column do %>
+              <span><%= task.errors[:task_category_id].first %></span>
+              <%= render_select name: "tasks[#{index}][task_category_id]", id: "select_#{index}_task_category_id", selected: 'default', disabled: 'default', class: 'w-60 text-xs truncate' do |select| %>
+                <%= select.option label: 'Select a category...', value: 'default' %>
+                <% @categories.each do |category| %>
+                  <%= select.option label: category.name, value: category.id %>
+                <% end %>
+              <% end %>
+            <% end %>
+            <%= table_column do %>
+              <span><%= task.errors[:name].first %></span>
+              <%= render_input name: "tasks[#{index}][name]", value: task.name, class: 'w-60 text-xs' %>
+            <% end %>
+            <%= table_column do %>
+              <span><%= task.errors[:hours].first %></span>
+              <%= render_input name: "tasks[#{index}][hours]", value: task.hours, type: 'number', class: 'w-24 text-xs' %>
+            <% end %>
+            <%= table_column do %>
+              <span><%= task.errors[:deadline].first %></span>
+              <%= render_input name: "tasks[#{index}][deadline]", value: task.deadline, type: 'datetime-local', class: 'text-xs' %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <%= f.submit "Create Tasks", class: 'w-fit' %>
+  <% end %>
+<% end %>
+

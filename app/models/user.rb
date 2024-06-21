@@ -5,10 +5,11 @@ class User < ApplicationRecord
   include Turbo::Broadcastable
 
   has_one_attached :avatar
+  has_many :clients, through: :memberships, source: :memberable, source_type: 'Client'
   has_many :notifications, as: :recipient, dependent: :destroy, class_name: 'Noticed::Notification'
   has_many :mentions, as: :record, dependent: :destroy, class_name: 'Noticed::Event'
   has_many :memberships
-  has_many :clients, through: :memberships, source: :memberable, source_type: 'Client'
+  has_many :tasks
 
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
