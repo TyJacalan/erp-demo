@@ -1,5 +1,10 @@
 <%= turbo_frame_tag "tasks_#{dom_id(current_user)}" do %>
   <div class='mt-4 w-full flex flex-col gap-2'>
+    <%= render_form_with id: 'task_search', class: 'mb-2 w-full max-w-md flex flex-col sm:flex-row gap-2', method: :get, data: { turbo_permanent: true } do |f| %>
+      <%= f.search_field :name_or_client_name_or_task_category_name_or_task_category_department_cont, placeholder: 'Search tasks...' %>
+      <%= f.submit 'Search', variant: :outline %>
+    <% end %>
+
     <% @tasks.each do |task| %>
       <%= render_card do %>
         <div class='w-full flex flex-row gap-2 justify-between overflow-hidden'>
@@ -7,10 +12,16 @@
             <%= task.name %>
           </div>
           <div class='w-fit px-2'>
+            <%= task.task_category.name %>
             <%= task.hours %>
+            <%= task.client.name %>
           </div>
         </div>
       <% end %>
     <% end %>
+
+    <nav class='w-full flex justify-center mt-2 text-muted-foreground text-sm' data-controller='pagy-initializer'>
+      <%== pagy_nav_js(@pagy) if @pagy.pages > 1 %>
+    </nav>
   </div>
 <% end %>

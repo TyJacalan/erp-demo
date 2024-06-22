@@ -20,7 +20,7 @@ class Client < ApplicationRecord
   end
 
   def self.ransackable_associations(_auth_object = nil)
-    %w[users]
+    %w[user]
   end
 
   ransacker :issue_areas do

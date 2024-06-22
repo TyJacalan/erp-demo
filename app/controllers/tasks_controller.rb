@@ -4,7 +4,8 @@ class TasksController < ApplicationController
   before_action :load_resources, only: %i[new create]
 
   def index
-    @tasks = current_user.tasks
+    @q = current_user.tasks.ransack(params[:q])
+    @pagy, @tasks = pagy(@q.result.includes(:task_category, :client))
     authorize @tasks
   end
 
@@ -28,7 +29,7 @@ class TasksController < ApplicationController
     if @response
       Task.insert_all(@tasks.map(&:attributes).map { |attr| attr.except('id', 'created_at', 'updated_at') })
       flash.now[:notice] = t("task.#{action_name}.success")
-      @tasks = Array.new(2) { Task.new }
+      @tasks = Array.new(1) { Task.new }
     else
       flash.now[:alert] = t("task.#{action_name}.failure")
     end

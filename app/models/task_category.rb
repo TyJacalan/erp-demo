@@ -8,4 +8,8 @@ class TaskCategory < ApplicationRecord
 
   enum department: { research: 0, writing: 1, editorial: 2, account_management: 3, accounting: 4,
                      business_development: 5, design: 6, social_media: 7, others: 8 }
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[department name]
+  end
 end
