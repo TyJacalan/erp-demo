@@ -38,7 +38,7 @@ module Components::TableHelper
   def table_body(**options, &block)
     content_tag :tbody, id: options[:id], class: options.reverse_merge(
       class: tw("[&_tr:last-child]:border-0", options[:class])
-    ), &block
+    ), data: options[:data], &block
   end
 
   def table_row(**options, &block)
@@ -50,7 +50,7 @@ module Components::TableHelper
   def table_column(content = nil, **options, &block)
     content_tag :td, options.reverse_merge(
       class: tw("p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium", options[:class])
-    ) do
+    ), data: options[:data] do
       if block
         capture(&block)
       else

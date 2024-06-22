@@ -10,6 +10,9 @@ application.register("auto-submit", AutoSubmitController)
 import PagyInitializerController from "./pagy_initializer_controller"
 application.register("pagy-initializer", PagyInitializerController)
 
+import TasksFormController from "./tasks_form_controller"
+application.register("tasks-form", TasksFormController)
+
 import Ui__CarouselController from "./ui/carousel_controller"
 application.register("ui--carousel", Ui__CarouselController)
 

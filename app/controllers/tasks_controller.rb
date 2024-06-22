@@ -9,7 +9,8 @@ class TasksController < ApplicationController
   end
 
   def new
-    @tasks = Array.new(10) { Task.new }
+    task_count = session[:task_count] || 1
+    @tasks = Array.new(task_count) { Task.new }
     authorize @tasks.first
   end
 
