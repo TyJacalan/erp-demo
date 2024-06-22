@@ -1,1 +1,2 @@
+<%= turbo_stream.update 'toasts', partial: 'components/layout/toast_messages' %>
 <%= turbo_stream.replace "task_form", partial: "forms/task_form", locals: { tasks: @tasks } %>

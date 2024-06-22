@@ -11,6 +11,7 @@ en:
   task:
     create:
       success: "You have successfully created new task(s)."
+      failure: "Submission failed! Errors were found."
   team:
     destroy:
       success: "You removed"

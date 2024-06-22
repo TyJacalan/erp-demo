@@ -9,7 +9,7 @@ class TasksController < ApplicationController
   end
 
   def new
-    @tasks = Array.new(2) { Task.new }
+    @tasks = Array.new(10) { Task.new }
     authorize @tasks.first
   end
 
@@ -21,13 +21,15 @@ class TasksController < ApplicationController
       authorize task
     end
 
-    all_valid = @tasks.all?(&:valid?)
+    @tasks.each(&:valid?)
+    @response = @tasks.all?(&:valid?)
 
-    if all_valid
+    if @response
       Task.insert_all(@tasks.map(&:attributes).map { |attr| attr.except('id', 'created_at', 'updated_at') })
-      redirect_to workplan_index_path, notice: t("task.#{action_name}.success")
+      flash.now[:notice] = t("task.#{action_name}.success")
+      @tasks = Array.new(2) { Task.new }
     else
-      flash.now[:alert] = 'Errors'
+      flash.now[:alert] = t("task.#{action_name}.failure")
     end
   end
 
