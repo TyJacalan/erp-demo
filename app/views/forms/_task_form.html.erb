@@ -1,73 +1,109 @@
 <%= turbo_frame_tag 'task_form' do %>
-  <%= render_form_with url: tasks_path, method: :post, local: true, class: 'flex flex-col gap-4', data: { controller: 'tasks-form' } do |f| %>
-    <%= f.submit "Create Tasks", class: 'w-fit' %>
+  <% if method == :post %>
+    <%= render_form_with url: url, method: method, local: true, class: 'flex flex-col gap-4', data: { controller: 'tasks-form' } do |f| %>
+      <%= f.submit 'Create Tasks', class: 'w-fit' %>
 
-    <div class='flex flex-col'>
-      <%= f.select_field :client_id, selected: 'default', disabled: 'default', class: "#{ @tasks[0].errors[:user_id].present? ? 'error' : ''} w-48", data: { action: 'change->tasks-form#updateSelectOnChange' } do |select| %>
-        <%= select.option label: 'Select a client...', value: 'default' %>
-        <% @clients.each do |client| %>
-          <%= select.option label: client.abbreviation, value: client.id %>
-        <% end %>
-        <% end %>
-      <span class='h-6 text-destructive text-xs font-normal'><%= @tasks[0].errors[:client_id].first.to_s.capitalize %></span>
-    </div>
+      <div class='flex flex-col'>
+        <%= f.select_field :client_id, selected: 'default', disabled: 'default', class: "#{ @tasks[0].errors[:user_id].present? ? 'error' : ''} w-48", data: { action: 'change->tasks-form#updateSelectOnChange' } do |select| %>
+          <%= select.option label: 'Select a client...', value: 'default' %>
+          <% @clients.each do |client| %>
+            <%= select.option label: client.abbreviation, value: client.id %>
+          <% end %>
+          <% end %>
+        <span class='h-6 text-destructive text-xs font-normal'><%= @tasks[0].errors[:client_id].first.to_s.capitalize %></span>
+      </div>
 
-    <%= render_table do %>
-      <%= table_head do %>
-        <%= table_header 'User' %>
-        <%= table_header 'Category' %>
-        <%= table_header 'Name' %>
-        <%= table_header 'Hours' %>
-        <%= table_header 'Deadline' %>
-        <%= table_header '' %>
-      <% end %>
-      <%= table_body data: { tasks_form_target: 'container' } do %>
-        <% tasks.each_with_index do |task, index| %>
-          <%= table_row data: { tasks_form_target: 'formItem'} do %>
-            <%= table_column do %>
-              <div class='h-4 text-destructive text-xs font-normal'><%= task.errors[:user_id].first.to_s.capitalize %></div>
-              <%= render_select name: "tasks[#{index}][user_id]", id: "select_#{index}_user_id", selected: task.user_id || 'default', disabled: 'default', class: "#{ task.errors[:user_id].present? ? 'error' : ''} w-60 text-xs truncate", data: { action: 'change->tasks-form#updateSelectOnChange' } do |select| %>
-                <%= select.option label: 'Select an employee...', value: 'default' %>
-                <% @users.each do |user| %>
-                  <%= select.option label: user.full_name, value: user.id %>
+      <%= render_table do %>
+        <%= table_head do %>
+          <%= table_header 'User' %>
+          <%= table_header 'Category' %>
+          <%= table_header 'Name' %>
+          <%= table_header 'Hours' %>
+          <%= table_header 'Deadline' %>
+          <%= table_header '' %>
+        <% end %>
+        <%= table_body data: { tasks_form_target: 'container' } do %>
+          <% tasks.each_with_index do |task, index| %>
+            <%= table_row data: { tasks_form_target: 'formItem'} do %>
+              <%= table_column do %>
+                <div class='h-4 text-destructive text-xs font-normal'><%= task.errors[:user_id].first.to_s.capitalize %></div>
+                <%= render_select name: "tasks[#{index}][user_id]", id: "select_#{index}_user_id", selected: task.user_id || 'default', disabled: 'default', class: "#{ task.errors[:user_id].present? ? 'error' : ''} w-60 text-xs truncate", data: { action: 'change->tasks-form#updateSelectOnChange' } do |select| %>
+                  <%= select.option label: 'Select an employee...', value: 'default' %>
+                  <% @users.each do |user| %>
+                    <%= select.option label: user.full_name, value: user.id %>
+                  <% end %>
                 <% end %>
               <% end %>
-            <% end %>
-            <%= table_column do %>
-              <div class='h-4 text-destructive text-xs font-normal'><%= task.errors[:task_category_id].first.to_s.capitalize %></div>
-              <%= render_select name: "tasks[#{index}][task_category_id]", id: "select_#{index}_task_category_id", selected: task.task_category_id || 'default', disabled: 'default', class: "#{ task.errors[:task_category_id].present? ? 'error' : ''} w-60 text-xs truncate", data: { action: 'change->tasks-form#updateSelectOnChange' } do |select| %>
-                <%= select.option label: 'Select a category...', value: 'default' %>
-                <% @categories.each do |category| %>
-                  <%= select.option label: category.name, value: category.id %>
+              <%= table_column do %>
+                <div class='h-4 text-destructive text-xs font-normal'><%= task.errors[:task_category_id].first.to_s.capitalize %></div>
+                <%= render_select name: "tasks[#{index}][task_category_id]", id: "select_#{index}_task_category_id", selected: task.task_category_id || 'default', disabled: 'default', class: "#{ task.errors[:task_category_id].present? ? 'error' : ''} w-60 text-xs truncate", data: { action: 'change->tasks-form#updateSelectOnChange' } do |select| %>
+                  <%= select.option label: 'Select a category...', value: 'default' %>
+                  <% @categories.each do |category| %>
+                    <%= select.option label: category.name, value: category.id %>
+                  <% end %>
                 <% end %>
               <% end %>
-            <% end %>
-            <%= table_column class: 'w-full' do %>
-              <div class='h-4 text-destructive text-xs font-normal'><%= task.errors[:name].first.to_s.capitalize %></div>
-              <%= render_input name: "tasks[#{index}][name]", value: task.name, class: "#{ task.errors[:name].present? ? 'error' : ''} w-full text-xs", autocomplete: 'off' %>
-            <% end %>
-            <%= table_column do %>
-              <div class='h-4 text-destructive text-xs font-normal'><%= task.errors[:hours].first.to_s.capitalize %></div>
-              <%= render_input name: "tasks[#{index}][hours]", value: task.hours, type: 'number', class: "#{ task.errors[:hours].present? ? 'error' : ''} w-24 text-xs", autocomplete: 'off' %>
-            <% end %>
-            <%= table_column do %>
-              <div class='h-4 text-destructive text-xs font-normal'><%= task.errors[:deadline].first.to_s.capitalize %></div>
-              <%= render_input name: "tasks[#{index}][deadline]", value: task.deadline, type: 'datetime-local', class: "#{ task.errors[:deadline].present? ? 'error' : ''} text-xs", autocomplete: 'off' %>
-            <% end %>
-            <%= table_column class: 'w-fit' do %>
-              <div class='h-4'></div>
-              <%= render_button variant: :ghost, class: 'p-1', data: { action: 'tasks-form#removeTask'} do %>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                </svg>
+              <%= table_column class: 'w-full' do %>
+                <div class='h-4 text-destructive text-xs font-normal'><%= task.errors[:name].first.to_s.capitalize %></div>
+                <%= render_input name: "tasks[#{index}][name]", value: task.name, class: "#{ task.errors[:name].present? ? 'error' : ''} w-full text-xs", autocomplete: 'off' %>
+              <% end %>
+              <%= table_column do %>
+                <div class='h-4 text-destructive text-xs font-normal'><%= task.errors[:hours].first.to_s.capitalize %></div>
+                <%= render_input name: "tasks[#{index}][hours]", value: task.hours, type: 'number', class: "#{ task.errors[:hours].present? ? 'error' : ''} w-24 text-xs", autocomplete: 'off' %>
+              <% end %>
+              <%= table_column do %>
+                <div class='h-4 text-destructive text-xs font-normal'><%= task.errors[:deadline].first.to_s.capitalize %></div>
+                <%= render_input name: "tasks[#{index}][deadline]", value: task.deadline, type: 'datetime-local', class: "#{ task.errors[:deadline].present? ? 'error' : ''} text-xs", autocomplete: 'off' %>
+              <% end %>
+              <%= table_column class: 'w-fit' do %>
+                <div class='h-4'></div>
+                <%= render_button variant: :ghost, class: 'p-1', data: { action: 'tasks-form#removeTask'} do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                  </svg>
+                <% end %>
               <% end %>
             <% end %>
           <% end %>
         <% end %>
       <% end %>
+      <%= render_button 'Add new row', variant: :outline, data: { action: 'tasks-form#addTask' } %>
     <% end %>
-    <%= render_button 'Add new row', variant: :outline, data: { action: 'tasks-form#addTask' } %>
+  <% elsif method == :patch %>
+      <%= render_form_for resource, url: url, method: method, local: true, class: 'flex flex-col gap-4', data: { controller: 'tasks-form' } do |f| %>
+        <%= f.label :name %>
+        <%= f.text_field :name, value: resource.name %>
 
+        <div class='flex flex-row gap-2'>
+          <div>
+            <%= f.label :hours %>
+            <%= f.number_field :hours, value: resource.hours %>
+          </div>
+          <div>
+            <%= f.label :deadline %>
+            <%= f.date_field :deadline, type: 'datetime-local', value: resource.deadline %>
+          </div>
+        </div>
+
+        <%= f.label :client_id %>
+        <%= f.select_field :client_id, selected: resource.client_id do |select| %>
+          <% @clients.each do |client| %>
+            <%= select.option label: client.abbreviation, value: client.id %>
+          <% end %>
+        <% end %>
+
+        <%= f.label :user_id %>
+        <%= f.select_field :user_id, selected: resource.user_id do |select| %>
+          <% @users.each do |user| %>
+            <%= select.option label: user.full_name, value: user.id %>
+          <% end %>
+        <% end %>
+
+        <%= f.submit 'Edit', class: 'w-full' %>
+      <% end %>
+  <% elsif method == :delete %>
+    <%= render_form_for resource, url: url, method: method do |f| %>
+      <%= f.submit 'Delete', variant: :destructive, class: 'w-24' %>
+    <% end %>
   <% end %>
 <% end %>
-

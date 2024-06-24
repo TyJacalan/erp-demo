@@ -6,48 +6,8 @@
     <% end %>
 
     <% @tasks.each do |task| %>
-      <%= render_collapsible do %>
-        <%= collapsible_trigger do %>
-          <div class='w-full bg-background flex flex-row items-center gap-4 px-4 py-2 rounded-md shadow-sm cursor-pointer'>
-            <div class='w-24 flex justify-center'>
-              <div class='w-fit px-2 bg-accent rounded-md text-nowrap'>
-                <%= task.hours %> <%= task.hours > 1 ? 'hrs' : 'hr' %>
-              </div>
-            </div>
-            <div class='w-full'>
-              <%= task.name %>
-            </div>
-            <%= render partial: 'forms/task_status_form', locals: { task: task } %>
-          </div>
-        <% end %>
-        <%= collapsible_body do %>
-          <div class='w-full grid grid-cols-3 gap-6 px-4 py-6 rounded-md'>
-            <div class='flex flex-col'>
-              <span class='font-bold'>Client</span>
-              <div class='flex flex-row items-center gap-2'>
-                <%= render_avatar src: image_url(task.client.logo), alt: task.client.name, variant: :small %>
-                <%= task.client.name %>
-              </div>
-            </div>
-            <div class='flex flex-col'>
-              <span class='font-bold'>Hours</span>
-              <%= task.hours %>
-            </div>
-            <div class='flex flex-col'>
-              <span class='font-bold'>Deadline</span>
-              <%= task.deadline ? task.deadline.strftime('%Y %b %d, %I:%M%p') : 'N/A' %>
-            </div>
-            <div class='flex flex-col'>
-              <span class='font-bold'>Department</span>
-              <%= task.task_category.department %>
-            </div>
-            <div class='flex flex-col'>
-              <span class='font-bold'>Category</span>
-              <%= task.task_category.name %>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
+    
+      <%= render partial: 'task', locals: { task: task } %>
     <% end %>
 
     <nav class='w-full flex justify-center mt-2 text-muted-foreground text-sm' data-controller='pagy-initializer'>

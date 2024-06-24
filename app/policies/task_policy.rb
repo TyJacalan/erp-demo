@@ -13,6 +13,10 @@ class TaskPolicy < ApplicationPolicy
     user.task_manager
   end
 
+  def update?
+    user.task_manager
+  end
+
   def destroy?
     user.task_manager
   end

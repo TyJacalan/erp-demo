@@ -3,23 +3,23 @@
 TaskCategory.insert_all(
   [
     {
-      department: 'Research',
+      department: 0,
       name: 'Prospect Research'
     },
     {
-      department: 'Account Management',
+      department: 3,
       name: 'Moves Action Plan'
     },
     {
-      department: 'Writing',
+      department: 1,
       name: 'Proposal V1'
     },
     {
-      department: 'Writing',
+      department: 1,
       name: 'Proposal V2'
     },
     {
-      department: 'Editorial',
+      department: 2,
       name: 'Edits V1'
     }
   ]
