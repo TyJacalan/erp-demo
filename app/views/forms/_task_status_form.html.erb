@@ -1,0 +1,7 @@
+<%= render_form_for task, href: task_path(task), method: :patch, data: { controller: 'auto-submit' } do |f| %>
+    <%= f.select_field :status do |select| %>
+        <% Task.statuses.each do |status| %>
+            <%= select.option label: status[0].upcase, value: status[1] %>
+        <% end %>
+    <% end %>
+<% end %>

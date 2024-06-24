@@ -1,0 +1,17 @@
+<div
+  data-state="closed"
+  class="w-full"
+  data-controller="ui--collapsible">
+  <div
+    class="w-full flex flex-row items-center justify-between space-x-4"
+    data-action="click->ui--collapsible#toggle">
+    <%= content_for(:collapsible_trigger) %>
+  </div>
+  <%= yield :preview %>
+  <div
+    data-ui--collapsible-target="item"
+    data-state="closed"
+    class="space-y-2 hidden">
+    <%= yield :body %>
+  </div>
+</div>

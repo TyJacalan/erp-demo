@@ -19,6 +19,9 @@ application.register("ui--carousel", Ui__CarouselController)
 import Ui__CheckboxController from "./ui/checkbox_controller"
 application.register("ui--checkbox", Ui__CheckboxController)
 
+import Ui__CollapsibleController from "./ui/collapsible_controller"
+application.register("ui--collapsible", Ui__CollapsibleController)
+
 import Ui__DialogController from "./ui/dialog_controller"
 application.register("ui--dialog", Ui__DialogController)
 
