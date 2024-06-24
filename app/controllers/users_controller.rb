@@ -12,5 +12,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     authorize @user
+    add_breadcrumb @user.full_name, client_path(@user)
   end
 end
