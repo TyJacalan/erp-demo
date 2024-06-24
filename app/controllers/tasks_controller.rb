@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
+  before_action :authorize_referer, only: %i[index]
   before_action :load_resources, except: %i[destroy]
   before_action :task, only: %i[update destroy]
 
@@ -43,6 +44,12 @@ class TasksController < ApplicationController
   end
 
   private
+
+  def authorize_referer
+    unless request.referer&.include?(workplan_index_path)
+      redirect_to workplan_index_path
+    end
+  end
 
   def build_tasks
     client_id = params[:client_id]
