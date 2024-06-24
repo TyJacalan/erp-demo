@@ -1,0 +1,22 @@
+<div class='flex flex-col gap-4 p-6'>
+    <%= render_form_with id: 'user_search', class: 'w-full max-w-md flex flex-col sm:flex-row gap-2', method: :get, data: { turbo_permanent: true } do |f| %>
+        <%= f.search_field :full_name_or_email_or_position_cont, placeholder: 'Search users...' %>
+        <%= f.submit 'Search', variant: :outline %>
+    <% end %>
+
+    <div class='grid grid-cols-5 gap-4'>
+    <% @users.each do |user| %>
+        <%= render_card class: 'min-w-[250px] w-[250px] hover:brightness-90 cursor-pointer' do %>
+            <%= link_to current_user == user ? profile_index_path : user_path(user), class: 'w-full flex flex-col items-center justify-center text-center' do %>
+                <div class='flex-1'>
+                    <%= render_avatar src: image_url(user.avatar), alt: user.full_name, variant: :large %>
+                </div>
+                <div class='w-full'>
+                    <h4 class='truncate'><%= user.full_name %></h4>
+                    <p class='truncate'><%= user.position %></p>
+                </div>
+            <% end %>
+        <% end %>
+    <% end %>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<div id="<%= dom_id(@user) %>" class='h-full w-full flex flex-col gap-4'>
+    <div class='flex flex-row items-start sm:items-center gap-4 px-6 py-4 bg-gradient-to-b from-primary to-secondary'>
+        <div class='w-fit'>
+            <%= render_avatar src: image_url(@user.avatar), alt: @user.full_name, variant: :large %>
+        </div>
+        <div class='h-full w-full flex flex-col gap-2'>
+            <h1 class='text-xl sm:text-3xl text-background dark:text-muted-foreground truncate'><%= @user.full_name %></h1>
+            <p class='text-xs sm:text-sm text-background dark:text-muted-foreground'><%= @user.position.titleize %></p>
+            <p class='text-xs sm:text-sm text-background dark:text-muted-foreground'><%= @user.team.titleize %></p>
+        </div>
+    </div>
+
+
+    <div class='px-6 py-4'>
+        <%= render_tabs do %>
+            <%= tab_list do %>
+                <%= tab "Summary" %>
+                <%= tab "Posts" %>
+                <%= tab "Comments" %>
+                <%= tab "Tasks" %>
+            <% end %>
+            <%= tab_panels do %>
+                <%= tab_panel do %>
+
+                <% end %>
+                <%= tab_panel do %>
+
+                <% end %>
+                <%= tab_panel do %>
+
+                <% end %>
+
+                <%= tab_panel do %>
+                <% end %>
+            <% end %>
+        <% end %>
+    </div>
+</div>

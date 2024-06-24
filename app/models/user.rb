@@ -18,6 +18,10 @@ class User < ApplicationRecord
   validates :full_name, :email, :position, presence: true
   validates :full_name, :email, uniqueness: true
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[full_name email position]
+  end
+
   def self.distinct_positions
     pluck(:position).uniq.compact.sort
   end
