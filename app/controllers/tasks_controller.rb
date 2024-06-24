@@ -5,7 +5,7 @@ class TasksController < ApplicationController
 
   def index
     @q = current_user.tasks.ransack(params[:q])
-    @pagy, @tasks = pagy(@q.result.includes(:task_category, :client))
+    @pagy, @tasks = pagy(@q.result.includes(:task_category, :client), items: 10)
     authorize @tasks
   end
 
@@ -16,18 +16,8 @@ class TasksController < ApplicationController
   end
 
   def create
-    client_id = params[:client_id]
-
-    @tasks = task_params.map do |task_param|
-      task = Task.new(task_param.merge(client_id:))
-      authorize task
-    end
-
-    @tasks.each(&:valid?)
-    @response = @tasks.all?(&:valid?)
-
-    if @response
-      Task.insert_all(@tasks.map(&:attributes).map { |attr| attr.except('id', 'created_at', 'updated_at') })
+    @tasks = build_tasks
+    if task_service.create(@tasks)
       flash.now[:notice] = t("task.#{action_name}.success")
       @tasks = Array.new(1) { Task.new }
     else
@@ -40,6 +30,19 @@ class TasksController < ApplicationController
   def destroy; end
 
   private
+
+  def build_tasks
+    client_id = params[:client_id]
+
+    task_params.map do |task_param|
+      task = Task.new(task_param.merge(client_id:))
+      authorize task
+    end
+  end
+
+  def task_service
+    @task_service ||= TaskService.new
+  end
 
   def load_resources
     @users = User.select(:id, :full_name)

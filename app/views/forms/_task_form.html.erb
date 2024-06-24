@@ -3,7 +3,7 @@
     <%= f.submit "Create Tasks", class: 'w-fit' %>
 
     <div class='flex flex-col'>
-      <%= f.select_field :client_id, selected: 'default', disabled: 'default', class: "#{ @tasks[0].errors[:user_id].present? ? 'error' : ''} w-48" do |select| %>
+      <%= f.select_field :client_id, selected: 'default', disabled: 'default', class: "#{ @tasks[0].errors[:user_id].present? ? 'error' : ''} w-48", data: { action: 'change->tasks-form#updateSelectOnChange' } do |select| %>
         <%= select.option label: 'Select a client...', value: 'default' %>
         <% @clients.each do |client| %>
           <%= select.option label: client.abbreviation, value: client.id %>

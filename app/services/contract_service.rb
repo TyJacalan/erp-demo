@@ -8,8 +8,8 @@ class ContractService
 
   def create
     ActiveRecord::Base.transaction do
-      @contract = Client.new(@client_params)
-      @contract.issue_areas = @client_params[:issue_areas].split(',').map(&:strip)
+      @contract = Client.new(@contract_params)
+      @contract.issue_areas = @contract_params[:issue_areas].split(',').map(&:strip)
 
       @contract.save
 
