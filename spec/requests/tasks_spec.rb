@@ -29,7 +29,21 @@ RSpec.describe 'Tasks', type: :request do
     describe 'GET /new' do
       it 'restricts access' do
         get new_task_path
-        expect(response).to have_http_status('406')
+        expect(response).to have_http_status(:not_acceptable)
+      end
+    end
+
+    describe 'PATCH /update' do
+      it 'restricts access' do
+        patch task_path(task), params: { task: { name: 'Updated Task' } }
+        expect(response).to have_http_status(:not_acceptable)
+      end
+    end
+
+    describe 'DELETE /destroy' do
+      it 'restricts access' do
+        delete task_path(task)
+        expect(response).to have_http_status(:not_acceptable)
       end
     end
   end
@@ -43,6 +57,25 @@ RSpec.describe 'Tasks', type: :request do
       it 'allows access to the new task path' do
         get new_task_path
         expect(response.body).to include('Create Tasks')
+      end
+    end
+
+    describe 'PATCH /update' do
+      it 'updates the task and returns success' do
+        patch task_path(task), params: { task: { name: 'Updated Task' } }, headers: { 'Accept' => 'text/vnd.turbo-stream.html' }
+        task.reload
+        expect(task.name).to eq('Updated Task')
+        expect(response.content_type).to include('text/vnd.turbo-stream.html')
+        expect(flash[:notice]).to eq(I18n.t("task.update.success"))
+      end
+    end
+
+    describe 'DELETE /destroy' do
+      it 'deletes the task and returns success' do
+        delete task_path(task), headers: { 'Accept' => 'text/vnd.turbo-stream.html' }
+        expect(response.content_type).to include('text/vnd.turbo-stream.html')
+        expect(Task.exists?(task.id)).to be_falsey
+        expect(flash[:notice]).to eq(I18n.t("task.destroy.success"))
       end
     end
   end
