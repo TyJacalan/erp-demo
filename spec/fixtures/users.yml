@@ -5,6 +5,12 @@ valid_user:
   email: example@example.com
   position: ceo
 
+task_manager:
+  full_name: Task Manager
+  email: taskmanager@example.com
+  position: senior_development_associate
+  task_manager: true
+
 invalid_user:
   full_name: Invalid User
 

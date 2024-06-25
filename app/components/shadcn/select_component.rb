@@ -15,7 +15,11 @@ module Shadcn
     end
 
     def option(value:, label: nil, &block)
-      content = label || view_context.capture(&block)
+      if block_given?
+        content = view_context.capture(&block)
+      else
+        content = label
+      end
       option_options = { value: }
       option_options[:selected] = 'selected' if value == selected
       option_options[:disabled] = 'disabled' if value == disabled

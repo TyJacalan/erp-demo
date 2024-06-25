@@ -46,9 +46,9 @@ class TasksController < ApplicationController
   private
 
   def authorize_referer
-    unless request.referer&.include?(workplan_index_path)
-      redirect_to workplan_index_path
-    end
+    return if request.referer&.include?(workplan_index_path)
+
+    redirect_to workplan_index_path
   end
 
   def build_tasks
