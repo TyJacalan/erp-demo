@@ -29,6 +29,24 @@
 
           <%= render partial: 'forms/shared/submit', locals: { method: method } %>
         <% end %>
+        <%= carousel_slide do %>
+          <%= f.fields_for :location do |location_field| %>
+            <%= location_field.label :street %>
+            <%= location_field.text_field :street, autocomplete: 'street-name' %>
+
+            <div class='flex flex-row gap-2'>
+              <div class='flex flex-col gap-2'>
+                <%= location_field.label :city %>
+                <%= location_field.text_field :city, autocomplete: 'address-level2' %>
+              </div>
+
+              <div class='flex flex-col gap-2'>
+                <%= location_field.label :country %>
+                <%= location_field.text_field :country, autocomplete: 'country-name' %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
       <% end %>
     <% end %>
   <% else %>

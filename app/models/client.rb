@@ -9,6 +9,7 @@ class Client < ApplicationRecord
   has_many :tasks, dependent: :destroy
   has_many :users, through: :memberships
 
+  accepts_nested_attributes_for :location
   validates :name, :abbreviation, presence: true
   validates :name, :abbreviation, uniqueness: true
 

@@ -9,6 +9,7 @@ class ClientsController < ApplicationController
     @q = Client.ransack(params[:q])
     @pagy, @clients = pagy(@q.result.includes(:logo_attachment))
     @client = Client.new
+    @client.build_location
     authorize @clients
   end
 
