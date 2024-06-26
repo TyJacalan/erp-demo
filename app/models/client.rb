@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Client < ApplicationRecord
+  belongs_to :location, optional: true
   has_one_attached :logo
   has_many :contracts
   has_many :mentions, as: :record, dependent: :destroy, class_name: 'Noticed::Event'
