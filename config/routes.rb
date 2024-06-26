@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   resources :workplan, only: %i[index]
   resources :users
 
-  resources :alerts
+  resources :alerts, only: %i[index]
   resources :notifications
   resources :profile, only: [:index]
   resources :tasks, except: %i[show edit]
