@@ -26,8 +26,6 @@
 
           <%= f.label :issue_areas %>
           <%= f.text_field :issue_areas, autocomplete: 'off' %>
-
-          <%= render partial: 'forms/shared/submit', locals: { method: method } %>
         <% end %>
         <%= carousel_slide do %>
           <%= f.fields_for :location do |location_field| %>
@@ -45,6 +43,9 @@
                 <%= location_field.text_field :country, autocomplete: 'country-name' %>
               </div>
             </div>
+            
+            <%= render partial: 'forms/shared/submit', locals: { method: method } %>
+
           <% end %>
         <% end %>
       <% end %>

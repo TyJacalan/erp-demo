@@ -45,7 +45,7 @@ class ClientsController < ApplicationController
 
   def client_params
     params.require(:client).permit(:name, :abbreviation, :mission, :logo, :website, :nonprofit_status, :status,
-                                   :issue_areas)
+                                   :issue_areas, location_attributes: %i[street city country])
   end
 
   def initialize_client_service
