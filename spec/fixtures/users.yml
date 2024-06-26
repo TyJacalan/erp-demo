@@ -11,6 +11,12 @@ task_manager:
   position: senior_development_associate
   task_manager: true
 
+client_manager:
+  full_name: Client Manager
+  email: clientmanager@example.com
+  position: associate_development_manager
+  client_manager: true
+
 invalid_user:
   full_name: Invalid User
 

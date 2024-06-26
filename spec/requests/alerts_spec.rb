@@ -20,7 +20,7 @@ RSpec.describe 'Alerts', type: :request do
     end
 
     describe 'GET /index' do
-      it 'it renders the users notifications' do
+      it 'renders the users notifications' do
         get alerts_path
         expect(response).to have_http_status(:success)
         expect(response.body).to(include('No notifications to display'))

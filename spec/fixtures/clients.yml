@@ -1,6 +1,7 @@
 valid_client:
-  name: "Client"
-  abbreviation: "CLNT"
+  name: "Test Client"
+  abbreviation: "TC"
+  mission: "To test clients"
 
 invalid_client:
   name: "Invalid Client"
