@@ -8,6 +8,7 @@ end
 puts "Seeding #{Rails.env} database..."
 seed 'admin'
 seed 'users'
+seed 'organizations'
 seed 'clients'
 seed 'tasks'
 

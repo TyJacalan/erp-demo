@@ -1,0 +1,52 @@
+<%= turbo_frame_tag "organizations_#{dom_id(current_user)}" do %>
+    <div class='flex flex-col gap-4 p-6'>
+        <%= render_form_with id: 'organization_search', class: 'h-full w-full max-w-md flex flex-row gap-2', method: :get, data: { turbo_permanent: true } do |f| %>
+            <div class='relative group h-full w-full'>
+                <%= f.search_field :name_or_headquarter_city_cont, placeholder: 'Search organizations...', class: 'w-full' %>
+                <%= link_to organizations_path do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="absolute top-0 right-2 translate-y-[50%] hidden group-hover:block text-muted-foreground size-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                <% end %>
+            </div>
+            <%= f.submit 'Search' %>
+        <% end %>
+
+        <%= render_table do %>
+            <%= table_head do %>
+                <%= table_header do %>
+                    <%= sort_link(@q, :id) %>
+                <% end %>
+                <%= table_header do %>
+                    <%= sort_link(@q, :name) %>
+                <% end %>
+                <%= table_header do %>
+                    <%= sort_link(@q, :organization_type) %>
+                <% end %>
+                <%= table_header do %>
+                    <%= sort_link(@q, :headquarter_city) %>
+                <% end %>
+                <%= table_header do %>
+                    <%= sort_link(@q, :headquarter_country) %>
+                <% end %>
+            <% end %>
+            <%= table_body do %>
+                <% @organizations.each do |org| %>
+                    <%= table_row do %>
+                        <%= table_column org.id.to_s %>
+                        <%= table_column do %>
+                            <%= link_to org.name, organization_path(org.id), class: 'underline', data: { turbo: false } %>
+                        <% end %>
+                        <%= table_column org.organization_type.titleize %>
+                        <%= table_column org.headquarter.city %>
+                        <%= table_column org.headquarter.country %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% end %>
+
+        <nav class='w-full flex justify-center mt-2 text-muted-foreground text-sm' data-controller='pagy-initializer'>
+            <%== pagy_nav_js(@pagy) if @pagy.pages > 1 %>
+        </nav>
+    </div>
+<% end %>

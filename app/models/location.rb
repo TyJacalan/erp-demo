@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Location < ApplicationRecord
+  has_many :organizations
+  has_many :offices
+
   geocoded_by :address
   after_validation :geocode, if: ->(obj) { obj.address.present? and obj.address_changed? }
 
@@ -12,5 +15,9 @@ class Location < ApplicationRecord
 
   def address_changed?
     street_changed? || city_changed? || state_changed? || country_changed?
+  end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[city country]
   end
 end
