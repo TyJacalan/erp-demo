@@ -1,0 +1,42 @@
+<%= turbo_frame_tag 'organization_form', loading: 'lazy' do %>
+    <%= render_form_for resource, url: path, method: method do |f| %>
+        <% unless method == :delete %>
+            <%= render_carousel do %>
+                <%= carousel_slides do %>
+                    <%= carousel_slide do %>
+                        <%= f.label :name %>
+                        <%= f.text_field :name, autocomplete: 'organization' %>
+                        <%= f.error_message :name %>
+
+                        <%= f.label :website %>
+                        <%= f.text_field :website, autocomplete: 'url' %>
+                        <%= f.error_message :website %>
+
+                        <%= f.label :mission %>
+                        <%= f.textarea :mission, autocomplete: 'off' %>
+                        <%= f.error_message :mission %>
+
+                        <%= f.label :organization_type %>
+                        <%= f.select_field :organization_type, selected: -1, disabled: -1, class: 'w-full' do |select| %>
+                            <%= select.option label: 'Select type...', value: -1 %>
+                            <% Organization.organization_types.each do |type| %>
+                                <%= select.option label: type[0].titleize, value: type[0] %>
+                            <% end %>
+                        <% end %>
+                        <%= f.error_message :organization_type %>
+                    <% end %>
+                    <%= carousel_slide do %>
+                        <h3>Headquater</h3>
+                        
+                        <%= f.fields_for :headquarter do |headquarter_field| %>
+                            <%= render partial: 'forms/location_fields', locals: { resource: headquarter_field } %>
+                        <% end %>
+                        
+                        <%= f.submit 'Create', class: 'w-full' %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% else %>
+        <% end %>
+    <% end %>
+<% end %>

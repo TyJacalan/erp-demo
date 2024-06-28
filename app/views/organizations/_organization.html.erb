@@ -1,0 +1,9 @@
+<%= table_row do %>
+    <%= table_column organization.id.to_s %>
+    <%= table_column do %>
+        <%= link_to organization.name, organization_path(organization.id), class: 'underline', data: { turbo: false } %>
+    <% end %>
+    <%= table_column organization.organization_type.titleize %>
+    <%= table_column organization.headquarter.city %>
+    <%= table_column organization.headquarter.country %>
+<% end %>

@@ -1,0 +1,11 @@
+<%= resource.label :street %>
+<%= resource.text_field :street, autocomplete: 'address-line1' %>
+<%= resource.error_message :street %>
+
+<%= resource.label :city %>
+<%= resource.text_field :city, autocomplete: 'address-level2' %>
+<%= resource.error_message :city %>
+
+<%= resource.label :country %>
+<%= resource.text_field :country, autocomplete: 'address-level1' %>
+<%= resource.error_message :country %>

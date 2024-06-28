@@ -9,7 +9,9 @@ class Organization < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   validates :website, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]) }, allow_blank: true
-  validates :mission, presence: true
+
+  accepts_nested_attributes_for :headquarter
+  accepts_nested_attributes_for :offices, allow_destroy: true
 
   after_save { Rails.cache.delete_matched(/^pagy-#{self.class.name}:/) }
 

@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   resources :notifications
   resources :profile, only: [:index]
   resources :tasks, except: %i[show edit]
-  resources :organizations, only: %i[index show update destroy]
+  resources :organizations, except: %i[new edit]
 
   # Error routes
   get '/404', to: 'errors#not_found', via: :all

@@ -8,11 +8,23 @@ class OrganizationsController < ApplicationController
     @q = Organization.ransack(params[:q])
     @pagy, @organizations = pagy(@q.result.includes(:headquarter))
     @organization = Organization.new
+    @organization.build_headquarter
     authorize @organizations
   end
 
   def show
     add_breadcrumb @organization.name, organization_path(@organization)
+  end
+
+  def create
+    @organization = Organization.new(organization_params)
+    authorize @organization
+
+    if @organization.save
+      flash.now[:notice] = "#{t "organization.#{action_name}.success"} #{@organization.name}"
+    else
+      flash.now[:alert] = "#{t "organization.#{action_name}.failure"} #{@organization.name}"
+    end
   end
 
   def update
@@ -39,7 +51,7 @@ class OrganizationsController < ApplicationController
   end
 
   def organization_params
-    params.require(:organization).permit(:name, :website, :mission, :type, :logo,
+    params.require(:organization).permit(:name, :website, :mission, :organization_type, :logo,
                                          headquarter_attributes: %i[id street city state country _destroy],
                                          offices_attributes: %i[id street city state country _destroy])
   end

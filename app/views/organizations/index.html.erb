@@ -12,6 +12,30 @@
             <%= f.submit 'Search' %>
         <% end %>
 
+        <div>
+            <%= render_dialog do %>
+                <%= dialog_trigger do %>
+                    <%= render_tooltip do %>
+                        <%= tooltip_trigger do %>
+                            <%= render_button variant: :outline do %>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                </svg>
+                            <% end %>
+                        <% end %>
+                        <%= tooltip_content do %> 
+                            <p>Add a new organization</p>
+                        <% end %>
+                    <% end %>
+                <% end %>
+                <%= dialog_content do %>
+                    <%= turbo_frame_tag 'organization_form' do %>
+                        <%= render partial: 'forms/organization_form', locals: { resource: @organization, path: organizations_path, method: :post } %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        </div>
+
         <%= render_table do %>
             <%= table_head do %>
                 <%= table_header do %>
@@ -30,17 +54,9 @@
                     <%= sort_link(@q, :headquarter_country) %>
                 <% end %>
             <% end %>
-            <%= table_body do %>
-                <% @organizations.each do |org| %>
-                    <%= table_row do %>
-                        <%= table_column org.id.to_s %>
-                        <%= table_column do %>
-                            <%= link_to org.name, organization_path(org.id), class: 'underline', data: { turbo: false } %>
-                        <% end %>
-                        <%= table_column org.organization_type.titleize %>
-                        <%= table_column org.headquarter.city %>
-                        <%= table_column org.headquarter.country %>
-                    <% end %>
+            <%= table_body id: 'organizations' do %>
+                <% @organizations.each do |organization| %>
+                    <%= render partial: 'organization', locals: { organization: organization } %>
                 <% end %>
             <% end %>
         <% end %>

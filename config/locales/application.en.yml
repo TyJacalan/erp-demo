@@ -9,6 +9,9 @@ en:
     edit:
       success: "You have successfully edited a new client."
   organization:
+    create:
+      success: "You created a client:"
+      failure: "Organization could not be created, errors were found!"
     update:
       success: "You updated a client:"
     destroy:

@@ -59,7 +59,7 @@ module Shadcn
       error_message = @object.errors[method].to_sentence
 
       content_tag(:p, "#{method_name} #{error_message}",
-                  options.merge(class: 'text-destructive'))
+                  options.merge(class: 'text-destructive text-xs'))
     end
 
     def label(method, options = {})
