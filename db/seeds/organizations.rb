@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Clear models
 
 Location.destroy_all

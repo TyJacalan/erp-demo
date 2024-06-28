@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrganizationsController < ApplicationController
   before_action :set_organization, only: %i[show update destroy]
   add_breadcrumb 'Organizations', :organizations_path

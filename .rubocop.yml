@@ -22,6 +22,7 @@ Metrics/BlockLength:
 Layout/LineLength:
   Exclude:
     - "bin/**"
+    - "db/**/*.rb"
 
 Metrics/MethodLength:
   Max: 20
