@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_240_626_135_221) do
+ActiveRecord::Schema[7.1].define(version: 20_240_628_120_446) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -21,8 +21,7 @@ ActiveRecord::Schema[7.1].define(version: 20_240_626_135_221) do
     t.bigint 'blob_id', null: false
     t.datetime 'created_at', null: false
     t.index ['blob_id'], name: 'index_active_storage_attachments_on_blob_id'
-    t.index %w[record_type record_id name blob_id], name: 'index_active_storage_attachments_uniqueness',
-                                                    unique: true
+    t.index %w[record_type record_id name blob_id], name: 'index_active_storage_attachments_uniqueness', unique: true
   end
 
   create_table 'active_storage_blobs', force: :cascade do |t|
@@ -167,6 +166,25 @@ ActiveRecord::Schema[7.1].define(version: 20_240_626_135_221) do
     t.index ['location_id'], name: 'index_organizations_on_location_id'
   end
 
+  create_table 'prospects', force: :cascade do |t|
+    t.bigint 'organization_id', null: false
+    t.text 'vision'
+    t.string 'facebook'
+    t.string 'linkedin'
+    t.string 'instagram'
+    t.string 'youtube'
+    t.string 'founder'
+    t.string 'founding_year'
+    t.text 'history'
+    t.bigint 'created_by_id', null: false
+    t.bigint 'updated_by_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['created_by_id'], name: 'index_prospects_on_created_by_id'
+    t.index ['organization_id'], name: 'index_prospects_on_organization_id'
+    t.index ['updated_by_id'], name: 'index_prospects_on_updated_by_id'
+  end
+
   create_table 'task_categories', force: :cascade do |t|
     t.string 'department'
     t.string 'name'
@@ -240,6 +258,9 @@ ActiveRecord::Schema[7.1].define(version: 20_240_626_135_221) do
   add_foreign_key 'offices', 'locations'
   add_foreign_key 'offices', 'organizations'
   add_foreign_key 'organizations', 'locations'
+  add_foreign_key 'prospects', 'organizations'
+  add_foreign_key 'prospects', 'users', column: 'created_by_id'
+  add_foreign_key 'prospects', 'users', column: 'updated_by_id'
   add_foreign_key 'tasks', 'clients'
   add_foreign_key 'tasks', 'task_categories'
   add_foreign_key 'tasks', 'users'

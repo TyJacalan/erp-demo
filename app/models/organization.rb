@@ -5,6 +5,7 @@ class Organization < ApplicationRecord
   has_many :offices
   has_many :locations, through: :offices
   has_one_attached :logo
+  has_one :prospect
 
   validates :name, presence: true, uniqueness: true
   validates :website, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]) }, allow_blank: true

@@ -3,27 +3,21 @@
 require 'rails_helper'
 
 RSpec.describe OrganizationPolicy, type: :policy do
-  let(:user) { User.new }
+  subject { described_class.new(user, organization) }
 
-  subject { described_class }
+  let(:organization) { Organization.new }
 
-  permissions '.scope' do
-    pending "add some examples to (or delete) #{__FILE__}"
+  context 'with visitors' do
+    let(:user) { nil }
+
+    it 'raises NotAuthorizedError' do
+      expect { subject.index? }.to raise_error(Pundit::NotAuthorizedError)
+    end
   end
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  context 'for authenticated users' do
+    let(:user) { User.new }
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it { is_expected.to permit_all_actions }
   end
 end

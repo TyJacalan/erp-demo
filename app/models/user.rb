@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :mentions, as: :record, dependent: :destroy, class_name: 'Noticed::Event'
   has_many :memberships
   has_many :tasks
+  has_many :created_prospects, class_name: 'Prospect', foreign_key: 'created_by_id'
+  has_many :updated_prospects, class_name: 'Prospect', foreign_key: 'updated_by_id'
 
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
