@@ -9,6 +9,7 @@ class OrganizationsController < ApplicationController
     @pagy, @organizations = pagy(@q.result.includes(:headquarter))
     @organization = Organization.new
     @organization.build_headquarter
+    3.times { @organization.offices.build }
     authorize @organizations
   end
 
@@ -20,7 +21,7 @@ class OrganizationsController < ApplicationController
     @organization = Organization.new(organization_params)
     authorize @organization
 
-    if @organization.save
+    if @organization.save!
       flash.now[:notice] = "#{t "organization.#{action_name}.success"} #{@organization.name}"
     else
       flash.now[:alert] = "#{t "organization.#{action_name}.failure"} #{@organization.name}"
@@ -51,8 +52,14 @@ class OrganizationsController < ApplicationController
   end
 
   def organization_params
-    params.require(:organization).permit(:name, :website, :mission, :organization_type, :logo,
-                                         headquarter_attributes: %i[id street city state country _destroy],
-                                         offices_attributes: %i[id street city state country _destroy])
+    params.require(:organization).permit(
+      :name,
+      :website,
+      :mission,
+      :organization_type,
+      :logo,
+      headquarter_attributes: %i[id street city state country _destroy],
+      offices_attributes: %i[location_id _destroy]
+    )
   end
 end

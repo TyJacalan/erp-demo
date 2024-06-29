@@ -6,7 +6,7 @@ class CreateOrganizations < ActiveRecord::Migration[7.1]
       t.string :name
       t.string :website
       t.text :mission
-      t.integer :organization_type
+      t.integer :organization_type, null: false, default: 0
       t.references :location, null: false, foreign_key: true
 
       t.timestamps

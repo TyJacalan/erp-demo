@@ -2,7 +2,7 @@
 
 class Organization < ApplicationRecord
   belongs_to :headquarter, class_name: 'Location', optional: true, foreign_key: :location_id
-  has_many :offices
+  has_many :offices, dependent: :destroy
   has_many :locations, through: :offices
   has_one_attached :logo
   has_one :prospect
@@ -10,8 +10,12 @@ class Organization < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :website, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]) }, allow_blank: true
 
-  accepts_nested_attributes_for :headquarter
-  accepts_nested_attributes_for :offices, allow_destroy: true
+  accepts_nested_attributes_for :headquarter, reject_if: lambda { |attributes|
+                                                           attributes['city'].blank? && attributes['country'].blank?
+                                                         }
+  accepts_nested_attributes_for :offices, allow_destroy: true, reject_if: lambda { |attributes|
+                                                                            attributes['location_id'].blank?
+                                                                          }
 
   after_save { Rails.cache.delete_matched(/^pagy-#{self.class.name}:/) }
 

@@ -20,4 +20,8 @@ class Location < ApplicationRecord
   def self.ransackable_attributes(_auth_object = nil)
     %w[city country]
   end
+
+  def self.city_and_id
+    Location.pluck(:city, :id)
+  end
 end

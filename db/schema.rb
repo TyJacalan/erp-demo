@@ -159,7 +159,7 @@ ActiveRecord::Schema[7.1].define(version: 20_240_628_120_446) do
     t.string 'name'
     t.string 'website'
     t.text 'mission'
-    t.integer 'organization_type'
+    t.integer 'organization_type', default: 0, null: false
     t.bigint 'location_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
