@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProspectPolicy < ApplicationPolicy
   def index?
     user

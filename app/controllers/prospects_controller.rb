@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProspectsController < ApplicationController
   before_action :set_organization
   before_action :build_prospect, only: [:create]

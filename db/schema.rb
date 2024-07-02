@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_240_628_120_446) do
+ActiveRecord::Schema[7.1].define(version: 20_240_702_141_927) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -100,6 +100,24 @@ ActiveRecord::Schema[7.1].define(version: 20_240_628_120_446) do
     t.index ['client_id'], name: 'index_contracts_on_client_id'
   end
 
+  create_table 'grants', force: :cascade do |t|
+    t.text 'recipient', null: false
+    t.text 'description'
+    t.integer 'purpose', default: 0, null: false
+    t.integer 'amount', default: 0
+    t.string 'year', default: 'Undisclosed'
+    t.integer 'grant_type', default: 0
+    t.integer 'duration'
+    t.bigint 'organization_id', null: false
+    t.bigint 'recipient_id'
+    t.bigint 'program_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['organization_id'], name: 'index_grants_on_organization_id'
+    t.index ['program_id'], name: 'index_grants_on_program_id'
+    t.index ['recipient_id'], name: 'index_grants_on_recipient_id'
+  end
+
   create_table 'locations', force: :cascade do |t|
     t.string 'address'
     t.string 'street'
@@ -164,6 +182,18 @@ ActiveRecord::Schema[7.1].define(version: 20_240_628_120_446) do
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.index ['location_id'], name: 'index_organizations_on_location_id'
+  end
+
+  create_table 'programs', force: :cascade do |t|
+    t.string 'name', null: false
+    t.text 'description'
+    t.text 'issue_areas', default: [], array: true
+    t.integer 'target_funding', default: 0
+    t.integer 'current_funding', default: 0
+    t.bigint 'organization_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['organization_id'], name: 'index_programs_on_organization_id'
   end
 
   create_table 'prospects', force: :cascade do |t|
@@ -254,10 +284,14 @@ ActiveRecord::Schema[7.1].define(version: 20_240_628_120_446) do
   add_foreign_key 'active_storage_variant_records', 'active_storage_blobs', column: 'blob_id'
   add_foreign_key 'clients', 'locations'
   add_foreign_key 'contracts', 'clients'
+  add_foreign_key 'grants', 'organizations'
+  add_foreign_key 'grants', 'organizations', column: 'recipient_id'
+  add_foreign_key 'grants', 'programs'
   add_foreign_key 'memberships', 'users'
   add_foreign_key 'offices', 'locations'
   add_foreign_key 'offices', 'organizations'
   add_foreign_key 'organizations', 'locations'
+  add_foreign_key 'programs', 'organizations'
   add_foreign_key 'prospects', 'organizations'
   add_foreign_key 'prospects', 'users', column: 'created_by_id'
   add_foreign_key 'prospects', 'users', column: 'updated_by_id'

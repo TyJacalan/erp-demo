@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   resources :alerts, only: %i[index]
   resources :notifications
   resources :profile, only: [:index]
-  resources :tasks, except: %i[new edit]
+  resources :tasks, except: %i[edit]
   resources :organizations, except: %i[new edit] do
     resources :prospects, only: %i[index show create]
   end

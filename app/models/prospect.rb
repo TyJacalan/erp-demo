@@ -37,10 +37,14 @@ class Prospect < ApplicationRecord
   belongs_to :updated_by, class_name: 'User'
 
   validates :linkedin,
-            format: { with: %r{\Ahttps://www\.linkedin\.com/.*\z}, message: 'must be a valid LinkedIn URL' }, allow_blank: true
+            format: { with: %r{\Ahttps://www\.linkedin\.com/.*\z},
+                      message: 'must be a valid LinkedIn URL' }, allow_blank: true
   validates :instagram,
-            format: { with: %r{\Ahttps://www\.instagram\.com/.*\z}, message: 'must be a valid Instagram URL' }, allow_blank: true
+            format: { with: %r{\Ahttps://www\.instagram\.com/.*\z},
+                      message: 'must be a valid Instagram URL' }, allow_blank: true
   validates :youtube,
-            format: { with: %r{\Ahttps://(www\.youtube\.com/|youtu\.be/).*?\z}, message: 'must be a valid YouTube URL' }, allow_blank: true
-  validates :founding_year, format: { with: /\A\d{4}\z/, message: 'must be a valid year' }, allow_blank: true
+            format: { with: %r{\Ahttps://(www\.youtube\.com/|youtu\.be/).*?\z},
+                      message: 'must be a valid YouTube URL' }, allow_blank: true
+  validates :founding_year, format: { with: /\A\d{4}\z/,
+                                      message: 'must be a valid year' }, allow_blank: true
 end
