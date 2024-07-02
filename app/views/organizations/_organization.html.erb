@@ -4,6 +4,11 @@
         <%= link_to organization.name, organization_path(organization.id), class: 'underline', data: { turbo: false } %>
     <% end %>
     <%= table_column organization.organization_type.titleize %>
-    <%= table_column organization.headquarter.city %>
-    <%= table_column organization.headquarter.country %>
+    <% if organization.headquarter %>
+      <%= table_column organization.headquarter.city %>
+      <%= table_column organization.headquarter.country %>
+    <% else %>
+      <%= table_column 'N/A' %>
+      <%= table_column 'N/A' %>
+    <% end %>
 <% end %>

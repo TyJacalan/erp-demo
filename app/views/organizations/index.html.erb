@@ -47,11 +47,15 @@
                 <%= table_header do %>
                     <%= sort_link(@q, :organization_type) %>
                 <% end %>
-                <%= table_header do %>
+                <% unless :headquarter_city.nil? %>
+                  <%= table_header do %>
                     <%= sort_link(@q, :headquarter_city) %>
+                  <% end %>
                 <% end %>
-                <%= table_header do %>
+                <% unless :headquarter_country.nil? %>
+                  <%= table_header do %>
                     <%= sort_link(@q, :headquarter_country) %>
+                  <% end %>
                 <% end %>
             <% end %>
             <%= table_body id: 'organizations' do %>
