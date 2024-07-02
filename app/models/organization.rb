@@ -1,5 +1,26 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: organizations
+#
+#  id                :bigint           not null, primary key
+#  mission           :text
+#  name              :string
+#  organization_type :integer          default("nonprofit"), not null
+#  website           :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  location_id       :bigint           not null
+#
+# Indexes
+#
+#  index_organizations_on_location_id  (location_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (location_id => locations.id)
+#
 class Organization < ApplicationRecord
   belongs_to :headquarter, class_name: 'Location', optional: true, foreign_key: :location_id
   has_many :offices, dependent: :destroy

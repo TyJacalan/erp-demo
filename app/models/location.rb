@@ -1,5 +1,20 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: locations
+#
+#  id         :bigint           not null, primary key
+#  address    :string
+#  city       :string
+#  country    :string
+#  latitude   :string
+#  longitude  :string
+#  state      :string
+#  street     :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class Location < ApplicationRecord
   has_many :organizations
   has_many :offices

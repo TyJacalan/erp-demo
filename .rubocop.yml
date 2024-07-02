@@ -18,6 +18,7 @@ Metrics/BlockLength:
     - "spec/**/*.rb"
     - "config/**/*.rb"
     - "db/**/*.rb"
+    - "lib/tasks/*.rake"
 
 Layout/LineLength:
   Exclude:

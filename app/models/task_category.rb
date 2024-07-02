@@ -1,5 +1,15 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: task_categories
+#
+#  id         :bigint           not null, primary key
+#  department :string
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class TaskCategory < ApplicationRecord
   has_many :tasks
 
