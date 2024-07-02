@@ -45,6 +45,10 @@
 
                     <%= carousel_slide do %>
                       <%= f.fields_for :prospect do |prospect_field| %>
+                        <%= prospect_field.hidden_field :created_by_id, value: current_user.id %>
+                        <%= prospect_field.hidden_field :updated_by_id, value: current_user.id %>
+                        <%= prospect_field.hidden_field :organization_id, value: resource.id %>
+
                         <%= prospect_field.label :vision %>
                         <%= prospect_field.textarea :vision %>
                         <%= prospect_field.error_message :vision %>
@@ -83,12 +87,13 @@
                           <%= prospect_field.text_field :youtube, autocomplete: 'url' %>
                         </div>
                         <%= prospect_field.error_message :youtube %>
-                        <%= f.submit 'Create', class: 'w-full' %>
                       <% end %>
                     <% end %>
                   <% end %>
             <% end %>
-            <% if method == :patch %>
+            <% if method == :post %>
+              <%= f.submit 'Create', class: 'w-full' %>
+            <% elsif method ==:patch %>
               <%= f.submit "Edit #{resource.name}", class: 'w-full mt-4' %>
             <% end %>
         <% else %>

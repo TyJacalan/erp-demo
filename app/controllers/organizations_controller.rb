@@ -67,7 +67,8 @@ class OrganizationsController < ApplicationController
       :organization_type,
       :logo,
       headquarter_attributes: %i[id street city state country _destroy],
-      offices_attributes: %i[location_id _destroy]
+      offices_attributes: %i[location_id _destroy],
+      prospect_attributes: %i[vision founder founding_year history linkedin instagram youtube created_by_id updated_by_id organization_id]
     )
   end
 end
