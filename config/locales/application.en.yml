@@ -16,6 +16,10 @@ en:
       success: "You updated a client:"
     destroy:
       success: "You deleted a client:"
+  prospect:
+    create:
+      success: "You added prospect information to"
+      failure: "Submission failed! Errors were found."
   task:
     create:
       success: "You have successfully created new task(s)."

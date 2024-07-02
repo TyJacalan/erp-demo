@@ -1,0 +1,48 @@
+<%= turbo_frame_tag 'prospect_form', loading: 'lazy' do %>
+  <%= render_form_for [organization, prospect], url: path, method: method, class: 'flex flex-col gap-4' do |f| %>
+    <%= f.label :vision %>
+    <%= f.textarea :vision %>
+    <%= f.error_message :vision %>
+
+    <div class='flex flex-row gap-2'>
+      <div class='flex-1 space-y-2'>
+        <%= f.label :founder %>
+        <%= f.text_field :founder, autocomplete: 'name' %>
+      </div>
+      <div class='w-20 space-y-2'>
+        <%= f.label :founding_year, label: 'Year', autocomplete: 'name' %>
+        <%= f.text_field :founding_year, autocomplete: 'bday-year' %>
+      </div>
+    </div>
+    <%= f.error_message :founder %>
+    <%= f.error_message :founding_year %>
+
+    <%= f.label :history %>
+    <%= f.textarea :history, autocomplete: 'off' %>
+    <%= f.error_message :history %>
+
+    <div class='flex flex-row items-center gap-2'>
+      <%= f.label :linkedin, class: 'w-20' %>
+      <%= f.text_field :linkedin, autocomplete: 'url' %>
+    </div>
+    <%= f.error_message :linkedin %>
+
+    <div class='flex flex-row items-center gap-2'>
+      <%= f.label :instagram, class: 'w-20' %>
+      <%= f.text_field :instagram, autocomplete: 'url' %>
+    </div>
+    <%= f.error_message :instagram %>
+
+    <div class='flex flex-row items-center gap-2'>
+      <%= f.label :youtube, class: 'w-20' %>
+      <%= f.text_field :youtube, autocomplete: 'url' %>
+    </div>
+    <%= f.error_message :youtube %>
+
+    <%= f.submit 'Create', class: 'w-full' %>
+
+    <% unless method == :delete %>
+    <% else %>
+    <% end %>
+  <% end %>
+<% end %>

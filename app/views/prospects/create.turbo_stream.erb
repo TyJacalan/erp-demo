@@ -1,0 +1,16 @@
+<%= turbo_stream.update 'toasts', partial: 'components/layout/toast_messages' %>
+
+<% if @prospect.persisted? %>
+  <%= turbo_stream.remove 'prospect_form_trigger' %>
+                          
+  <%= turbo_stream.after "#{dom_id(@organization)}_mission",
+    partial: 'prospect' %>
+
+<% else %>
+  <%= turbo_stream.replace 'prospect_form',
+    partial: 'forms/prospect_form',
+    locals: { organization: @organization,
+              prospect: @prospect,
+              path: organization_prospects_path(@organization.id),
+              method: :post } %>
+<% end %>

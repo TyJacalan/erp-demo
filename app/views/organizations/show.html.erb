@@ -23,6 +23,10 @@
     <div class='h-fit flex flex-row items-end gap-4'>
       <%= render partial: 'controls' %>
     </div>
-    <p><%= @organization.mission %>
+    <p id="<%= dom_id(@organization) %>_mission"><%= @organization.mission %></p>
+    <% if @organization.prospect.id.present? %>
+      <%= turbo_frame_tag dom_id(@prospect), src: organization_prospect_path(@organization.id) %>
+    <% end %>
   </div>
+
 </div>

@@ -1,0 +1,15 @@
+<%= render_tabs do %>
+  <%= tab_list do %>
+    <%= tab 'Prospect Information' %>
+    <%= tab 'Grants' %>
+  <% end %>
+  <%= tab_panels do %>
+    <%= tab_panel do %>
+      <div class='flex flex-col gap-4 p-6'>
+        <%= @prospect.vision %>
+      </div>
+    <% end %>
+    <%= tab_panel do %>
+    <% end %>
+  <% end %>
+<% end %>

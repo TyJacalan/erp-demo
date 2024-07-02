@@ -37,3 +37,33 @@
   <% end %>
 <% end %>
 
+<% unless @organization.prospect.id %> 
+  <div id='prospect_form_trigger'>
+  <%= render_tooltip do %>
+    <%= tooltip_trigger do %>
+      <%= render_dialog do %>
+        <%= dialog_trigger do %>
+          <%= render_button variant: :outline do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+          <% end %>
+        <% end %>
+        <%= dialog_content do %>
+          <%= render partial: 'forms/prospect_form',
+            locals: { organization: @organization,
+                      prospect: @prospect,
+                      path: organization_prospects_path(@organization.id),
+                      method: :post } %>
+        <% end %>
+      <% end %>
+      <%= tooltip_content do %>
+        <span class='text-xs text-muted-foreground'>
+          Add prospect information
+        </span>
+      <% end %>
+    <% end %>
+  <% end %>
+  </div>
+<% end %>
+

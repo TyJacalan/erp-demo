@@ -1,20 +1,19 @@
 # frozen_string_literal: true
 
 class OrganizationsController < ApplicationController
+  before_action :build_organization, only: [:index]
   before_action :set_organization, only: %i[show update destroy]
   add_breadcrumb 'Organizations', :organizations_path
 
   def index
     @q = Organization.ransack(params[:q])
     @pagy, @organizations = pagy(@q.result.includes(:headquarter))
-    @organization = Organization.new
-    @organization.build_headquarter
-    3.times { @organization.offices.build }
     authorize @organizations
   end
 
   def show
     add_breadcrumb @organization.name, organization_path(@organization)
+    @prospect = @organization.prospect || @organization.build_prospect
   end
 
   def create
@@ -47,6 +46,12 @@ class OrganizationsController < ApplicationController
   end
 
   private
+
+  def build_organization
+    @organization = Organization.new
+    @organization.build_headquarter
+    3.times { @organization.offices.build }
+  end
 
   def set_organization
     @organization = Organization.find(params[:id])
