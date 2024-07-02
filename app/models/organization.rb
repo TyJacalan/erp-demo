@@ -11,7 +11,7 @@
 #  website           :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  location_id       :bigint           not null
+#  location_id       :bigint
 #
 # Indexes
 #
@@ -32,11 +32,13 @@ class Organization < ApplicationRecord
   validates :website, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]) }, allow_blank: true
 
   accepts_nested_attributes_for :headquarter, reject_if: lambda { |attributes|
-                                                           attributes['city'].blank? && attributes['country'].blank?
-                                                         }
+    attributes['city'].blank? && attributes['country'].blank?
+  }
   accepts_nested_attributes_for :offices, allow_destroy: true, reject_if: lambda { |attributes|
-                                                                            attributes['location_id'].blank?
-                                                                          }
+    attributes['location_id'].blank? || attributes['location_id'] == '-1'
+  }
+
+  accepts_nested_attributes_for :prospect, reject_if: :all_blank
 
   after_save { Rails.cache.delete_matched(/^pagy-#{self.class.name}:/) }
 
@@ -59,6 +61,8 @@ class Organization < ApplicationRecord
   end
 
   def full_headquarter
+    return unless headquarter.present?
+
     if headquarter.state.present?
       "#{headquarter.city}, #{headquarter.state}, #{headquarter.country}"
     else

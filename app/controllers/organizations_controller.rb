@@ -51,6 +51,7 @@ class OrganizationsController < ApplicationController
     @organization = Organization.new
     @organization.build_headquarter
     3.times { @organization.offices.build }
+    @organization.build_prospect
   end
 
   def set_organization

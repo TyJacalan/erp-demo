@@ -1,7 +1,7 @@
 class ProspectsController < ApplicationController
   before_action :set_organization
   before_action :build_prospect, only: [:create]
-  before_action :set_prospect, only: %i[show update destroy]
+  before_action :set_prospect, only: [:show]
 
   def index
     @prospects = Prospect.all
@@ -13,24 +13,11 @@ class ProspectsController < ApplicationController
   end
 
   def create
-    if @prospect.save
+    if @prospect.save!
       flash.now[:notice] = "#{t "prospect.#{action_name}.success"} #{@organization.name}."
     else
       flash.now[:alert] = t("prospect.#{action_name}.failure")
     end
-  end
-
-  def update
-    if @prospect.update(prospect_params)
-      redirect_to organization_path(@organization), notice: 'success'
-    else
-      redirect_to organization_path(@organization), alert: 'failure'
-    end
-  end
-
-  def destroy
-    @prospect.destroy
-    redirect_to organization_path(@organization), notice: 'success'
   end
 
   private
@@ -55,4 +42,3 @@ class ProspectsController < ApplicationController
     params.require(:prospect).permit(:founder, :founding_year, :instagram, :history, :linkedin, :youtube, :vision)
   end
 end
-

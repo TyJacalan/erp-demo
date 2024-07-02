@@ -30,22 +30,63 @@
                         <%= f.fields_for :headquarter do |headquarter_field| %>
                             <%= render partial: 'forms/location_fields', locals: { resource: headquarter_field } %>
                         <% end %>
-                    <% end %>
-                    <% if method == :post %>
-                      <%= carousel_slide do %>
-                        <h3>Offices</h3>
-                        <%= f.fields_for :offices, multiple: true do |office_field| %>
-                          <%= office_field.select_field :location_id, selected: -1, class: 'w-full' do |select| %>
-                            <%= select.option label: 'Select a city...', value: -1 %>
-                            <% Location.city_and_id.each do |location| %>
-                              <%= select.option label: location[0], value: location[1] %>
+                        <% if method == :post %>
+                          <h3>Offices</h3>
+                          <%= f.fields_for :offices, multiple: true do |office_field| %>
+                            <%= office_field.select_field :location_id, selected: -1, class: 'w-full' do |select| %>
+                              <%= select.option label: 'Select a city...', value: -1 %>
+                              <% Location.city_and_id.each do |location| %>
+                                <%= select.option label: location[0], value: location[1] %>
+                              <% end %>
                             <% end %>
                           <% end %>
                         <% end %>
+                    <% end %>
+
+                    <%= carousel_slide do %>
+                      <%= f.fields_for :prospect do |prospect_field| %>
+                        <%= prospect_field.label :vision %>
+                        <%= prospect_field.textarea :vision %>
+                        <%= prospect_field.error_message :vision %>
+
+                        <div class='flex flex-row gap-2'>
+                          <div class='flex-1 space-y-2'>
+                            <%= prospect_field.label :founder %>
+                            <%= prospect_field.text_field :founder, autocomplete: 'name' %>
+                          </div>
+                          <div class='w-20 space-y-2'>
+                            <%= prospect_field.label :founding_year, label: 'Year', autocomplete: 'name' %>
+                            <%= prospect_field.text_field :founding_year, autocomplete: 'bday-year' %>
+                          </div>
+                        </div>
+                        <%= prospect_field.error_message :founder %>
+                        <%= prospect_field.error_message :founding_year %>
+
+                        <%= prospect_field.label :history %>
+                        <%= prospect_field.textarea :history, autocomplete: 'off' %>
+                        <%= prospect_field.error_message :history %>
+
+                        <div class='flex flex-row items-center gap-2'>
+                          <%= prospect_field.label :linkedin, class: 'w-20' %>
+                          <%= prospect_field.text_field :linkedin, autocomplete: 'url' %>
+                        </div>
+                        <%= prospect_field.error_message :linkedin %>
+
+                        <div class='flex flex-row items-center gap-2'>
+                          <%= prospect_field.label :instagram, class: 'w-20' %>
+                          <%= prospect_field.text_field :instagram, autocomplete: 'url' %>
+                        </div>
+                        <%= prospect_field.error_message :instagram %>
+
+                        <div class='flex flex-row items-center gap-2'>
+                          <%= prospect_field.label :youtube, class: 'w-20' %>
+                          <%= prospect_field.text_field :youtube, autocomplete: 'url' %>
+                        </div>
+                        <%= prospect_field.error_message :youtube %>
                         <%= f.submit 'Create', class: 'w-full' %>
                       <% end %>
                     <% end %>
-                <% end %>
+                  <% end %>
             <% end %>
             <% if method == :patch %>
               <%= f.submit "Edit #{resource.name}", class: 'w-full mt-4' %>

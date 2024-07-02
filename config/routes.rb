@@ -37,7 +37,7 @@ Rails.application.routes.draw do
   resources :profile, only: [:index]
   resources :tasks, except: %i[new edit]
   resources :organizations, except: %i[new edit] do
-    resources :prospects, except: %i[new edit]
+    resources :prospects, only: %i[index show create]
   end
 
   # Error routes
