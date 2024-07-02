@@ -28,4 +28,20 @@ class Organization < ApplicationRecord
   def self.ransackable_associations(_auth_object = nil)
     %w[headquarter locations]
   end
+
+  ransacker :city, formatter: proc { |v| v.mb_chars.downcase.to_s } do
+    Arel.sql('LOWER(headquarter.city)')
+  end
+
+  ransacker :country, formatter: proc { |v| v.mb_chars.downcase.to_s } do
+    Arel.sql('LOWER(headquarter.country)')
+  end
+
+  def full_headquarter
+    if headquarter.state.present?
+      "#{headquarter.city}, #{headquarter.state}, #{headquarter.country}"
+    else
+      "#{headquarter.city}, #{headquarter.country}"
+    end
+  end
 end

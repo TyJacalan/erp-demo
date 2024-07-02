@@ -1,1 +1,28 @@
-<%= @organization.name %>
+<div id="<%= dom_id(@organization) %>" class='h-full w-full flex flex-col gap-4'>
+  <div class='flex flex-row items-start sm:items-center gap-4 px-6 py-4 bg-gradient-to-b from-primary to-secondary'>
+    <div class='w-fit'>
+      <%= render_avatar src: image_url(@organization.logo), alt: @organization.name, variant: :large %>
+    </div>
+    <div class='h-full w-full flex flex-col gap-2'>
+      <span class='text-background dark:text-muted-foreground text-xs'>
+        <%= @organization.organization_type.titleize %>
+      </span>
+      <h1 class='text-xl sm:text-3xl text-background dark:text-muted-foreground truncate'><%= @organization.name %></h1>
+      <%= link_to @organization.website, @organization.website, class: 'text-xs sm:text-sm text-background dark:text-muted-foreground' %>
+      <div class='flex flex-row gap-2'>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+        </svg>
+        <p><%= @organization.full_headquarter %></p>
+      </div>
+    </div>
+  </div>
+
+  <div class='h-full w-full flex flex-col gap-4 px-6'>
+    <div class='h-fit flex flex-row items-end gap-4'>
+      <%= render partial: 'controls' %>
+    </div>
+    <p><%= @organization.mission %>
+  </div>
+</div>

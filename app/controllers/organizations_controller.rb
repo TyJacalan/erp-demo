@@ -37,10 +37,12 @@ class OrganizationsController < ApplicationController
   end
 
   def destroy
-    if @organization.destroy(organization_params)
-      flash.now[:notice] = "#{t "organization.#{action_name}.success"} #{@organization.name}."
+    if @organization.destroy
+      flash[:notice] = "#{t "organization.#{action_name}.success"} #{@organization.name}."
+      redirect_to organizations_path
     else
-      flash.now[:alert] = @organization.errors.full_messages
+      flash[:alert] = @organization.errors.full_messages
+      redirect_to organization_path(@organization)
     end
   end
 
