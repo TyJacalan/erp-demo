@@ -21,8 +21,11 @@ class MembershipsController < ApplicationController
 
     @membership_service.create(@membership)
 
-    message = "You added a new member to the #{@memberable.name} team."
-    handle_turbo_response(@membership.persisted?, @membership, message)
+    if @membership.save!
+      flash.now[:notice] = "You added a new member to the #{@memberable.abbreviation} team."
+    else
+      flash.now[:alert] = @membership.errors.full_messages.first
+    end
   end
 
   def destroy
@@ -31,8 +34,11 @@ class MembershipsController < ApplicationController
 
     @membership_service.destroy(@membership)
 
-    message = "You removed #{@membership.user.full_name} from #{@memberable.name}."
-    handle_turbo_response(@membership.persisted?, @membership, message)
+    if @membership.persisted?
+      flash.now[:notice] = "You removed #{@membership.user.full_name} from #{@memberable.abbreviation}."
+    else
+      flash.now[:alert] = @membership.errors.full_messages.first
+    end
   end
 
   private

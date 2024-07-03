@@ -16,17 +16,6 @@ class ApplicationController < ActionController::Base
     authenticate_admin!(force: true)
   end
 
-  def handle_turbo_response(response, obj, message = nil)
-    respond_to do |format|
-      if response
-        flash.now[:notice] = message unless message.nil?
-      elsif obj.present?
-        flash.now[:alert] = obj.errors.full_messages.first
-      end
-      format.turbo_stream
-    end
-  end
-
   def user_not_authorized
     flash.now[:alert] = t 'policy.unauthorized'
     respond_to do |format|

@@ -12,8 +12,11 @@ class ContractsController < ApplicationController
     @contract = Contract.new(contract_params)
     authorize @contract
 
-    message = "#{current_user.full_name} created a new contract."
-    handle_turbo_response(@contract.save, @contract, message)
+    if @contract.save!
+      flash.now[:notice] = "#{current_user.full_name} created a new contract."
+    else
+      flash.now[:alert] = @contract.errors.full_messages.first
+    end
   end
 
   def update; end

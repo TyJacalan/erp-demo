@@ -11,7 +11,7 @@ class MembershipService
       @membership = membership
       @membership.save
 
-      message = "#{@user.full_name} added #{@membership.user.full_name} to the #{@memberable.name} team."
+      message = "#{@user.full_name} added #{@membership.user.full_name} to the #{@memberable.abbreviation} team."
       notify_team_members(message)
     end
 
@@ -23,7 +23,7 @@ class MembershipService
       @membership = membership
       @membership.destroy
 
-      message = "#{@user.full_name} removed #{@membership.user.full_name} from the #{@memberable.name} team."
+      message = "#{@user.full_name} removed #{@membership.user.full_name} from the #{@memberable.abbreviation} team."
       notify_team_members(message)
     end
 

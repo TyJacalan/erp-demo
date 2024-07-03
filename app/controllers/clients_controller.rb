@@ -24,7 +24,7 @@ class ClientsController < ApplicationController
     if @client.persisted?
       flash.now[:notice] = "#{current_user.full_name} #{t "client.#{action_name}.success"} #{@client.abbreviation}"
     else
-      flash.now[:alert] = @client.errors.full_messages
+      flash.now[:alert] = @client.errors.full_messages.first
     end
   end
 
