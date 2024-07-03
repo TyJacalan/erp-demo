@@ -7,9 +7,9 @@ class ClientsController < ApplicationController
 
   def index
     @q = Client.ransack(params[:q])
-    @pagy, @clients = pagy(@q.result.includes(:logo_attachment))
+    @pagy, @clients = pagy(@q.result.includes(:logo_attachment, :organization))
     @client = Client.new
-    @client.build_location
+    @client.build_organization
     authorize @clients
   end
 
@@ -20,20 +20,25 @@ class ClientsController < ApplicationController
   def create
     @client = @client_service.create
     authorize @client
-    message = "#{current_user.full_name} #{t "client.#{action_name}.success"} #{@client.name}"
-    handle_turbo_response(@client.persisted?, @client, message)
+
+    if @client.persisted?
+      flash.now[:notice] = "#{current_user.full_name} #{t "client.#{action_name}.success"} #{@client.abbreviation}"
+    else
+      flash.now[:alert] = @client.errors.full_messages
+    end
   end
 
   def update
-    message = "#{t "client.#{action_name}.success"} #{@client.name}."
-    handle_turbo_response(@client.update(client_params), @client, message)
+    if @client.update(client_params)
+      flash.now[:notice] = "#{t "client.#{action_name}.success"} #{@client.abbreviation}."
+    else
+      flash.now[:alert] = @client.errors.full_messages
+    end
   end
 
   def destroy
-    message = "#{current_user.full_name} #{t "client.#{action_name}.success"} #{@client.name}"
-
     if @client.destroy
-      flash[:notice] = message
+      flash[:notice] = "#{current_user.full_name} #{t "client.#{action_name}.success"} #{@client.abbreviation}"
       redirect_to clients_path
     else
       flash[:alert] = @client.error.full_messages.first
@@ -44,8 +49,8 @@ class ClientsController < ApplicationController
   private
 
   def client_params
-    params.require(:client).permit(:name, :abbreviation, :mission, :logo, :website, :nonprofit_status, :status,
-                                   :issue_areas, location_attributes: %i[street city country])
+    params.require(:client).permit(:abbreviation, :logo, :status, :issue_areas,
+                                   organization_attributes: %i[name mission website organization_type location_id])
   end
 
   def initialize_client_service

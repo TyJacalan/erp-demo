@@ -26,6 +26,7 @@ class Organization < ApplicationRecord
   has_many :offices, dependent: :destroy
   has_many :locations, through: :offices
   has_one_attached :logo
+  has_one :client, dependent: :destroy
   has_one :prospect, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true

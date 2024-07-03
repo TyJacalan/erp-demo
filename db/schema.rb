@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_240_702_141_927) do
+ActiveRecord::Schema[7.1].define(version: 20_240_703_094_321) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -76,17 +76,15 @@ ActiveRecord::Schema[7.1].define(version: 20_240_702_141_927) do
   end
 
   create_table 'clients', force: :cascade do |t|
-    t.string 'name'
     t.string 'abbreviation'
-    t.text 'mission'
-    t.string 'website'
-    t.boolean 'nonprofit_status'
     t.integer 'status', default: 0, null: false
     t.text 'issue_areas', default: [], array: true
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.bigint 'location_id'
+    t.bigint 'organization_id', null: false
     t.index ['location_id'], name: 'index_clients_on_location_id'
+    t.index ['organization_id'], name: 'index_clients_on_organization_id'
   end
 
   create_table 'contracts', force: :cascade do |t|
@@ -283,6 +281,7 @@ ActiveRecord::Schema[7.1].define(version: 20_240_702_141_927) do
   add_foreign_key 'active_storage_attachments', 'active_storage_blobs', column: 'blob_id'
   add_foreign_key 'active_storage_variant_records', 'active_storage_blobs', column: 'blob_id'
   add_foreign_key 'clients', 'locations'
+  add_foreign_key 'clients', 'organizations'
   add_foreign_key 'contracts', 'clients'
   add_foreign_key 'grants', 'organizations'
   add_foreign_key 'grants', 'organizations', column: 'recipient_id'

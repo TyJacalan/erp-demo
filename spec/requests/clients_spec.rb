@@ -6,6 +6,7 @@ RSpec.describe 'Clients', type: :request do
   let(:user) { users(:valid_user) }
   let(:client_manager) { users(:client_manager) }
   let(:client) { clients(:valid_client) }
+  let(:organization) { organizations(:valid_organization) }
 
   context 'when the user is a non-task manager' do
     before do
@@ -16,7 +17,7 @@ RSpec.describe 'Clients', type: :request do
       it 'renders the index template' do
         get clients_path
         expect(response).to have_http_status(:success)
-        expect(response.body).to include(client.name)
+        expect(response.body).to include(client.organization.name)
       end
 
       it 'does not render the add new client button' do
@@ -29,7 +30,7 @@ RSpec.describe 'Clients', type: :request do
       it 'renders the show template' do
         get client_path(client)
         expect(response).to have_http_status(:success)
-        expect(response.body).to include(client.mission)
+        expect(response.body).to include(client.abbreviation)
       end
 
       it 'does not render the client update and delete buttons' do
@@ -43,11 +44,9 @@ RSpec.describe 'Clients', type: :request do
       let(:update_params) do
         {
           client: {
-            name: 'Updated Client',
             abbreviation: 'UC',
-            mission: 'Updated mission',
-            website: 'http://updatedclient.com',
-            status: 'inactive'
+            status: 'inactive',
+            organization:
           }
         }
       end
@@ -63,7 +62,7 @@ RSpec.describe 'Clients', type: :request do
       it 'renders the index template' do
         get clients_path
         expect(response).to have_http_status(:success)
-        expect(response.body).to include(client.name)
+        expect(response.body).to include(client.organization.name)
         expect(response.body).to include('Add a new client')
       end
     end
@@ -80,13 +79,15 @@ RSpec.describe 'Clients', type: :request do
       let(:client_params) do
         {
           client: {
-            name: 'New Client',
             abbreviation: 'NC',
-            mission: 'To serve the community',
-            website: 'http://newclient.com',
-            nonprofit_status: true,
-            status: 'active',
-            issue_areas: 'Health, Community-building'
+            status: 'pending',
+            issue_areas: 'Health',
+            organization_attributes: {
+              name: 'New Client',
+              mission: 'Mission description',
+              website: 'https://www.example.com',
+              organization_type: :nonprofit
+            }
           }
         }
       end
@@ -98,7 +99,7 @@ RSpec.describe 'Clients', type: :request do
 
         expect(response.body).to include('New Client')
         expect(response.content_type).to include('text/vnd.turbo-stream.html')
-        expect(flash[:notice]).to eq("#{client_manager.full_name} created a new client: New Client")
+        expect(flash[:notice]).to eq("#{client_manager.full_name} created a new client: NC")
       end
     end
 
@@ -106,11 +107,9 @@ RSpec.describe 'Clients', type: :request do
       let(:update_params) do
         {
           client: {
-            name: 'Updated Client',
             abbreviation: 'UC',
-            mission: 'Updated mission',
-            website: 'http://updatedclient.com',
-            status: 'inactive'
+            status: 'inactive',
+            organization:
           }
         }
       end
@@ -118,10 +117,9 @@ RSpec.describe 'Clients', type: :request do
       it 'updates the client' do
         patch client_path(client), params: update_params, headers: { 'Accept' => 'text/vnd.turbo-stream.html' }
         client.reload
-        expect(client.name).to eq('Updated Client')
+        expect(client.abbreviation).to eq('UC')
         expect(response.content_type).to include('text/vnd.turbo-stream.html')
-        expect(response.body).to include('Updated Client')
-        expect(flash[:notice]).to eq("#{I18n.t('client.update.success')} Test Client.")
+        expect(flash[:notice]).to eq("#{I18n.t('client.update.success')} #{client.abbreviation}.")
       end
     end
 
@@ -132,8 +130,7 @@ RSpec.describe 'Clients', type: :request do
         end.to change(Client, :count).by(-1)
         expect(response).to redirect_to(clients_path)
         follow_redirect!
-        expect(response.body).not_to include(client.abbreviation)
-        expect(flash[:notice]).to eq("#{client_manager.full_name} deleted a client: #{client.name}")
+        expect(flash[:notice]).to eq("#{client_manager.full_name} deleted a client: #{client.abbreviation}")
       end
     end
   end

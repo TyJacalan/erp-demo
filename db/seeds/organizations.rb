@@ -4,6 +4,8 @@
 
 Location.destroy_all
 Organization.destroy_all
+Prospect.destroy_all
+Client.destroy_all
 Office.destroy_all
 
 # Add locations
@@ -44,14 +46,66 @@ organizations = [
     mission: 'To conserve nature and reduce the most pressing threats to the diversity of life on Earth.', organization_type: 0, location_id: location_ids.sample },
   { name: 'Habitat for Humanity', website: 'https://www.habitat.org',
     mission: 'To bring people together to build homes, communities, and hope.', organization_type: 0, location_id: location_ids.sample },
-  { name: 'Oxfam', website: 'https://www.oxfam.org', mission: 'To tackle poverty and injustice worldwide.', organization_type: 0, location_id: location_ids.sample }
+  { name: 'SAHA Global', website: 'https://www.sahaglobal.com',
+    mission: 'To get the cleanest water to the hardest to reach people.', organization_type: :nonprofit, location_id: location_ids.sample },
+  { name: 'BOMA', website: 'https://www.boma.ngo',
+    mission: 'Empowering women to end extreme poverty', organization_type: :nonprofit, location_id: location_ids.sample },
+  { name: 'Lewa Wildlife Conservation', website: 'https://www.lewa.org',
+    mission: 'to work as a model and catalyst for the conservation of wildlife and its habitat.', organization_type: :nonprofit, location_id: location_ids.sample },
+  { name: 'Oxfam', website: 'https://www.oxfam.org',
+    mission: 'To tackle poverty and injustice worldwide.', organization_type: 0, location_id: location_ids.sample }
 ]
 
 Organization.insert_all(organizations)
 
-# Add office locations for one sample
+p 'Seeded clients'
+
+# Add a prospect
+
+user = User.find(1)
+p user.full_name
 
 gates_foundation = Organization.find_by(name: 'Bill & Melinda Gates Foundation')
+habitat_for_humanity = Organization.find_by(name: 'Habitat for Humanity')
+
+prospects = [
+  { vision: 'To create a world where very person has the opportunity to lead a healthy, productive life.',
+    founder: 'Bill and Melinda Gates',
+    founding_year: 2000,
+    organization_id: gates_foundation.id,
+    created_by_id: user.id,
+    updated_by_id: user.id },
+  { vision: 'A world where everyone has a decent place to live.',
+    founder: 'Millard and Linda Fuller',
+    founding_year: 1976,
+    organization_id: habitat_for_humanity.id,
+    created_by_id: user.id,
+    updated_by_id: user.id }
+]
+
+Prospect.insert_all(prospects)
+
+p 'Seeded prospects'
+
+# Add clients
+
+clients = [
+  { organization_id: Organization.find_by(name: 'SAHA Global').id,
+    abbreviation: 'SAHA',
+    issue_areas: ['water and sanitation', 'livelihood', 'rural development'] },
+  { organization_id: Organization.find_by(name: 'BOMA').id,
+    abbreviation: 'BOMA',
+    issue_areas: ['entrepreneurship', 'livelihood', 'food security', 'technology', 'rural development'] },
+  { organization_id: Organization.find_by(name: 'Lewa Wildlife Conservation').id,
+    abbreviation: 'LWC',
+    issue_areas: ['water and sanitation', 'livelihood', 'energy', 'food security', 'technology', 'rural development', 'wildlife', 'education'] }
+]
+
+Client.insert_all(clients)
+
+p 'Seeded clients'
+
+# Add office locations for one sample
 
 office_location_ids = Location.where(city: %w[Seattle Chicago]).pluck(:id)
 
