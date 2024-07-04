@@ -1,0 +1,41 @@
+<% unless @organization.client %>
+  <%= turbo_frame_tag "#{dom_id(@organization)}_grants" do %>
+    <%= render_table do %>
+      <%= table_head do %>
+        <%= table_header 'Recipient' %>
+        <%= table_header 'Grant Type' %>
+        <%= table_header 'Purpose' %>
+        <%= table_header 'Amount' %>
+        <%= table_header 'Start' %>
+        <%= table_header 'End' %>
+        <%= table_header 'Duration' %>
+        <%= table_header '' %>
+      <% end %>
+      <%= table_body do %>
+        <%= render @grants %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if @organization.client %>
+  <%= turbo_frame_tag "#{dom_id(@organization)}_donations" do %>
+    <%= render_table do %>
+      <%= table_head do %>
+        <%= table_header 'Donor' %>
+        <%= table_header 'Grant Type' %>
+        <%= table_header 'Purpose' %>
+        <%= table_header 'Amount' %>
+        <%= table_header 'Start' %>
+        <%= table_header 'End' %>
+        <%= table_header 'Duration' %>
+        <%= table_header '' %>
+      <% end %>
+      <%= table_body do %>
+        <% @donations.each do |donation| %>
+          <%= render partial: 'donation', locals: { donation: donation } %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

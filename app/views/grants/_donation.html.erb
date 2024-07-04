@@ -1,0 +1,17 @@
+<%= table_row id: dom_id(donation) do %>
+  <%= table_column do %>
+    <%= link_to organization_path(donation.organization_id), data: { turbo: false } do %>
+      <%= donation.organization.name %>
+    <% end %>
+  <% end %>
+
+  <%= table_column donation.grant_type.titleize %>
+  <%= table_column donation.purpose.titleize %>
+  <%= table_column donation.amount.to_i %>
+  <%= table_column donation.year %>
+  <%= table_column donation.year %>
+  <%= table_column donation.duration.to_i %>
+  <%= table_column do %>
+    <%= render partial: 'forms/grant_form', locals: { organization: donation.organization, grant: donation, path: organization_grant_path(donation.organization.id, donation.id), method: :delete } %>
+  <% end %>
+<% end %>

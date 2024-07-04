@@ -1,6 +1,7 @@
 <%= render_tabs do %>
   <%= tab_list do %>
     <%= tab 'Prospect Information' %>
+    <%= tab 'Programs' %>
     <%= tab 'Grants' %>
   <% end %>
   <%= tab_panels do %>
@@ -10,6 +11,10 @@
       </div>
     <% end %>
     <%= tab_panel do %>
+      <%= turbo_frame_tag "#{dom_id(@organization)}_programs", src: organization_programs_path %>
+    <% end %>
+    <%= tab_panel do %>
+      <%= turbo_frame_tag "#{dom_id(@organization)}_grants", src: organization_grants_path %>
     <% end %>
   <% end %>
 <% end %>

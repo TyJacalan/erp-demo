@@ -77,7 +77,7 @@
   <%= render_tabs do %>
     <%= tab_list do %>
       <%= tab "Prospects" %>
-      <%= tab "Grants" %>
+      <%= tab "Donations" %>
       <%= tab "Projects" %>
       <%= tab "Information" %>
       <%= tab "Contracts" %>
@@ -87,8 +87,9 @@
 
       <% end %>
       <%= tab_panel do %>
-
+        <%= turbo_frame_tag "#{dom_id(@organization)}_donations", src: organization_grants_path(@organization.id) %>
       <% end %>
+
       <%= tab_panel do %>
 
       <% end %>

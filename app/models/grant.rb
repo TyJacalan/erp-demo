@@ -9,8 +9,8 @@
 #  description     :text
 #  duration        :integer
 #  grant_type      :integer          default("undisclosed_type")
-#  purpose         :integer          default("undisclosed_purpose"), not null
-#  recipient       :text             not null
+#  purpose         :integer          default("undisclosed_purpose")
+#  recipient_name  :text
 #  year            :string           default("Undisclosed")
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
@@ -32,12 +32,28 @@
 #
 class Grant < ApplicationRecord
   belongs_to :organization
-  belongs_to :recipient_organization
+  belongs_to :recipient, class_name: 'Organization', optional: true, foreign_key: :recipient_id
   belongs_to :program, optional: true
 
   enum purpose: { undisclosed_purpose: 0, project: 1, program: 2, unrestricted: 3 }
   enum grant_type: { undisclosed_type: 0, one_time: 1, multi_year: 2 }
 
-  validates :recipient, presence: true
   validates :amount, :duration, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validate :recipient_presence
+
+  before_save :set_recipient
+
+  def recipient_presence
+    errors.add(:base, 'A recipient must be specified.') unless recipient_id.present? || recipient_name.present?
+  end
+
+  def set_recipient
+    if recipient_name.present? && recipient_id.blank?
+      recipient = Organization.find_or_create_by!(name: recipient_name)
+      self.recipient_id = recipient.id
+    else
+      recipient = Organization.find(recipient_id)
+      self.recipient_name = recipient.name if recipient.present?
+    end
+  end
 end

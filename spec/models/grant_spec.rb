@@ -9,8 +9,8 @@
 #  description     :text
 #  duration        :integer
 #  grant_type      :integer          default("undisclosed_type")
-#  purpose         :integer          default("undisclosed_purpose"), not null
-#  recipient       :text             not null
+#  purpose         :integer          default("undisclosed_purpose")
+#  recipient_name  :text
 #  year            :string           default("Undisclosed")
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

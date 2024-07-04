@@ -1,0 +1,15 @@
+<%= table_row id: dom_id(program) do %>
+  <%= table_column program.name %>
+  <%= table_column do %>
+    <% program.issue_areas.each do |issue_area| %>
+      <span class='px-2 py-1 rounded-md bg-accent text-xs text-accent-foreground'><%= issue_area %></span> 
+    <% end %>
+  <% end %>
+  <% if @organization.client %>
+    <%= table_column program.target_funding.to_i %>
+    <%= table_column program.current_funding.to_i %>
+  <% end %>
+  <%= table_column do %> 
+    <%= render partial: 'forms/program_form', locals: { organization: @organization, program: program, path: organization_program_path(@organization.id, program.id), method: :delete } %>
+  <% end %>
+<% end %>

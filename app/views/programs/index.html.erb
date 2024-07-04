@@ -1,0 +1,18 @@
+<%= turbo_frame_tag "#{dom_id(@organization)}_programs" do %>
+  <%= render_table do %>
+    <%= table_head do %>
+      <%= table_header 'Name' %>
+      <%= table_header 'Issue Areas' %>
+      <% if @organization.client %>
+        <%= table_header 'Target' %>
+        <%= table_header 'Current Funding' %>
+        <%= table_header 'Funding Gap' %>
+      <% end %>
+      <%= table_header '', class: 'w-1' %>
+    <% end %>
+    <%= table_body id: 'programs' do %>
+      <%= render @programs %>
+    <% end %>
+  <% end %>
+<% end %>
+

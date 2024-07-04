@@ -2,6 +2,7 @@
 
 class ClientsController < ApplicationController
   before_action :set_client, only: %i[show update destroy]
+  before_action :set_organization, only: [:show]
   before_action :initialize_client_service, only: %i[create]
   add_breadcrumb 'Clients', :clients_path
 
@@ -60,5 +61,10 @@ class ClientsController < ApplicationController
   def set_client
     @client = Client.find(params[:id])
     authorize @client
+  end
+
+  def set_organization
+    @organization = Organization.find(@client.organization.id)
+    authorize @organization
   end
 end

@@ -1,0 +1,18 @@
+<%= table_row id: dom_id(grant) do %>
+  <%= table_column do %>
+    <% path = grant.recipient.client ? client_path(grant.recipient.client.id) : organization_path(grant.recipient.id) %>
+    <%= link_to path, data: { turbo: false } do %>
+      <%= grant.recipient_name %>
+    <% end %>
+  <% end %>
+
+  <%= table_column grant.grant_type.titleize %>
+  <%= table_column grant.purpose.titleize %>
+  <%= table_column grant.amount.to_i %>
+  <%= table_column grant.year %>
+  <%= table_column grant.year %>
+  <%= table_column grant.duration.to_i %>
+  <%= table_column do %>
+    <%= render partial: 'forms/grant_form', locals: { organization: @organization, grant: grant, path: organization_grant_path(@organization.id, grant.id), method: :delete } %>
+  <% end %>
+<% end %>

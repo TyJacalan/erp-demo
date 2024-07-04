@@ -67,7 +67,7 @@ module Shadcn
       options[:class] = @template.tw((options[:class]).to_s)
       @template.render_label(
         name: set_name,
-        label: label_for(@object, method), **options
+        label: label_for, **options
       )
     end
 
@@ -169,10 +169,10 @@ module Shadcn
 
     private
 
-    def label_for(object, method)
-      return method.capitalize if object.nil?
+    def label_for
+      return @method.capitalize if @object.nil?
 
-      object.class.human_attribute_name(method)
+      @object.class.human_attribute_name(@method)
     end
 
     def add_error_class(options)
@@ -186,7 +186,9 @@ module Shadcn
     end
 
     def set_id
-      @object.present? ? "#{object_name}_#{@method}" : @method.to_s
+      return @method.capitalize if @object.nil?
+
+      "#{object_name.gsub(/[\[\]]/, '_').gsub(/_$/,'')}_#{@method.to_s}"
     end
 
     def set_value

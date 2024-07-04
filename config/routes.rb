@@ -38,6 +38,8 @@ Rails.application.routes.draw do
   resources :tasks, except: %i[edit]
   resources :organizations, except: %i[new edit] do
     resources :prospects, only: %i[index show create]
+    resources :grants
+    resources :programs
   end
 
   # Error routes

@@ -23,7 +23,10 @@
 #
 class Organization < ApplicationRecord
   belongs_to :headquarter, class_name: 'Location', optional: true, foreign_key: :location_id
+  has_many :grants, dependent: :destroy
+  has_many :donations, class_name: 'Grant', foreign_key: :recipient_id, dependent: :destroy
   has_many :offices, dependent: :destroy
+  has_many :programs, dependent: :destroy
   has_many :locations, through: :offices
   has_one_attached :logo
   has_one :client, dependent: :destroy
@@ -39,6 +42,8 @@ class Organization < ApplicationRecord
     attributes['location_id'].blank? || attributes['location_id'] == '-1'
   }
 
+  accepts_nested_attributes_for :grants, reject_if: :all_blank
+  accepts_nested_attributes_for :programs, reject_if: :all_blank
   accepts_nested_attributes_for :prospect, reject_if: :all_blank
 
   after_save { Rails.cache.delete_matched(/^pagy-#{self.class.name}:/) }

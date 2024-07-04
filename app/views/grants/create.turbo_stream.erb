@@ -1,0 +1,14 @@
+<%= turbo_stream.update 'toasts', partial: 'components/layout/toast_messages' %>
+
+<% if @grant.persisted? %>
+  <%= turbo_stream.replace 'grant_form', 
+                            partial: 'forms/grant_form', 
+                            locals: { organization: @organization, organizations: Organization.pluck(:id, :name), grant: Grant.new, path: organization_grants_path, method: :post } %>
+  
+  <%= turbo_stream.append "#{dom_id(@organization)}_grants", partial: 'grant', locals: { grant: @grant } %>
+<% else %>
+  <%= turbo_stream.replace 'grant_form',
+                            partial: 'forms/grant_form',
+                            locals: { organization: @organization, organizations: Organization.pluck(:id, :name), grant: @grant, path: organization_grants_path, method: :post } %>
+<% end %>
+

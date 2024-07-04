@@ -8,6 +8,13 @@ en:
       success: "deleted a client:"
     edit:
       success: "You have successfully edited a new client."
+  grant:
+    create:
+      success: "You created a new grant for"
+    update:
+      success: "You updated a grant for"
+    destroy:
+      success: "You deleted a grant for"
   organization:
     create:
       success: "You created a client:"
@@ -16,6 +23,13 @@ en:
       success: "You updated a client:"
     destroy:
       success: "You deleted a client:"
+  program:
+    create:
+      success: "You created a new program for"
+    update:
+      success: "You updated a program for"
+    destroy:
+      success: "You deleted a program for"
   prospect:
     create:
       success: "You added prospect information to"

@@ -3,17 +3,17 @@
 class OrganizationsController < ApplicationController
   before_action :build_organization, only: [:index]
   before_action :set_organization, only: %i[show update destroy]
+  before_action :set_resources, only: [:show]
   add_breadcrumb 'Organizations', :organizations_path
 
   def index
     @q = Organization.ransack(params[:q])
-    @pagy, @organizations = pagy(@q.result.includes(:headquarter))
+    @pagy, @organizations = pagy(@q.result.includes(:headquarter, :client))
     authorize @organizations
   end
 
   def show
     add_breadcrumb @organization.name, organization_path(@organization)
-    @prospect = @organization.prospect || @organization.build_prospect
   end
 
   def create
@@ -52,6 +52,13 @@ class OrganizationsController < ApplicationController
     @organization.build_headquarter
     3.times { @organization.offices.build }
     @organization.build_prospect
+  end
+
+  def set_resources
+    @organizations = Organization.pluck(:id, :name)
+    @prospect = @organization.prospect || @organization.build_prospect
+    @grant = Grant.new
+    @program = Program.new
   end
 
   def set_organization

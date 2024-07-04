@@ -1,0 +1,14 @@
+<%= turbo_stream.update 'toasts', partial: 'components/layout/toast_messages' %>
+
+<% if @program.persisted? %>
+  <%= turbo_stream.replace 'program_form', 
+                            partial: 'forms/program_form', 
+                            locals: { organization: @organization, program: Program.new, path: organization_programs_path, method: :post } %>
+  
+  <%= turbo_stream.append "programs", partial: 'program', locals: { program: @program } %>
+<% else %>
+  <%= turbo_stream.replace 'program_form',
+                            partial: 'forms/program_form',
+                            locals: { organization: @organization, program: @program, path: organization_programs_path, method: :post } %>
+<% end %>
+
