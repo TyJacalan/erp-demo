@@ -8,7 +8,7 @@ class OrganizationsController < ApplicationController
 
   def index
     @q = Organization.ransack(params[:q])
-    @pagy, @organizations = pagy(@q.result.includes(:headquarter, :client))
+    @pagy, @organizations = pagy(@q.result.includes(:headquarter))
     authorize @organizations
   end
 
