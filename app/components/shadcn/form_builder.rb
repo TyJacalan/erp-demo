@@ -186,9 +186,9 @@ module Shadcn
     end
 
     def set_id
-      return @method.capitalize if @object.nil?
+      return @method.capitalize unless object_name
 
-      "#{object_name.gsub(/[\[\]]/, '_').gsub(/_$/,'')}_#{@method.to_s}"
+      "#{object_name.to_s.gsub(/[\[\]]/, '_').gsub(/_$/,'')}_#{@method.to_s}"
     end
 
     def set_value
