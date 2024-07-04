@@ -6,7 +6,7 @@
 
     <div class='w-full grid grid-flow-row auto-cols-auto gap-4 overflow-hidden grid-cols-[repeat(auto-fit,minmax(250px,1fr))]'>
         <% @users.each do |user| %>
-            <div class='h-full w-[250px] min-w-[250px] p-6 overflow-hidden rounded-lg ring-1 ring-black/5 dark:ring-white/10 bg-card text-card-foreground shadow-sm hover:brightness-90 cursor-pointer'>
+            <div class='h-full w-[250px] min-w-[250px] flex flex-col gap-2 p-6 overflow-hidden rounded-lg ring-1 ring-black/5 dark:ring-white/10 bg-card text-card-foreground shadow-sm hover:brightness-90 cursor-pointer'>
                 <%= link_to current_user == user ? profile_index_path : user_path(user), class: 'w-full flex flex-col items-center justify-center text-center' do %>
                     <div class='flex-1'>
                         <%= render_avatar src: image_url(user.avatar), alt: user.full_name, variant: :large %>
