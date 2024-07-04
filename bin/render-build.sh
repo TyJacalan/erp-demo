@@ -7,4 +7,4 @@ bundle exec rails assets:precompile
 bundle exec rails assets:clean
 bundle exec rails db:migrate
 
-rails runner db/script/create_users.rb
+rails runner db/script/create_admin.rb
