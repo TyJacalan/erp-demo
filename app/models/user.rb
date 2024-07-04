@@ -68,8 +68,8 @@ class User < ApplicationRecord
   has_many :updated_prospects, class_name: 'Prospect', foreign_key: 'updated_by_id'
 
   devise :invitable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :omniauthable, omniauth_providers: [:google_oauth2]
+         :recoverable, :rememberable, :validatable
+         #:omniauthable, omniauth_providers: [:google_oauth2]
 
   accepts_nested_attributes_for :location
   validates :full_name, :email, :position, presence: true
