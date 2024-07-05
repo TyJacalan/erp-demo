@@ -3,11 +3,17 @@
 <% if @client.persisted? %>
   <%= turbo_stream.replace 'client_form', 
                             partial: 'forms/client_form', 
-                            locals: { resource: Client.new,
+                            locals: { resource: @new_client,
                                       path: clients_path, 
                                       method: :post } %>
-                          
+                                    
   <%= turbo_stream.append 'clients',
                            partial: 'client',
                            locals: { client: @client } %>
+<% else %>
+    <%= turbo_stream.replace 'client_form', 
+                            partial: 'forms/client_form', 
+                            locals: { resource: @client,
+                                      path: clients_path, 
+                                      method: :post } %>
 <% end %>

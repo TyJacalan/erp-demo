@@ -3,14 +3,13 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: %i[show update destroy]
   before_action :set_organization, only: [:show]
+  before_action :build_client, only: %i[index create]
   before_action :initialize_client_service, only: %i[create]
   add_breadcrumb 'Clients', :clients_path
 
   def index
     @q = Client.ransack(params[:q])
     @pagy, @clients = pagy(@q.result.includes(:logo_attachment, :organization))
-    @client = Client.new
-    @client.build_organization
     authorize @clients
   end
 
@@ -48,6 +47,11 @@ class ClientsController < ApplicationController
   end
 
   private
+
+  def build_client
+    @new_client = Client.new
+    @new_client.build_organization
+  end
 
   def client_params
     params.require(:client).permit(:abbreviation, :logo, :status, :issue_areas,

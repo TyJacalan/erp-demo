@@ -23,9 +23,7 @@
           <% end %>
         <% end %>
         <%= dialog_content do %>
-          <%= turbo_frame_tag 'client_form' do %>
-            <%= render partial: 'forms/client_form', locals: { resource: @client, path: clients_path, method: :post } %>
-          <% end %>
+          <%= render partial: 'forms/client_form', locals: { resource: @new_client, path: clients_path, method: :post } %>
         <% end %>
       <% end %>
     <% end %>

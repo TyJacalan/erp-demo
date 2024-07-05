@@ -2,7 +2,7 @@
   <%= table_column client.id.to_s %>
   <%= table_column do %>
     <%= render_form_for client, url: client_path(client), method: :patch, data: { controller: 'auto-submit' } do |f| %>
-      <%= f.select_field :status, id: "status_#{dom_id(client)}", class: 'w-full min-w-32', selected: @client.status, data: { action: 'change->auto-submit#submit' } do |select| %>
+      <%= f.select_field :status, id: "status_#{dom_id(client)}", class: 'w-full min-w-32', selected: client.status, data: { action: 'change->auto-submit#submit' } do |select| %>
         <% Client.statuses.each do |key, value| %>
           <%= select.option label: key, value: key %>
         <% end %>
