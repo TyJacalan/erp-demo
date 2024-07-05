@@ -26,7 +26,7 @@
 class Client < ApplicationRecord
   belongs_to :organization
   has_one_attached :logo
-  has_many :contracts
+  has_many :contracts, dependent: :destroy
   has_many :mentions, as: :record, dependent: :destroy, class_name: 'Noticed::Event'
   has_many :memberships, as: :memberable
   has_many :tasks, dependent: :destroy
